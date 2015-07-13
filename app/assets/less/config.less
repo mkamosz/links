@@ -1,0 +1,30 @@
+@color-black: #000;
+@color-white: #fff;
+@img-content: "../img/content";
+@img-layout: "../img/layout";
+
+.arial {
+  font-family: 'Arial', sans-serif;
+}
+
+.scale(@value:1.05){
+  transform: scale(@value, @value);
+}
+
+.transition(@time : 0.3s){
+  transition: all @time ease-in;
+}
+
+// @radius -> 10px | 50% | 10px 0 | 10px 0 10px 0
+.border-radius(@radius: 0) {
+  border-radius: @radius;
+}
+
+// .font-px-to-em(15)
+// .font-px-to-em(15px)
+// .font-px-to-em(15px, 14px)
+// .font-px-to-em(15, 14px)
+// .font-px-to-em(15px, 14)
+.font-px-to-em(@size: 14, @base: 14) {
+  font-size: unit(@size / @base, em);
+}

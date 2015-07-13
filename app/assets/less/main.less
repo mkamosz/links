@@ -1,0 +1,15 @@
+@import "config";
+
+body{
+  padding:0;
+  .font-px-to-em(14);
+  color: @color-black;
+}
+
+@media screen and (max-width: 992px) {
+  @import "rwd-tablet";
+}
+
+@media screen and (max-width: 767px) {
+  @import "rwd-mobile";
+}
