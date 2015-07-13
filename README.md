@@ -1,6 +1,6 @@
-formsfield
+Angular + codeIgniter forum
 ===========
 
 ## Description
 
-static templates for formsfield
+Forum based on Angular JS framework and CodeIgniter v3.
