@@ -40,8 +40,7 @@ gulp.task('js', function() {
 
 // Static Server + watching scss/html files
 gulp.task('serve', ['less'], function() {
-
-    browserSync.init({
+    browserSync.init(["'./app/assets/css/**/*.css"], {
         server: "./app",
         notify: false,
         browser: "Chrome"
@@ -54,4 +53,4 @@ gulp.task('watch', function() {
     gulp.watch(['./app/**/*.html']).on("change", browserSync.reload);
 });
 
-gulp.task('default', ['less','js','serve','html','watch']);
+gulp.task('default', ['less','js','serve','watch']);
