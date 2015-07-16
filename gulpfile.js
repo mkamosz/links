@@ -39,8 +39,8 @@ gulp.task('js', function() {
 });
 
 // Static Server + watching scss/html files
-gulp.task('serve', ['less'], function() {
-    browserSync.init(["'./app/assets/css/**/*.css"], {
+gulp.task('serve', function() {
+    browserSync.init(["./app/assets/css/**/*.css"],{
         server: "./app",
         notify: false,
         browser: "Chrome"
@@ -50,7 +50,7 @@ gulp.task('serve', ['less'], function() {
 gulp.task('watch', function() {
     gulp.watch(['./app/assets/less/**/*.less'], ['less']);
     gulp.watch(['./app/assets/js/**/*.js'], ['js']);
-    gulp.watch(['./app/**/*.html']).on("change", browserSync.reload);
+    gulp.watch(['./app/common/**/*.html','./app/assets/**/*.html','./app/core/**/*.html']).on("change", browserSync.reload);
 });
 
 gulp.task('default', ['less','js','serve','watch']);

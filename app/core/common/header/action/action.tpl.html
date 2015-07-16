@@ -1,0 +1,22 @@
+<div class="row" ng-controller="ActionController">
+    <div class="col-md-5">
+        <input type="text" class="search-field pull-right" placeholder="search links"/>
+    </div>
+    <div class="col-md-7">
+        <div class="btn-group pull-right" ng-if="showProfile">
+            <a ng-show="showMyProfile" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li class="title">Signed in as <b>{{userInfo.username}}</b></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#/myProfile">Dashboard</a></li>
+                <li><a href="#">Favourites</a></li>
+                <li><a href="#">Watches</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a href="#">Settings</a></li>
+                <li><a class="logout" ng-click="logout();">Sign out</a></li>
+            </ul>
+        </div>
+        <a href="#/signin" ng-if="!showProfile" class="btn btn-default btn-sm pull-right">Sign in</a>
+        <a href="#/signup" ng-if="!showProfile" class="btn btn-primary btn-sm pull-right">Sign up</a>
+    </div>
+</div>

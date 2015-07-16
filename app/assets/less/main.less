@@ -1,10 +1,21 @@
 @import "config";
 
 body{
+  .defaultFont;
   padding:0;
   .font-px-to-em(14);
   color: @color-black;
 }
+
+/*header section*/
+@import "header";
+
+/*main-content section*/
+@import "main-content";
+
+/*footer section*/
+@import "footer";
+
 
 @media screen and (max-width: 992px) {
   @import "rwd-tablet";

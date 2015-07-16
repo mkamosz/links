@@ -1,0 +1,35 @@
+<section class="content">
+    <div class="container">
+        <h1>Sign up</h1>
+        <div ng-show="showForm">
+            <div class="alert alert-danger" ng-show="error.show">
+                <span ng-bind-html="error.msg"></span>
+            </div>
+            <form name="signIn">
+                <div class="form-group">
+                    <label for="username">Email</label>
+                    <input type="email" minlength="5" ng-keypress="error.show=false;" class="form-control" ng-model="data.username" name="username" id="username" required />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" minlength="5" ng-keypress="error.show=false;" class="form-control" ng-model="data.password" name="password" id="password" required />
+                </div>
+                <button ng-click="signup();" ng-disabled="signIn.$invalid" class="btn btn-success">Sing in</button>
+            </form>
+        </div>
+        <div class="login-success" ng-hide="showForm">
+            <div class="thick">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <h3 class="color-success">Congratulate Your account <span class="color-normal">{{data.username}}</span><br>has been created</h3>
+                    <a href="#/signin" class="btn btn-primary btn-lg">Sign in</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <loader-page></loader-page>
+</section>

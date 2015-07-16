@@ -1,0 +1,40 @@
+@import "config";
+
+.header {
+  .brand {
+    padding-left:0;
+    padding-right:0;
+    img {
+      width:80%;
+    }
+  }
+  .nav {
+    li {
+      a {
+        &:hover {
+          background: @color-black;
+        }
+      }
+    }
+  }
+  .actions {
+    .btn {
+      margin:10px 0 0 10px;
+    }
+    .search-field {
+      height:30px;
+      padding:5px 10px;
+      margin:10px 0 0 0;
+      border:0;
+      .border-radius(4px);
+      width:100%;
+    }
+  }
+  .title{
+    padding:3px 20px;
+  }
+  .logout{
+    cursor: pointer;
+  }
+}
+
