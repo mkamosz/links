@@ -12,7 +12,7 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
 
     $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
         if (eventObj.authenticated === false) {
-            $location.path("/signin");
+            $location.path("/page/signin");
         }
     });
 }]);

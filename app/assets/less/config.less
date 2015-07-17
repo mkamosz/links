@@ -1,18 +1,22 @@
 @color-black: #000;
 @color-white: #fff;
+@color-red: #cc0000;
 @color-green: #33cc33;
 @color-blue: #286090;
 @color-gray-666: #666;
 @color-gray-999: #999;
 @color-gray-aaa: #aaa;
 @color-gray-ccc: #ccc;
+@color-gray-ddd: #ddd;
 @color-gray-eee: #eee;
 
 @img-content: "../img/content";
 @img-layout: "../img/layout";
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,400,300,600,800,700);
+
 .defaultFont {
-  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: 'Open Sans', Arial, Helvetica,sans-serif;
 }
 
 .scale(@value:1.05){
@@ -35,4 +39,44 @@
 // .font-px-to-em(15px, 14)
 .font-px-to-em(@size: 14, @base: 14) {
   font-size: unit(@size / @base, em);
+}
+
+@-webkit-keyframes movingbar {
+  0% {right:50%;left:50%}
+  99.9% {right:0;left:0}
+  100% {right:50%;left:50%}
+}
+@-moz-keyframes movingbar {
+  0% {right:50%;left:50%}
+  99.9% {right:0;left:0}
+  100% {right:50%;left:50%}
+}
+@keyframes movingbar {
+  0% {right:50%;left:50%}
+  99.9% {right:0;left:0}
+  100% {right:50%;left:50%}
+}
+@-webkit-keyframes changebar {
+  0% {background-color:red;}
+  33.3% {background-color:red;}
+  33.33% {background-color:@color-green;}
+  66.6% {background-color:@color-green;}
+  66.66% {background-color:@color-black;}
+  99.9% {background-color:@color-black;}
+}
+@-moz-keyframes changebar {
+  0% {background-color:red;}
+  33.3% {background-color:red;}
+  33.33% {background-color:@color-green;}
+  66.6% {background-color:@color-green;}
+  66.66% {background-color:@color-black;}
+  99.9% {background-color:@color-black;}
+}
+@keyframes changebar {
+  0% {background-color:red;}
+  33.3% {background-color:red;}
+  33.33% {background-color:@color-green;}
+  66.6% {background-color:@color-green;}
+  66.66% {background-color:@color-black;}
+  99.9% {background-color:@color-black;}
 }

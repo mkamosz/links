@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html ng-app="appUsfulLinks">
+<html ng-app="appUsfulLinks"  ng-controller="IndexController">
 <head lang="en">
     <meta charset="UTF-8">
     <title>Hello</title>
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/main.min.css">
+    <link rel="stylesheet" ng-href="{{path.css}}bootstrap.css">
+    <link rel="stylesheet" ng-href="{{path.css}}main.min.css">
 </head>
-<body ng-controller="IndexController">
+<body>
     <header class="header">
-        <section class="nav-bar navbar-inverse">
+        <section class="nav-bar">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
-                        <a href="#/" class="brand navbar-brand"><img src="assets/img/content/logo-white.png" /></a>
+                    <div class="col-md-8">
+                        <a href="#/" class="brand navbar-brand"><img ng-src="{{path.imgContent}}logo.png" /></a>
 
                         <ul class="nav navbar-nav">
-                            <li><a ng-href="#/about">about us</a></li>
-                            <li><a ng-href="#/faq">faq</a></li>
+                            <li><a ng-href="{{path.pages.about}}">About us</a></li>
+                            <li><a ng-href="{{path.pages.faq}}">Faq</a></li>
+                            <li><a ng-href="{{path.pages.community}}">Community</a></li>
+                            <li><a ng-href="{{path.pages.news}}">News</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-5 actions" ng-include="'core/common/header/action/action.tpl.html'">
+                    <div class="col-md-4 actions" ng-include="actionUrl">
 
                     </div>
                 </div>
             </div>
         </section>
     </header>
+    <section class="content">
+        <div ng-view=""></div>
 
-    <div ng-view=""></div>
+        <loader-page></loader-page>
+    </section>
 
     <footer class="footer">
         <div class="container">
@@ -43,7 +48,7 @@
                 <div class="col-md-6 brand">
                     <ul class="pull-right">
                         <li>&copy2015 <a href="mailtto:mkamosz@gmail.com">Michał Kamosz</a></li>
-                        <li><a href="/#/"><img src="assets/img/content/logo-small-mono.png" /></a></li>
+                        <li><a href="/#/"><img ng-src="{{path.imgContent}}logo-small-mono.png" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -60,10 +65,12 @@
     <script src="app.mdl.js"></script>
     <script src="app.rout.js"></script>
 
-    <script src="common/factory/connection.js"></script>
-    <script src="common/factory/authorization.js"></script>
+    <script src="common/factories/connection.js"></script>
+    <script src="common/factories/authorization.js"></script>
 
     <script src="common/directives/loader.js"></script>
+
+    <script src="common/services/path.js"></script>
 
     <script src="index-ctrl.js"></script>
 
@@ -73,7 +80,8 @@
     <script src="core/error/error-ctrl.js"></script>
     <script src="core/signin/signin-ctrl.js"></script>
     <script src="core/signup/signup-ctrl.js"></script>
-    <script src="core/myprofile/myprofile-ctrl.js"></script>
+    <script src="core/myprofile/dashboard/dashboard-ctrl.js"></script>
+    <script src="core/myprofile/settings/settings-ctrl.js"></script>
 
     <script src="core/common/header/action/action-ctrl.js"></script>
 

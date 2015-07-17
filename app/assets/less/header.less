@@ -1,6 +1,13 @@
 @import "config";
 
 .header {
+  position: fixed;
+  background: @color-white;
+  z-index:999;
+  top:0;
+  left:0;
+  width:100%;
+  box-shadow:0 2px 2px rgba(0,0,0,0.05),0 1px 0 rgba(0,0,0,0.05);
   .brand {
     padding-left:0;
     padding-right:0;
@@ -8,11 +15,21 @@
       width:80%;
     }
   }
-  .nav {
-    li {
-      a {
-        &:hover {
-          background: @color-black;
+  .nav{
+    li{
+      .font-px-to-em(14px);
+      text-transform: uppercase;
+      a{
+        color:@color-black;
+        border-top:2px solid @color-white;
+        transition: all .2s;
+        &:hover{
+          color:@color-red;
+          background: none;
+          border-color:@color-red;
+        }
+        &:focus{
+          background: none;
         }
       }
     }
@@ -24,8 +41,8 @@
     .search-field {
       height:30px;
       padding:5px 10px;
-      margin:10px 0 0 0;
-      border:0;
+      margin:12px 0 0 0;
+      border:1px solid @color-gray-ddd;
       .border-radius(4px);
       width:100%;
     }

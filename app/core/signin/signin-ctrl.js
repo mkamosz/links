@@ -2,18 +2,17 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('SigninController', ['$rootScope', '$scope','auth','$location', function($rootScope, $scope, auth, $location){
+app.controller('SigninController', ['$rootScope', '$scope','auth','$location', 'path', function($rootScope, $scope, auth, $location,path){
 
+    $scope.path = path.url();
     $scope.data = {};
     $scope.error = {
         show : false,
         msg : ""
     };
 
-    console.log($rootScope)
-
     $scope.signin = function(){
-        auth.login('/server/login', $scope.data)
+        auth.login($scope.path.login, $scope.data)
             .then(function(result){
                 if(result.authenticated == true){
                     $location.path("/");

@@ -12,16 +12,19 @@ app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
     };
 
     $scope.signup = function(){
-        conn.postData('/server/user', $scope.data)
+        conn.postData($scope.path.user, $scope.data)
             .then(function(result){
                 if(result.status == true){
                     $scope.showForm = false;
                 } else {
                     $scope.showForm = true;
+                    $scope.error.show = true;
+                    $scope.error.msg = result.message;
+                    $scope.data.password = "";
                     if(result.code == 1){
-                        $scope.error.show = true;
-                        $scope.error.msg = result.message;
-                        $scope.data = {};
+                        $scope.data.username = "";
+                    } else{
+                        $scope.data.email = "";
                     }
                 }
             }, function(msg) {

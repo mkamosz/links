@@ -2,15 +2,15 @@
  * Created by kamoszm on 2015-07-15.
  */
 
-app.directive("loaderPage", ['path', function(path){
-    var enableRouteChange = true,
-        path = path.url();
+app.directive("addLink", ['path', function(path){
+    var path = path.url();
+
     return {
         restrict : "E",
         scope : {
             text : "@"
         },
-        templateUrl: path.template.loader + 'loader.tpl.html',
+        templateUrl: path.tamplete.addlink + '/addlink.tpl.html',
         replace : true,
         transclude : false,
         controller : ['$rootScope', '$scope', function($rootScope, $scope){

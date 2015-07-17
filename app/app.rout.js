@@ -2,32 +2,22 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.config(function($routeProvider){
+app.config(['$routeProvider', function($routeProvider){
     $routeProvider
         .when('/', {
             templateUrl: 'core/homepage/homepage.tpl.html',
-            controller: "HomepageController",
-            resolve: 'HomepageController'
+            controller: "HomepageController"
         })
-        .when('/about', {
-            templateUrl: 'core/about/about.tpl.html',
-            controller: 'AboutController'
+        .when('/page/:name', { //for static pages about/faq/signin/signup etc...
+            templateUrl: function(param){
+                return 'core/' + param.name + '/' + param.name + '.tpl.html';
+            }
         })
-        .when('/faq', {
-            templateUrl: 'core/faq/faq.tpl.html',
-            controller: 'FaqController'
-        })
-        .when('/signup', {
-            templateUrl: 'core/signup/signup.tpl.html',
-            controller: 'SignupController'
-        })
-        .when('/signin', {
-            templateUrl: 'core/signin/signin.tpl.html',
-            controller: 'SigninController'
-        })
-        .when('/myProfile',{
-            templateUrl: 'core/myprofile/myprofile.tpl.html',
-            controller: 'MyProfileController',
+        .when('/myprofile/:name',{ //for myprofile pages dashboard/settings etc....
+            templateUrl: function(param){
+                console.log();
+                return 'core/myprofile/' + param.name + '/' + param.name + '.tpl.html'
+            },
             resolve : {
                 check : ['$q', 'auth', function($q, auth) {
                     var userInfo = auth.getUserInfo();
@@ -44,4 +34,5 @@ app.config(function($routeProvider){
             templateUrl : 'core/error/error.tpl.html',
             controller : 'ErrorController'
         });
-});
+
+}]);
