@@ -1,0 +1,34 @@
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="link-list">
+            <ul ng-if="data.tags">
+                <li ng-repeat="tag in data.tags" class="item">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h3>{{tag.title}} <a target="_blank" ng-href="tag.url">{{tag.host}}</a></h3>
+                        </div>
+                        <div class="col-md-2">
+                            {{tag.date}}
+                        </div>
+                        <div class="col-md-12">
+                            <blockquote>{{tag.comment}}</blockquote>
+                        </div>
+                        <div class="col-md-2">
+                            <span class="link-list-counter">{{tag.counter}}</span>
+                            <span class="link-list-counter all">{{tag.counterAll}}</span>
+                        </div>
+                        <div class="col-md-8">
+                            <span>tags:</span>
+                            <ul class="link-list-tags" ng-if="tag.tags">
+                                <li ng-repeat="item in tag.tags">{{item}}</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2">
+
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

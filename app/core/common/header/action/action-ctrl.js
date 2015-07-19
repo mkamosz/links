@@ -8,7 +8,7 @@ app.controller('ActionController', ['$scope', 'auth', '$location', 'path', funct
     $scope.path = path.url();
     $scope.showProfile = false;
     $scope.logout = function(){
-        auth.logout($scope.path.logout,{username : userInfo.username})
+        auth.logout($scope.path.server.logout,{username : userInfo.username})
             .then(function(result){
                 $location.path('/');
                 $scope.showProfile = false;

@@ -3,11 +3,18 @@
 .content{
   position: relative;
 }
-.panel{
+.wrapper{
   &-gray{
     background: #f1f1f7;
   }
   padding:0 0 50px 0;
+}
+
+h1,h2,h3,h4,h5{font-weight:200;}
+
+.form-control:focus{
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  border-color: #ccc;
 }
 
 .login-success{
@@ -102,6 +109,96 @@
       animation:changebar 2.25s infinite;
       &:before{
         animation:movingbar .75s infinite
+      }
+    }
+  }
+}
+
+.add-link{
+  position: relative;
+  label{
+    margin: 5px 0 0 0;
+    font-weight: normal;
+    color: @color-gray-999;
+  }
+  a{
+    text-decoration: none;
+  }
+  .add-wrapper{
+    position: relative;
+    padding-right:49px;
+    .link{
+      height: 50px;
+      line-height: 50px;
+      .font-px-to-em(26px);
+    }
+    .btn{
+      position: absolute;
+      top:0;
+      right:0;
+      height: 50px;
+      width: 50px;
+    }
+  }
+  .linkAnchor{
+    margin:0 0 30px;
+  }
+  .form-group:last-child{
+    margin-bottom:0;
+  }
+  .summary{
+    margin:0 0 50px 0;
+    .btn{
+      width:100%;
+    }
+  }
+}
+
+.link {
+  &-list{
+    ul{
+      margin: 0;
+      list-style: none;
+      padding: 0;
+      .item {
+        border-bottom:1px solid @color-gray-eee;
+        padding:30px 0 30px 15px;
+        border-right:5px solid @color-white;
+        &:hover{
+          background: #fcfcfc;
+          border-color:@color-blue;
+        }
+        h3{
+          margin:0 0 20px 0;
+          a{
+            margin:0 0 0 30px;
+            display: inline-block;
+            .font-px-to-em(10x);
+          }
+        }
+      }
+    }
+    &-counter {
+      padding: 3px 8px;
+      color: @color-white;
+      background: @color-gray-ccc;
+      display: inline-block;
+      &.all {
+        margin-left: -4px;
+        background: @color-blue;
+      }
+    }
+    &-tags{
+      margin: 0;
+      list-style: none;
+      padding: 0;
+      display:inline;
+      li{
+        display:inline;
+        padding:3px 5px;
+        margin:0 0 5px 5px;
+        color: @color-gray-999;
+        background: @color-gray-eee;
       }
     }
   }

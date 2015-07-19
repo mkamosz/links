@@ -10,32 +10,33 @@ app.directive("loaderPage", ['path', function(path){
         scope : {
             text : "@"
         },
-        templateUrl: path.template.loader + 'loader.tpl.html',
+        templateUrl: path.template.loader,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope', function($rootScope, $scope){
+        controller : ['$rootScope', '$scope', 'loaderService', function($rootScope, $scope, loaderService){
 
             if(enableRouteChange){
                 $rootScope.$on("$routeChangeStart", function (event, next, current) {
-                    $scope.loader = {
-                        message : "Loading....",
-                        active : "active"
-                    };
+                    $scope.loader = loaderService.active()
                 });
 
                 $rootScope.$on("$routeChangeSuccess", function (event, current, previous) {
-                    $scope.loader = {
-                        message : "",
-                        active : ""
-                    };
+                    $scope.loader = loaderService.inactive();
                 });
 
                 $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
-                    $scope.loader = {
-                        message : "",
-                        active : ""
-                    };
+                    $scope.loader = loaderService.inactive();
                 });
+
+                $rootScope.$on("loaderActive", function () {
+                    $scope.loader = loaderService.active();
+                });
+
+                $rootScope.$on("loaderInactive", function () {
+                    $scope.loader = loaderService.inactive();
+                });
+
+
                 enableRouteChange = false;
             }
         }]

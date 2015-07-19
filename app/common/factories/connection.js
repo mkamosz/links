@@ -4,9 +4,9 @@
 
 app.factory('conn', ['$http','$q' , function($http,$q){
     return{
-        getData : function(url){
+        getData : function(url,data){
             var deferred = $q.defer();
-            $http.get(url)
+            $http.get(url,data)
                 .success(function(data, status, headers, config){
                     deferred.resolve(data);
                 })

@@ -10,34 +10,51 @@ app.directive("addLink", ['path', function(path){
         scope : {
             text : "@"
         },
-        templateUrl: path.tamplete.addlink + '/addlink.tpl.html',
+        templateUrl: path.template.addlink,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope', function($rootScope, $scope){
+        controller : ['$rootScope', '$scope','conn', 'auth', 'loaderService', function($rootScope, $scope, conn, auth, loaderService){
+            $scope.path = path;
+            $scope.userInfo = auth.getUserInfo();
+            $scope.disabledAddButton = false;
+            $scope.linkTmpAdded = false;
+            $scope.data = {
+                auth : $scope.userInfo,
+                check : false
+            };
 
-            if(enableRouteChange){
-                $rootScope.$on("$routeChangeStart", function (event, next, current) {
-                    $scope.loader = {
-                        message : "Loading....",
-                        active : "active"
-                    };
-                });
+            $scope.checkLink = function(){
+                $rootScope.$broadcast('loaderActive');
+                $scope.disabledAddButton = true;
+                conn.getData(path.server.link, { params : $scope.data })
+                    .then(function(result){
+                        if(result.status == true){
+                            $scope.data.title = result.data.title;
+                            $scope.linkTmpAdded = true;
+                            $rootScope.$broadcast('loaderInactive');
 
-                $rootScope.$on("$routeChangeSuccess", function (event, current, previous) {
-                    $scope.loader = {
-                        message : "",
-                        active : ""
-                    };
-                });
+                            $scope.data.tags = result.data.tags;
 
-                $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
-                    $scope.loader = {
-                        message : "",
-                        active : ""
-                    };
-                });
-                enableRouteChange = false;
-            }
+                        }
+                    }, function(msg){
+                        console.log(msg);
+                    });
+            };
+
+            $scope.saveLink = function(){
+                $rootScope.$broadcast('loaderActive');
+                conn.postData(path.server.link, $scope.data )
+                    .then(function(result){
+                        if(result.status == true){
+                            $scope.linkTmpAdded = false;
+                            $scope.data = {};
+                            $rootScope.$broadcast('loaderInactive');
+                        }
+                    }, function(msg){
+                        console.log(msg);
+                    });
+            };
+
         }]
     }
 }]);

@@ -12,7 +12,7 @@ app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
     };
 
     $scope.signup = function(){
-        conn.postData($scope.path.user, $scope.data)
+        conn.postData($scope.path.server.user, $scope.data)
             .then(function(result){
                 if(result.status == true){
                     $scope.showForm = false;

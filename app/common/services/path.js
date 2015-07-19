@@ -16,11 +16,16 @@ app.service('path', function(){
             commonFactorys :    "common/factories/",
             commonServices :    "common/services/",
             core :              "core/",
-            login :             "/server/login",
-            logout :            "/server/login",
-            user :              "/server/user",
+            server : {
+                login :         "/server/login",
+                logout :        "/server/logout",
+                user :          "/server/user",
+                link :          "/server/link"
+            },
             template : {
-                loader :        "core/common/loader/"
+                loader :        "core/common/loader/loader.tpl.html",
+                addlink :       "core/common/addlink/addlink.tpl.html",
+                listlink :      "core/common/listlink/listlink.tpl.html"
             },
             pages : {
                 about :         "#/page/about",

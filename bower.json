@@ -1,0 +1,21 @@
+{
+  "name": "link",
+  "version": "0.1",
+  "description": "Site to store links that you like",
+  "main" : [
+    "app/assets/js/bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~1.10.2",
+    "angular": "~1.4",
+    "bootstrap": "~3.3.5"
+  },
+  "keywords": [
+    "links",
+    "angular",
+    "codeigniter"
+  ],
+  "authors": [
+    "Michał Kamosz <mkamosz@gmail.com>"
+  ]
+}

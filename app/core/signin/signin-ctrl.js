@@ -12,7 +12,7 @@ app.controller('SigninController', ['$rootScope', '$scope','auth','$location', '
     };
 
     $scope.signin = function(){
-        auth.login($scope.path.login, $scope.data)
+        auth.login($scope.path.server.login, $scope.data)
             .then(function(result){
                 if(result.authenticated == true){
                     $location.path("/");
