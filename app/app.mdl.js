@@ -2,7 +2,8 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-var app = app || angular.module('appUsfulLinks',['ngRoute','ngSanitize']);
+
+var app = angular.module('appLinks',['ngRoute','ngSanitize']);
 
 
 app.run(["$rootScope", "$location", function ($rootScope, $location) {

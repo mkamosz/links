@@ -3,7 +3,7 @@ var gulp = require('gulp'),
     LessPluginCleanCSS = require('less-plugin-clean-css'),
     cleanCSSPlugin = new LessPluginCleanCSS({advanced: true}),
     LessPluginAutoPrefix = require('less-plugin-autoprefix'),
-    autoprefixPlugin = new LessPluginAutoPrefix({browsers: ["last 2 versions"]}),
+    autoprefixPlugin = new LessPluginAutoPrefix({browsers: ["last 2 versions"]});
     rename = require("gulp-rename"),
     uglify = require('gulp-uglify'),
     browserSync = require("browser-sync").create(),
@@ -40,11 +40,11 @@ gulp.task('js', function() {
 
 // Static Server + watching scss/html files
 gulp.task('serve', function() {
-    browserSync.init(["./app/assets/css/**/*.css"],{
-        server: "./app",
-        notify: false,
-        browser: "Chrome"
-    });
+    //browserSync.init(["./app/assets/css/**/*.css"],{
+    //    server: "./app",
+    //    notify: false,
+    //    browser: "Chrome"
+    //});
 });
 
 gulp.task('watch', function() {

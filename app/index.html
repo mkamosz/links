@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="appUsfulLinks"  ng-controller="IndexController">
+<html ng-app="appLinks"  >
 <head lang="en">
     <meta charset="UTF-8">
     <title>Hello</title>
-    <link rel="stylesheet" ng-href="{{path.css}}bootstrap.css">
-    <link rel="stylesheet" ng-href="{{path.css}}main.min.css">
+    <link rel="stylesheet" ng-href="assets/css/bootstrap.css">
+    <link rel="stylesheet" ng-href="assets/css/main.min.css">
 </head>
-<body>
+<body ng-controller="IndexController" ng-class="(showFooter ? '' : 'full-bg')">
     <header class="header">
         <section class="nav-bar">
             <div class="container">
@@ -34,7 +34,7 @@
         <loader-page></loader-page>
     </section>
 
-    <footer class="footer">
+    <footer class="footer" ng-show="showFooter">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -67,14 +67,18 @@
 
     <script src="common/factories/connection.js"></script>
     <script src="common/factories/authorization.js"></script>
+    <script src="common/factories/data.js"></script>
 
     <script src="common/directives/loader.js"></script>
     <script src="common/directives/add-link.js"></script>
     <script src="common/directives/list-link.js"></script>
+    <script src="common/directives/list-tag.js"></script>
 
     <script src="common/services/path.js"></script>
     <script src="common/services/loader.js"></script>
     <script src="common/services/string.js"></script>
+
+    <script src="common/controllers/staticpage.js"></script>
 
     <script src="index-ctrl.js"></script>
 

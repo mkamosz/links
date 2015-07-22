@@ -26,4 +26,7 @@ app.controller('SigninController', ['$rootScope', '$scope','auth','$location', '
                 }
             });
     };
+
+    $rootScope.$broadcast('showFooter',{"show" : false});
+
 }]);

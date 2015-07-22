@@ -11,7 +11,8 @@ app.config(['$routeProvider', function($routeProvider){
         .when('/page/:name', { //for static pages about/faq/signin/signup etc...
             templateUrl: function(param){
                 return 'core/' + param.name + '/' + param.name + '.tpl.html';
-            }
+            },
+            controller : "StaticPageController"
         })
         .when('/myprofile/:name',{ //for myprofile pages dashboard/settings etc....
             templateUrl: function(param){

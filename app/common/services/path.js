@@ -18,14 +18,16 @@ app.service('path', function(){
             core :              "core/",
             server : {
                 login :         "/server/login",
-                logout :        "/server/logout",
+                logout :        "/server/login",
                 user :          "/server/user",
-                link :          "/server/link"
+                link :          "/server/link",
+                tag :           "/server/tag"
             },
             template : {
                 loader :        "core/common/loader/loader.tpl.html",
                 addlink :       "core/common/addlink/addlink.tpl.html",
-                listlink :      "core/common/listlink/listlink.tpl.html"
+                listlink :      "core/common/listlink/listlink.tpl.html",
+                listtag :       "core/common/listtag/listtag.tpl.html"
             },
             pages : {
                 about :         "#/page/about",

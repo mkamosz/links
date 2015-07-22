@@ -1,34 +1,55 @@
-<div class="panel panel-default">
-    <div class="panel-body">
-        <div class="link-list">
-            <ul ng-if="data.tags">
-                <li ng-repeat="tag in data.tags" class="item">
+<div class="link-list">
+    <div class="panel panel-default " ng-if="!hp">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-8">
+                    <h3>{{userInfo.username}} links list</h3>
+                </div>
+                <div class="col-md-4">
+                    <input type="text" placeholder="filter links by" class="form-control pull-right link-list-search" ng-model="search" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul ng-if="data.links">
+                <li ng-repeat="link in data.links | filter: search" class="link-list-item" data-id="{{link.id}}">
                     <div class="row">
-                        <div class="col-md-10">
-                            <h3>{{tag.title}} <a target="_blank" ng-href="tag.url">{{tag.host}}</a></h3>
+                        <div class="col-md-9">
+                            <a ng-href="link.url"><h3>{{link.title}} <span>{{link.host}}</span></h3></a>
                         </div>
-                        <div class="col-md-2">
-                            {{tag.date}}
+                        <div class="col-md-3 link-list-time text-right">
+                            {{link.date | date : 'd/MM/yyyy' }}
                         </div>
                         <div class="col-md-12">
-                            <blockquote>{{tag.comment}}</blockquote>
+                            <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
                         </div>
                         <div class="col-md-2">
-                            <span class="link-list-counter">{{tag.counter}}</span>
-                            <span class="link-list-counter all">{{tag.counterAll}}</span>
+                            <span class="link-list-counter all" title="Number of links">{{link.counterAll}}</span>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-6 link-list-tags">
                             <span>tags:</span>
-                            <ul class="link-list-tags" ng-if="tag.tags">
-                                <li ng-repeat="item in tag.tags">{{item}}</li>
+                            <ul ng-if="link.tags">
+                                <li ng-repeat="item in link.tags"><a href="#" ng-click="">#{{item}}</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-2">
-
+                        <div class="col-md-4 text-right link-list-buttons">
+                            <button class="btn btn-default btn-xs" title="Edit" ng-click="edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            <button class="btn btn-default btn-xs" title="Delete" ng-click="delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
+    </div>
+
+    <div  ng-if="hp">
+        <h3>The most popular links</h3>
+        <ul ng-if="data.links">
+            <li ng-repeat="link in data.links">
+
+                <span class="badge" title="{{link.counter}} wystąpień"></span>
+                <blockquote><a href="{{link.url}}" target="_blank">{{link.url}}</a> - {{link.counter}}</blockquote>
+            </li>
+        </ul>
     </div>
 </div>

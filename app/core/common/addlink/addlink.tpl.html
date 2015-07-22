@@ -1,26 +1,31 @@
-<form name="addLink" class="add-link">
+<form name="addLink" class="link-add">
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="form-group" ng-if="!linkTmpAdded">
-                <div class="add-wrapper">
+                <div class="link-add-wrapper">
                     <input type="text" class="form-control link" name="link" ng-model="data.link" required tabindex="0" minlength="3" />
                     <button ng-click="checkLink();"  class="btn btn-primary pull-right" ng-disabled="disabledAddButton || addLink.$invalid" ><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
                 <label>Add a new link</label>
             </div>
             <div class="form-group" ng-if="linkTmpAdded">
-                <h3 class="linkAnchor"><a href="{{data.link}}">{{data.link}}</a></h3>
-                <input type="text" name="title" ng-model="data.title" class="form-control" value="{{data.title}}" />
+                <h3 class="link-add-anchor"><a href="{{data.link}}">{{data.link}}</a></h3>
+                <input type="text" name="title" required="" minlength="5" ng-model="data.title" class="form-control" value="{{data.title}}" />
                 <label>Title</label>
             </div>
             <div class="form-group" ng-if="linkTmpAdded">
-                <input type="text" class="form-control" ng-model="data.tags" required="">
+                <ul ng-if="addedTags" class="link-add-tags">
+                    <li ng-repeat="item in addedTags">
+                        <button ng-click="removeAddedTag(item)"class="btn btn-primary btn-xs">{{item}}<span class="glyphicon glyphicon-remove"></span></button>
+                    </li>
+                </ul>
+                <input type="text" ng-keydown="checkAddedTags($event);" ng-blur="checkAddedTags($event);" ng-keyup="removeWC($event);" class="form-control">
                 <div class="row">
                     <div class="col-md-6">
                         <label>Tags</label>
                     </div>
                     <div class="col-md-6 text-right">
-                        <label>Separated by comma</label>
+                        <label>Separated by comma or enter - max 10 tags</label>
                     </div>
                 </div>
             </div>
@@ -37,11 +42,14 @@
             </div>
         </div>
     </div>
-    <div class="summary" ng-if="linkTmpAdded">
+    <div class="link-add-summary" ng-if="linkTmpAdded">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <button ng-click="saveLink();" class="btn btn-primary btn-lg">Add link</button>
+                    <button ng-click="saveLink();" ng-disabled="addLink.$invalid" class="btn btn-primary btn-lg">Add link</button>
+                </div>
+                <div class="col-md-1 text-center ">
+                    <a class="back" ng-click="back();">Back</a>
                 </div>
             </div>
         </div>

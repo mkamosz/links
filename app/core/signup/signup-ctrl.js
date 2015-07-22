@@ -2,7 +2,7 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
+app.controller('SignupController', ['$rootScope', '$scope', 'conn', function($rootScope, $scope, conn){
 
     $scope.data = {};
     $scope.showForm = true;
@@ -31,4 +31,6 @@ app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
                 console.log(msg);
             })
     };
+
+    $rootScope.$broadcast('showFooter',{"show" : false});
 }]);
