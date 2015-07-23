@@ -1,5 +1,5 @@
 <div class="link-tag">
-    <div class="panel panel-default " ng-if="!hp">
+    <div class="panel panel-default " ng-if="!popularTags">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-6">
@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="panel-body">
-            <ul ng-if="data.tags">
-                <li ng-repeat="(key, value) in filterTags(data.tags,search)" class="link-tag-item">
+            <ul ng-if="dataListTags">
+                <li ng-repeat="(key, value) in tag.fn.filterTags(dataListTags,search)" class="link-tag-item">
                     <a href="#">#{{key}}</a>
                     <span class="badge" title="{{value}} wystąpień">{{value}}</span>
                 </li>
@@ -21,10 +21,10 @@
         </div>
     </div>
 
-    <div ng-if="hp">
+    <div ng-if="popularTags">
         <h3>The most popular tags</h3>
-        <ul ng-if="data.tags">
-            <li ng-repeat="item in data.tags | limitTo : 5">
+        <ul ng-if="dataListTags">
+            <li ng-repeat="item in dataListTags | limitTo : 5">
                 <span class="badge" title="{{item.counter}} wystąpień"></span>
                 <blockquote>#{{item.name}} - {{item.counter}}</blockquote>
             </li>

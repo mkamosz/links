@@ -2,28 +2,26 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('ActionController', ['$scope', 'auth', '$location', 'path', function($scope, auth, $location, path){
-    var userInfo = (auth.getUserInfo() === null ? {logged : false} : auth.getUserInfo());
+app.controller('ActionController', ['$scope', 'auth', '$location', function($scope, auth, $location){
 
-    $scope.path = path.url();
-    $scope.showProfile = false;
-    $scope.logout = function(){
-        auth.logout($scope.path.server.logout,{username : userInfo.username})
+    /* Pseudo global variables $scope.data */
+
+    /* Private variables for this controller - $scope*/
+    $scope.action = {
+        fn : {}
+    };
+
+    /*Functions*/
+
+    $scope.action.fn.logout = function(){
+        auth.logout($scope.data.path.server.logout,{username : $scope.data.userInfo.username})
             .then(function(result){
                 $location.path('/');
-                $scope.showProfile = false;
+                $scope.data.userInfo = result.userInfo;
+                $scope.data.layout.showProfile = auth.isLogin();
             }, function(msg){
                 $location.path('/');
-                $scope.showProfile = false;
             });
     };
 
-    $scope.$on('logged', function(event, args) {
-        $scope.userInfo = auth.getUserInfo();
-        $scope.showProfile = $scope.userInfo.logged;
-    });
-
-    if(userInfo.logged){
-        $scope.showProfile = true;
-    }
 }]);

@@ -8,7 +8,7 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: 'core/homepage/homepage.tpl.html',
             controller: "HomepageController"
         })
-        .when('/page/:name', { //for static pages about/faq/signin/signup etc...
+        .when('/page/:name', { //for static pages about/faq/news/signin/signup etc...
             templateUrl: function(param){
                 return 'core/' + param.name + '/' + param.name + '.tpl.html';
             },
@@ -16,7 +16,6 @@ app.config(['$routeProvider', function($routeProvider){
         })
         .when('/myprofile/:name',{ //for myprofile pages dashboard/settings etc....
             templateUrl: function(param){
-                console.log();
                 return 'core/myprofile/' + param.name + '/' + param.name + '.tpl.html'
             },
             resolve : {

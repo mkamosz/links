@@ -3,6 +3,15 @@
  */
 
 app.controller('HomepageController', ['$scope' , function($scope){
-    $scope.test1 = "11111111";
-    $scope.test2 = "22222222";
+
+    /* Pseudo global variables $scope.data */
+
+    /* Private variables for this controller - $scope*/
+    $scope.hp = {
+        data : {},
+        fn : {}
+    };
+
+    /*Functions*/
+
 }]);

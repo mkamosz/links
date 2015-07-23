@@ -24,12 +24,14 @@ app.service('path', function(){
                 tag :           "/server/tag"
             },
             template : {
+                action :        "core/common/header/action/action.tpl.html",
                 loader :        "core/common/loader/loader.tpl.html",
                 addlink :       "core/common/addlink/addlink.tpl.html",
                 listlink :      "core/common/listlink/listlink.tpl.html",
                 listtag :       "core/common/listtag/listtag.tpl.html"
             },
             pages : {
+                hp :            "#/page",
                 about :         "#/page/about",
                 faq :           "#/page/faq",
                 news :          "#/page/news",

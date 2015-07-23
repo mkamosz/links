@@ -1,12 +1,26 @@
-app.controller('IndexController',['$rootScope', '$scope', 'auth', 'path', function($rootScope, $scope, auth, path){
-    $scope.userInfo = auth.getUserInfo();
-    $scope.showFooter = true;
+app.controller('IndexController',['$scope', 'auth', 'path', function($scope, auth, path){
+    /* IndexController - main controller
+    *  with set pseudo global variables for rest controllers
+    * */
+    $scope.data = {
+        userInfo : auth.getUserInfo(),
+        layout : {
+            showFooter : true,
+            showProfile : false,
+            showAddLinkForm : false
+        },
+        path : path.url(),
+        loader : {
+            set : "active"
+        },
+        listLinks : [],
+        listTags : [],
+        editTag : {
+            id : null,
+            show : false
+        }
 
-    $scope.path = path.url();
-    $scope.actionUrl = $scope.path.core + 'common/header/action/action.tpl.html';
-
-    $rootScope.$on("showFooter", function (event, data) {
-        $scope.showFooter = data.show;
-    });
+    };
+    $scope.data.layout.showProfile = $scope.data.userInfo.logged;
 
 }]);

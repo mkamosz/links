@@ -2,31 +2,46 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('SigninController', ['$rootScope', '$scope','auth','$location', 'path', function($rootScope, $scope, auth, $location,path){
+app.controller('SigninController', ['$scope','auth','$location', function($scope, auth, $location){
 
-    $scope.path = path.url();
-    $scope.data = {};
-    $scope.error = {
-        show : false,
-        msg : ""
+    /* Pseudo global variables $scope.data */
+    $scope.data.layout.showFooter = false;
+
+    /* Private variables for this controller - $scope*/
+    $scope.signin = {
+        data : {},
+        error : {
+            show : false,
+            msg : ""
+        },
+        fn : {}
     };
 
-    $scope.signin = function(){
-        auth.login($scope.path.server.login, $scope.data)
+    /* Functions */
+
+    /*Signin form*/
+    $scope.signin.fn.form = function(){
+        $scope.data.loader.set = "active";
+        auth.login($scope.data.path.server.login, $scope.signin.data)
             .then(function(result){
                 if(result.authenticated == true){
                     $location.path("/");
-
+                    $scope.data.layout.showProfile = auth.isLogin();
                 }
+                $scope.data.loader.set = "";
             }, function(result) {
                 if(result.authenticated == false){
-                    $scope.error.show = true;
-                    $scope.error.msg = result.message;
-                    $scope.data = {};
+                    $scope.signin.error.show = true;
+                    $scope.signin.error.msg = result.message;
+                    $scope.signin.data = {};
                 }
+                $scope.data.loader.set = "";
             });
     };
 
-    $rootScope.$broadcast('showFooter',{"show" : false});
+    /*hide errors*/
+    $scope.signin.fn.hideErrors = function(){
+        $scope.signin.error.show=false;
+    }
 
 }]);

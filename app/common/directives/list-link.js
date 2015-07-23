@@ -2,68 +2,59 @@
  * Created by kamoszm on 2015-07-15.
  */
 
-app.directive("listLink", ['path', function(path){
-    var path = path.url(),
-        checkRootScope = true;
+app.directive("listLinks", ['path', function(path){
+    var path = path.url();
 
     return {
-        restrict : "E",
+        restrict : "AE",
         scope : {
-            hp : "="
+            popularLinks : '@popularLinks',
+            dataListLinks : '=list',
+            dataListTags : '=tags',
+            editTag : '=editTag'
         },
         templateUrl: path.template.listlink,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope','conn', 'auth', 'loaderService','stringOperation','dataFactory', function($rootScope, $scope, conn, auth, loaderService, stringOperation,dataFactory){
+        controller : ['$scope','conn', 'auth', function($scope, conn, auth){
 
-            var dataConenction = function(){
-                conn.getData(path.server.link, { params : $scope.data })
-                    .then(function(result){
-                        if($scope.data.all == true){
-                            dataFactory.addData("popularLinksList",result.data);
-                            $scope.data.links = dataFactory.getData("popularLinksList");
-                        } else{
-                            dataFactory.addData("userLinksList",result.data);
-                            $scope.data.links = dataFactory.getData("userLinksList");
-                        }
+            /* Pseudo global variables $scope.data */
 
-
-                    }, function(msg){
-                        console.log(msg);
-                    });
+            /* Private variables for this controller - $scope*/
+            $scope.popularLinks = (typeof $scope.popularLinks === "undefined" ? false : $scope.popularLinks);
+            $scope.list = {
+                data : {
+                    auth : auth.getUserInfo(),
+                    check : false,
+                    all : $scope.popularLinks
+                },
+                fn : {}
             };
 
-            $scope.hp = (typeof $scope.hp === "undefined" ? false : $scope.hp);
-            $scope.path = path;
-            $scope.userInfo = auth.getUserInfo();
-            $scope.data = {
-                auth : $scope.userInfo,
-                check : false,
-                all : $scope.hp
-            };
+            /* Functions */
 
-            dataConenction();
-
-            if(checkRootScope){
-                $rootScope.$on("userLinksList", function () {
-                    $scope.data.links = dataFactory.getData("userLinksList");
+            conn.getData(path.server.link, { params : $scope.list.data })
+                .then(function(result){
+                    if(result.status == true) {
+                        $scope.dataListLinks = result.data;
+                    }
+                }, function(msg){
+                    console.log(msg);
                 });
-                checkRootScope = false;
-            }
 
-            $scope.edit = function(id){
-                $rootScope.$broadcast("editLink", {"id": id});
+
+            $scope.list.fn.edit = function(id){
+                $scope.editTag.id = id;
+                $scope.editTag.edit = true;
             };
 
-            $scope.delete = function(id){
+            $scope.list.fn.delete = function(id){
                 var check = confirm("Are you sure you want to remove?");
                 if (check == true) {
-                    conn.deleteData(path.server.link, {"params" : {auth : $scope.userInfo, id : id}})
+                    conn.deleteData(path.server.link, {"params" : {auth : auth.getUserInfo(), id : id}})
                         .then(function(result){
-                            dataFactory.editData("userLinksList",result.data.links);
-                            $scope.data.links = dataFactory.getData("userLinksList");
-
-                            dataFactory.editData("userTagsList",result.data.tags);
+                            $scope.dataListLinks = result.data.links;
+                            $scope.dataListTags = result.data.tags;
 
                         }, function(msg){
                             console.log(msg);

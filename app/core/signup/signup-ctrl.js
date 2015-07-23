@@ -2,35 +2,50 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('SignupController', ['$rootScope', '$scope', 'conn', function($rootScope, $scope, conn){
+app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
 
-    $scope.data = {};
-    $scope.showForm = true;
-    $scope.error = {
-        show : false,
-        msg : ""
+    /* Pseudo global variables $scope.data */
+    $scope.data.layout.showFooter = false;
+
+    /* Private variables for this controller - $scope*/
+    $scope.signup = {
+        data : {},
+        error : {
+            show : false,
+            msg : ""
+        },
+        showForm : true,
+        fn : {}
     };
 
-    $scope.signup = function(){
-        conn.postData($scope.path.server.user, $scope.data)
+    /* Functions */
+
+    /*signup - form*/
+    $scope.signup.fn.form = function(){
+        $scope.data.loader.set = "active";
+        conn.postData($scope.data.path.server.user, $scope.signup.data)
             .then(function(result){
                 if(result.status == true){
-                    $scope.showForm = false;
+                    $scope.signup.showForm = false;
                 } else {
-                    $scope.showForm = true;
-                    $scope.error.show = true;
-                    $scope.error.msg = result.message;
-                    $scope.data.password = "";
+                    $scope.signup.showForm = true;
+                    $scope.signup.error.show = true;
+                    $scope.signup.error.msg = result.message;
+                    $scope.signup.data.password = "";
                     if(result.code == 1){
-                        $scope.data.username = "";
+                        $scope.signup.data.username = "";
                     } else{
-                        $scope.data.email = "";
+                        $scope.signup.data.email = "";
                     }
                 }
+                $scope.data.loader.set = "";
             }, function(msg) {
                 console.log(msg);
             })
     };
 
-    $rootScope.$broadcast('showFooter',{"show" : false});
+    /*hide errors*/
+    $scope.signup.fn.hideErrors = function(){
+        $scope.signup.error.show=false;
+    }
 }]);

@@ -8,7 +8,7 @@ var app = angular.module('appLinks',['ngRoute','ngSanitize']);
 
 app.run(["$rootScope", "$location", function ($rootScope, $location) {
     $rootScope.$on("$routeChangeSuccess", function (userInfo) {
-        console.log(userInfo);
+        //console.log(userInfo);
     });
 
     $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {

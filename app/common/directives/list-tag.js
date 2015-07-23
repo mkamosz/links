@@ -2,41 +2,44 @@
  * Created by kamoszm on 2015-07-15.
  */
 
-app.directive("listTag", ['path', function(path){
-    var path = path.url(),
-        checkRootScope = true;
+app.directive("listTags", ['path', function(path){
+    var path = path.url();
 
     return {
-        restrict : "E",
+        restrict : "AE",
         scope : {
-            hp : "="
+            popularTags : "@popularTags",
+            dataListTags : "=list"
         },
         templateUrl: path.template.listtag,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope','conn', 'auth','dataFactory', function($rootScope, $scope, conn, auth, dataFactory){
-            $scope.path = path;
-            $scope.userInfo = auth.getUserInfo();
-            $scope.hp = (typeof $scope.hp === "undefined" ? false : $scope.hp);
-            $scope.data = {
-                auth : $scope.userInfo,
-                check : $scope.hp
+        controller : ['$scope','conn', 'auth', function($scope, conn, auth){
+
+            /* Pseudo global variables $scope.data */
+
+            /* Private variables for this controller - $scope*/
+            $scope.popularTags = (typeof $scope.popularTags === "undefined" ? false : $scope.popularTags);
+            $scope.tag = {
+                data : {
+                    auth : auth.getUserInfo(),
+                    check : $scope.popularTags
+                },
+                fn : {}
             };
 
-            conn.getData(path.server.tag, { params : $scope.data })
+            /* Functions */
+
+            conn.getData(path.server.tag, { params : $scope.tag.data })
                 .then(function(result){
-                    if(result.status == true && result.code == 0){
-                        dataFactory.addData("userTagsList",result.data);
-                        $scope.data.tags = dataFactory.getData("userTagsList");
-                    } else{
-                        dataFactory.addData("popularTagsList",result.data);
-                        $scope.data.tags = dataFactory.getData("popularTagsList");
+                    if(result.status == true){
+                        $scope.dataListTags = result.data;
                     }
                 }, function(msg){
                     console.log(msg);
                 });
 
-            $scope.filterTags = function(items, str) {
+            $scope.tag.fn.filterTags = function(items, str) {
                 var result = {};
                 if(typeof str !== "undefined"){
                     angular.forEach(items, function(key, value){
@@ -49,18 +52,6 @@ app.directive("listTag", ['path', function(path){
                 }
                 return result;
             };
-
-            if(checkRootScope){
-                $rootScope.$on("userTagsList", function () {
-                    if($scope.hp == true){
-                        $scope.data.tags = dataFactory.getData("popularTagsList");
-                    } else{
-                        $scope.data.tags = dataFactory.getData("userTagsList");
-                    }
-                });
-                checkRootScope = false;
-            }
-
-        }],
+        }]
     }
 }]);

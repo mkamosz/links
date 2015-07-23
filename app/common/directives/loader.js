@@ -8,34 +8,36 @@ app.directive("loaderPage", ['path', function(path){
     return {
         restrict : "E",
         scope : {
-            text : "@"
+            state : "=stateLoader"
         },
         templateUrl: path.template.loader,
         replace : true,
         transclude : false,
         controller : ['$rootScope', '$scope', 'loaderService', function($rootScope, $scope, loaderService){
 
+            /* Pseudo global variables $scope.data */
+
+            /* Private variables for this controller - $scope*/
+            $scope.loader = {
+                data : {},
+                fn : {}
+            }
+
+            /* Functions */
+
+
             if(enableRouteChange){
                 $rootScope.$on("$routeChangeStart", function (event, next, current) {
-                    $scope.loader = loaderService.active()
+                    $scope.state = "active";
                 });
 
                 $rootScope.$on("$routeChangeSuccess", function (event, current, previous) {
-                    $scope.loader = loaderService.inactive();
+                    $scope.state = "";
                 });
 
                 $rootScope.$on("$routeChangeError", function (event, current, previous, rejection) {
-                    $scope.loader = loaderService.inactive();
+                    $scope.state = "";
                 });
-
-                $rootScope.$on("loaderActive", function () {
-                    $scope.loader = loaderService.active();
-                });
-
-                $rootScope.$on("loaderInactive", function () {
-                    $scope.loader = loaderService.inactive();
-                });
-
 
                 enableRouteChange = false;
             }

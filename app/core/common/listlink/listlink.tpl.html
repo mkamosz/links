@@ -1,9 +1,9 @@
 <div class="link-list">
-    <div class="panel panel-default " ng-if="!hp">
+    <div class="panel panel-default " ng-if="!popularLinks">
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-8">
-                    <h3>{{userInfo.username}} links list</h3>
+                    <h3>{{data.userInfo.username}} links list</h3>
                 </div>
                 <div class="col-md-4">
                     <input type="text" placeholder="filter links by" class="form-control pull-right link-list-search" ng-model="search" />
@@ -11,8 +11,8 @@
             </div>
         </div>
         <div class="panel-body">
-            <ul ng-if="data.links">
-                <li ng-repeat="link in data.links | filter: search" class="link-list-item" data-id="{{link.id}}">
+            <ul ng-if="dataListLinks">
+                <li ng-repeat="link in dataListLinks | filter: search" class="link-list-item" data-id="{{link.id}}">
                     <div class="row">
                         <div class="col-md-9">
                             <a ng-href="link.url"><h3>{{link.title}} <span>{{link.host}}</span></h3></a>
@@ -24,7 +24,7 @@
                             <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
                         </div>
                         <div class="col-md-2">
-                            <span class="link-list-counter all" title="Number of links">{{link.counterAll}}</span>
+                            <span class="link-list-counter all" title="Counter link">{{link.counterAll}}</span>
                         </div>
                         <div class="col-md-6 link-list-tags">
                             <span>tags:</span>
@@ -33,8 +33,8 @@
                             </ul>
                         </div>
                         <div class="col-md-4 text-right link-list-buttons">
-                            <button class="btn btn-default btn-xs" title="Edit" ng-click="edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
-                            <button class="btn btn-default btn-xs" title="Delete" ng-click="delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                            <button class="btn btn-default btn-xs" title="Edit" ng-click="list.fn.edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+                            <button class="btn btn-default btn-xs" title="Delete" ng-click="list.fn.delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         </div>
                     </div>
                 </li>
@@ -42,10 +42,10 @@
         </div>
     </div>
 
-    <div  ng-if="hp">
+    <div ng-if="popularLinks">
         <h3>The most popular links</h3>
-        <ul ng-if="data.links">
-            <li ng-repeat="link in data.links">
+        <ul ng-if="dataListLinks">
+            <li ng-repeat="link in dataListLinks">
 
                 <span class="badge" title="{{link.counter}} wystąpień"></span>
                 <blockquote><a href="{{link.url}}" target="_blank">{{link.url}}</a> - {{link.counter}}</blockquote>

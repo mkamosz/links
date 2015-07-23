@@ -3,5 +3,15 @@
  */
 
 app.controller('CommunityController', ['$scope' , function($scope){
+    /* Pseudo global variables $scope.data */
+
+    /* Private variables for this controller - $scope*/
+    $scope.community = {
+        data : {},
+        fn : {}
+    };
+
+    /*Functions*/
+
 
 }]);

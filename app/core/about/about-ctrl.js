@@ -3,5 +3,17 @@
  */
 
 app.controller('AboutController', ['$scope' , function($scope){
-    $scope.test = "TEST";
+
+    /* Pseudo global variables $scope.data */
+
+    /* Private variables for this controller - $scope*/
+    $scope.about = {
+        data : {
+          test : "Test about"
+        },
+        fn : {}
+    };
+
+    /*Functions*/
+
 }]);

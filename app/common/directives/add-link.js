@@ -3,82 +3,91 @@
  */
 
 app.directive("addLink", ['path', function(path){
-    var path = path.url(),
-        checkRootScope = true;
+    var path = path.url();
 
     return {
-        restrict : "E",
+        restrict : "AE",
         scope : {
-            text : "@"
+            editTag : '=editTag',
+            loader : '=loader',
+            dataListLinks : '=list',
+            dataListTags : '=tags'
         },
         templateUrl: path.template.addlink,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope','conn', 'auth', 'loaderService','dataFactory','stringOperation', function($rootScope, $scope, conn, auth, loaderService,dataFactory,stringOperation){
-            var checkEdit = function(result){
+        controller : ['$rootScope', '$scope','conn', 'auth', function($rootScope, $scope, conn, auth){
 
-            };
-            $scope.path = path;
-            $scope.userInfo = auth.getUserInfo();
-            $scope.disabledAddButton = false;
-            $scope.linkTmpAdded = false;
-            $scope.data = {
-                auth : $scope.userInfo,
-                check : true,
-                all : $scope.hp
-            };
-            $scope.addedTags = [];
+            /* Pseudo global variables $scope.data */
 
-            $scope.back = function(){
-                $scope.disabledAddButton = false;
-                $scope.linkTmpAdded = false;
+            /* Private variables for this controller - $scope*/
+            $scope.add = {
+                data : {
+                    auth : auth.getUserInfo(),
+                    check : true,
+                    all : $scope.popularLinks
+                },
+                tags : [],
+                condition : {
+                    disabledAddButton : false,
+                    linkTmpAdded : false
+                },
+                addedTags : [],
+                fn : {}
             };
 
-            $scope.checkLink = function(){
-                $rootScope.$broadcast('loaderActive');
-                $scope.disabledAddButton = true;
-                conn.getData(path.server.link, { params : $scope.data })
+            /* Functions */
+
+            $scope.add.fn.back = function(){
+                $scope.add.condition.disabledAddButton = false;
+                $scope.add.condition.linkTmpAdded = false;
+            };
+
+            $scope.add.fn.checkLink = function(){
+                $scope.loader.set = "active";
+                $scope.add.condition.disabledAddButton = true;
+                conn.getData(path.server.link, { params : $scope.add.data })
                     .then(function(result){
                         if(result.status == true){
-                            $scope.data.title = result.data.title;
-                            $scope.linkTmpAdded = true;
-                            $rootScope.$broadcast('loaderInactive');
+                            $scope.add.data.title = result.data.title;
+                            $scope.add.condition.linkTmpAdded = true;
+                            $scope.loader.set = "";
 
-                            $scope.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
-                            $scope.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
+                            $scope.add.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
+                            $scope.add.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
                         }
                     }, function(msg){
                         console.log(msg);
                     });
             };
 
-            $scope.saveLink = function(){
-                $rootScope.$broadcast('loaderActive');
-                $scope.data.check = false;
-                conn.postData(path.server.link, $scope.data )
+            $scope.add.fn.saveLink = function(){
+                $scope.loader.set = "active";
+                $scope.add.data.check = false;
+                conn.postData(path.server.link, $scope.add.data )
                     .then(function(result){
                         if(result.status == true){
-                            $scope.linkTmpAdded = false;
-                            $scope.data = {
-                                auth : $scope.userInfo,
+                            $scope.add.condition.linkTmpAdded = false;
+                            $scope.add.data = {
+                                auth : auth.getUserInfo(),
                                 check : false
                             };
-                            $scope.disabledAddButton = false;
+                            $scope.add.condition.disabledAddButton = false;
 
-                            conn.getData(path.server.link, { params : $scope.data })
+                            conn.getData(path.server.link, { params : $scope.add.data })
                                 .then(function(result){
-                                    $rootScope.$broadcast('loaderInactive');
+                                    $scope.loader.set = "";
 
-                                    dataFactory.editData("userLinksList", result.data);
-                                    $scope.data.check = true;
+                                    $scope.dataListLinks = result.data;
+                                    $scope.add.data.check = true;
                                 }, function(msg){
                                     console.log(msg);
                                 });
 
-                            conn.getData(path.server.tag, { params : $scope.data })
+                            conn.getData(path.server.tag, { params : $scope.add.data })
                                 .then(function(result){
-                                    dataFactory.editData("userTagsList",result.data);
-                                    $scope.data.check = true;
+                                    $scope.dataListTags = result.data;
+                                    $scope.add.data.check = true;
                                 }, function(msg){
                                     console.log(msg);
                                 });
@@ -88,26 +97,26 @@ app.directive("addLink", ['path', function(path){
                     });
             };
 
-            $scope.removeAddedTag = function(el) {
-                var arr = $scope.addedTags;
+            $scope.add.fn.removeAddedTag = function(el) {
+                var arr = $scope.add.addedTags;
                 for(var i in arr){
                     if(arr[i]== el){
                         arr.splice(i,1);
                         break;
                     }
                 }
-                $scope.addedTags = arr;
-                $scope.data.tags = $scope.addedTags.join();
+                $scope.add.addedTags = arr;
+                $scope.add.data.tags = $scope.add.addedTags.join();
             };
 
-            $scope.checkAddedTags = function(e) {
+            $scope.add.fn.checkAddedTags = function(e) {
                 var $el = $(e.target),
                     val = $el.val(),
                     keyCode = e.keyCode,
                     addTags = function(){
-                        if ($scope.addedTags.indexOf(val) < 0 && $scope.addedTags.length < 10 && val != ""){
-                            $scope.addedTags.push(val);
-                            $scope.data.tags = $scope.addedTags.join();
+                        if ($scope.add.addedTags.indexOf(val) < 0 && $scope.add.addedTags.length < 10 && val != ""){
+                            $scope.add.addedTags.push(val);
+                            $scope.add.data.tags = $scope.add.addedTags.join();
                         }
                         $el.val("");
                         event.preventDefault();
@@ -134,7 +143,7 @@ app.directive("addLink", ['path', function(path){
 
             };
 
-            $scope.removeWC = function(e){
+            $scope.add.fn.removeWC = function(e){
                 var $el = $(e.target),
                     val = $el.val();
                 if(val.indexOf(' ') >= 0){
@@ -144,36 +153,34 @@ app.directive("addLink", ['path', function(path){
 
             $scope.edit = function(id){
 
-                $rootScope.$broadcast('loaderActive');
-                $scope.disabledAddButton = true;
-                $scope.data.id = id;
-                conn.getData(path.server.link, { params : $scope.data })
+                $scope.loader.set = "active";
+                $scope.add.condition.disabledAddButton = true;
+                $scope.add.data.id = id;
+                conn.getData(path.server.link, { params : $scope.add.data })
                     .then(function(result){
                         if(result.status == true){
-                            $scope.data.title = result.data.title;
-                            $scope.linkTmpAdded = true;
-                            $rootScope.$broadcast('loaderInactive');
+                            $scope.add.data.title = result.data.title;
+                            $scope.add.condition.linkTmpAdded = true;
+                            $scope.loader.set = "";
 
                             if(typeof result.data.comment !== "undefined"){
-                                $scope.data.comment = result.data.comment;
+                                $scope.add.data.comment = result.data.comment;
                             }
 
-                            $scope.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
-                            $scope.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
+                            $scope.add.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
+                            $scope.add.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
                         }
                     }, function(msg){
                         console.log(msg);
                     });
             };
 
-            if(checkRootScope){
-                $rootScope.$on("editLink", function (event, data) {
-                    $scope.edit(data.id);
-
-                });
-                checkRootScope = false;
-            }
-
+            $scope.$watch('editTag.edit', function() {
+                if($scope.editTag.edit == true){
+                    $scope.edit($scope.editTag.id);
+                    $scope.editTag.edit = false;
+                }
+            });
 
         }]
     }

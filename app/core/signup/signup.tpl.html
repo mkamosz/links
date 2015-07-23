@@ -4,26 +4,26 @@
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <h3>Create an account</h3>
-                    <div ng-show="showForm">
-                        <div class="alert alert-danger" ng-show="error.show">
-                            <span ng-bind-html="error.msg"></span>
+                    <div ng-show="signup.showForm">
+                        <div class="alert alert-danger" ng-show="signup.error.show">
+                            <span ng-bind-html="signup.error.msg"></span>
                         </div>
                         <form name="signIn">
 
 
                             <div class="list-group list-group-sm">
                                 <div class="list-group-item">
-                                    <input type="text" minlength="3" ng-keypress="error.show=false;" class="form-control" ng-model="data.username" name="username" id="username" placeholder="Username" required />
+                                    <input type="text" minlength="3" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.username" name="username" id="username" placeholder="Username" required />
                                 </div>
                                 <div class="list-group-item">
-                                    <input type="email" minlength="6" ng-keypress="error.show=false;" class="form-control" ng-model="data.email" name="email" id="email" placeholder="Email" required />
+                                    <input type="email" minlength="6" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.email" name="email" id="email" placeholder="Email" required />
                                 </div>
                                 <div class="list-group-item">
-                                    <input type="password" minlength="5" ng-keypress="error.show=false;" class="form-control" ng-model="data.password" name="password" id="password" placeholder="Password" required />
+                                    <input type="password" minlength="5" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.password" name="password" id="password" placeholder="Password" required />
                                 </div>
 
                             </div>
-                            <button ng-click="signup();" ng-disabled="signIn.$invalid" class="btn btn-primary btn-lg">Sing up</button>
+                            <button ng-click="signup.fn.form();" ng-disabled="signIn.$invalid" class="btn btn-primary btn-lg">Sing up</button>
 
                             <div class="text-center log-form-additional">
                                 <p>Already have an account?</p>
@@ -34,14 +34,14 @@
 
 
                     </div>
-                    <div class="login-success" ng-hide="showForm">
+                    <div class="login-success" ng-hide="signup.showForm">
                         <div class="thick">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
                                 <h3 class="color-success">Congratulate Your account <span class="color-normal">{{data.username}}</span><br>has been created</h3>
-                                <a href="#/page/signin" class="btn btn-primary btn-lg">Sign in</a>
+                                <a ng-href="data.path.pages.signin" class="btn btn-primary btn-lg">Sign in</a>
                             </div>
                         </div>
                     </div>

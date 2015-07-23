@@ -1,25 +1,25 @@
 <form name="addLink" class="link-add">
     <div class="panel panel-default">
         <div class="panel-body">
-            <div class="form-group" ng-if="!linkTmpAdded">
+            <div class="form-group" ng-if="!add.condition.linkTmpAdded">
                 <div class="link-add-wrapper">
-                    <input type="text" class="form-control link" name="link" ng-model="data.link" required tabindex="0" minlength="3" />
-                    <button ng-click="checkLink();"  class="btn btn-primary pull-right" ng-disabled="disabledAddButton || addLink.$invalid" ><span class="glyphicon glyphicon-plus"></span></button>
+                    <input type="text" class="form-control link" name="link" ng-model="add.data.link" required tabindex="0" minlength="3" />
+                    <button ng-click="add.fn.checkLink();"  class="btn btn-primary pull-right" ng-disabled="add.condition.disabledAddButton || addLink.$invalid" ><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
                 <label>Add a new link</label>
             </div>
-            <div class="form-group" ng-if="linkTmpAdded">
-                <h3 class="link-add-anchor"><a href="{{data.link}}">{{data.link}}</a></h3>
-                <input type="text" name="title" required="" minlength="5" ng-model="data.title" class="form-control" value="{{data.title}}" />
+            <div class="form-group" ng-if="add.condition.linkTmpAdded">
+                <h3 class="link-add-anchor"><a href="{{add.data.link}}">{{add.data.link}}</a></h3>
+                <input type="text" name="title" required="" minlength="5" ng-model="add.data.title" class="form-control" value="{{add.data.title}}" />
                 <label>Title</label>
             </div>
-            <div class="form-group" ng-if="linkTmpAdded">
-                <ul ng-if="addedTags" class="link-add-tags">
-                    <li ng-repeat="item in addedTags">
-                        <button ng-click="removeAddedTag(item)"class="btn btn-primary btn-xs">{{item}}<span class="glyphicon glyphicon-remove"></span></button>
+            <div class="form-group" ng-if="add.condition.linkTmpAdded">
+                <ul ng-if="add.addedTags" class="link-add-tags">
+                    <li ng-repeat="item in add.addedTags">
+                        <button ng-click="add.fn.removeAddedTag(item)"class="btn btn-primary btn-xs">{{item}}<span class="glyphicon glyphicon-remove"></span></button>
                     </li>
                 </ul>
-                <input type="text" ng-keydown="checkAddedTags($event);" ng-blur="checkAddedTags($event);" ng-keyup="removeWC($event);" class="form-control">
+                <input type="text" ng-keydown="add.fn.checkAddedTags($event);" ng-blur="add.fn.checkAddedTags($event);" ng-keyup="add.fn.removeWC($event);" class="form-control">
                 <div class="row">
                     <div class="col-md-6">
                         <label>Tags</label>
@@ -29,8 +29,8 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group" ng-if="linkTmpAdded">
-                <textarea class="form-control" ng-model="data.comment"></textarea>
+            <div class="form-group" ng-if="add.condition.linkTmpAdded">
+                <textarea class="form-control" ng-model="add.data.comment"></textarea>
                 <div class="row">
                     <div class="col-md-6">
                         <label>Comment</label>
@@ -42,14 +42,14 @@
             </div>
         </div>
     </div>
-    <div class="link-add-summary" ng-if="linkTmpAdded">
+    <div class="link-add-summary" ng-if="add.condition.linkTmpAdded">
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <button ng-click="saveLink();" ng-disabled="addLink.$invalid" class="btn btn-primary btn-lg">Add link</button>
+                    <button ng-click="add.fn.saveLink();" ng-disabled="addLink.$invalid" class="btn btn-primary btn-lg">Add link</button>
                 </div>
                 <div class="col-md-1 text-center ">
-                    <a class="back" ng-click="back();">Back</a>
+                    <a class="back" ng-click="add.fn.back();">Back</a>
                 </div>
             </div>
         </div>
