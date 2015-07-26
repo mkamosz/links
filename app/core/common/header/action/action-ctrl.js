@@ -7,6 +7,7 @@ app.controller('ActionController', ['$scope', 'auth', '$location', function($sco
     /* Pseudo global variables $scope.data */
 
     /* Private variables for this controller - $scope*/
+    $scope.userInfo = auth.getUserInfo();
     $scope.action = {
         fn : {}
     };

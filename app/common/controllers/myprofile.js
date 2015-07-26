@@ -2,17 +2,17 @@
  * Created by kamoszm on 2015-07-20.
  */
 
-app.controller('StaticPageController', ['$scope', function($scope){
+app.controller('MyProfileController', ['$scope', function($scope){
     /* Pseudo global variables $scope.data */
-    $scope.data.layout.showFooter = true;
-
+    $scope.data.layout.showFooter = false;
 
     /* Private variables for this controller - $scope*/
-    $scope.static = {
+    $scope.profile = {
         data : {},
         fn : {}
     };
 
     /* Functions */
+
 
 }]);

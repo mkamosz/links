@@ -10,8 +10,8 @@
             </div>
             <div class="form-group" ng-if="add.condition.linkTmpAdded">
                 <h3 class="link-add-anchor"><a href="{{add.data.link}}">{{add.data.link}}</a></h3>
-                <input type="text" name="title" required="" minlength="5" ng-model="add.data.title" class="form-control" value="{{add.data.title}}" />
                 <label>Title</label>
+                <input type="text" name="title" required="" minlength="5" ng-model="add.data.title" class="form-control" value="{{add.data.title}}" />
             </div>
             <div class="form-group" ng-if="add.condition.linkTmpAdded">
                 <ul ng-if="add.addedTags" class="link-add-tags">
@@ -19,26 +19,18 @@
                         <button ng-click="add.fn.removeAddedTag(item)"class="btn btn-primary btn-xs">{{item}}<span class="glyphicon glyphicon-remove"></span></button>
                     </li>
                 </ul>
+                <label>Tags</label>
                 <input type="text" ng-keydown="add.fn.checkAddedTags($event);" ng-blur="add.fn.checkAddedTags($event);" ng-keyup="add.fn.removeWC($event);" class="form-control">
                 <div class="row">
-                    <div class="col-md-6">
-                        <label>Tags</label>
-                    </div>
-                    <div class="col-md-6 text-right">
+                    <div class="col-md-12 text-right">
                         <label>Separated by comma or enter - max 10 tags</label>
                     </div>
                 </div>
             </div>
             <div class="form-group" ng-if="add.condition.linkTmpAdded">
+                <label>Comment</label>
                 <textarea class="form-control" ng-model="add.data.comment"></textarea>
-                <div class="row">
-                    <div class="col-md-6">
-                        <label>Comment</label>
-                    </div>
-                    <div class="col-md-6 text-right">
-                        <label>1000</label>
-                    </div>
-                </div>
+                <label class="text-right">1000</label>
             </div>
         </div>
     </div>
@@ -49,7 +41,7 @@
                     <button ng-click="add.fn.saveLink();" ng-disabled="addLink.$invalid" class="btn btn-primary btn-lg">Add link</button>
                 </div>
                 <div class="col-md-1 text-center ">
-                    <a class="back" ng-click="add.fn.back();">Back</a>
+                    <a class="back" ng-click="add.fn.back();">Cancel</a>
                 </div>
             </div>
         </div>

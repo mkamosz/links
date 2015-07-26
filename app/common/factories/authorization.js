@@ -15,7 +15,8 @@ app.factory('auth', ['$http', '$q', '$window', 'conn', function($http, $q, $wind
                     userInfo = {
                         access_token: result.data.access_token,
                         username: result.data.username,
-                        logged : true
+                        logged : true,
+                        state : ""
                     };
                     $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
                     deferred.resolve({authenticated: true, userInfo : userInfo});
@@ -46,6 +47,9 @@ app.factory('auth', ['$http', '$q', '$window', 'conn', function($http, $q, $wind
         isLogin = function(){
             return userInfo.logged;
         },
+        setState = function(type){
+            userInfo.state = type;
+        },
         init = function(){
             if ($window.sessionStorage["userInfo"] != null) {
                 userInfo = JSON.parse($window.sessionStorage["userInfo"]);
@@ -58,6 +62,7 @@ app.factory('auth', ['$http', '$q', '$window', 'conn', function($http, $q, $wind
         login : login,
         logout : logout,
         isLogin : isLogin,
+        setState : setState,
         getUserInfo: getUserInfo
     }
 }]);

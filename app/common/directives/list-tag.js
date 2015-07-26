@@ -20,6 +20,7 @@ app.directive("listTags", ['path', function(path){
 
             /* Private variables for this controller - $scope*/
             $scope.popularTags = (typeof $scope.popularTags === "undefined" ? false : $scope.popularTags);
+            $scope.userInfo = auth.getUserInfo();
             $scope.tag = {
                 data : {
                     auth : auth.getUserInfo(),

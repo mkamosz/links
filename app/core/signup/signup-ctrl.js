@@ -22,7 +22,7 @@ app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
 
     /*signup - form*/
     $scope.signup.fn.form = function(){
-        $scope.data.loader.set = "active";
+        $scope.data.loader.show();
         conn.postData($scope.data.path.server.user, $scope.signup.data)
             .then(function(result){
                 if(result.status == true){
@@ -38,7 +38,7 @@ app.controller('SignupController', ['$scope', 'conn', function($scope, conn){
                         $scope.signup.data.email = "";
                     }
                 }
-                $scope.data.loader.set = "";
+                $scope.data.loader.hide();
             }, function(msg) {
                 console.log(msg);
             })

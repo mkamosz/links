@@ -13,7 +13,7 @@ app.directive("loaderPage", ['path', function(path){
         templateUrl: path.template.loader,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope', 'loaderService', function($rootScope, $scope, loaderService){
+        controller : ['$rootScope', '$scope', function($rootScope, $scope){
 
             /* Pseudo global variables $scope.data */
 
@@ -21,7 +21,7 @@ app.directive("loaderPage", ['path', function(path){
             $scope.loader = {
                 data : {},
                 fn : {}
-            }
+            };
 
             /* Functions */
 

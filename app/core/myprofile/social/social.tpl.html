@@ -1,0 +1,53 @@
+<div ng-controller="SocialController" class="wrapper-gray">
+    <sidebar-nav nav-data="data.sidebar"></sidebar-nav>
+    <div class="main-content nav {{data.sidebar.state}}"  class="form-social">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <form name="form">
+                        <h1 class="title">Social data</h1>
+                        <div class="row">
+                        <div class="col-sm-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3>Personal data</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>fb</label>
+                                                <input type="text" class="form-control" ng-model="social.data.fb" name="fb" value="{{social.data.fb}}" min-length="2" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>twitter</label>
+                                                <input type="text" class="form-control" ng-model="social.data.twitter" name="twitter" value="{{social.data.twitter}}" min-length="2" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+
+                                            <div class="form-group">
+                                                <label>g+</label>
+                                                <input type="text" class="form-control" ng-model="social.data.g" name="g" value="{{social.data.g}}" min-length="2" />
+                                            </div>
+                                            <div class="form-group">
+                                                <label>www</label>
+                                                <input type="text" class="form-control" ng-model="social.data.www" name="www" value="{{social.data.www}}" min-length="2" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-md-offset-4 text-center">
+                            <button ng-click="social.fn.saveData();" ng-disabled="form.$invalid" class="btn btn-primary btn-lg form-submit-btn ">Save</button>
+                        </div>
+
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

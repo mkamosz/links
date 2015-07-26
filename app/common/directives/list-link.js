@@ -16,12 +16,13 @@ app.directive("listLinks", ['path', function(path){
         templateUrl: path.template.listlink,
         replace : true,
         transclude : false,
-        controller : ['$scope','conn', 'auth', function($scope, conn, auth){
+        controller : ['$scope','conn', 'auth','$location', function($scope, conn, auth,$location){
 
             /* Pseudo global variables $scope.data */
 
             /* Private variables for this controller - $scope*/
             $scope.popularLinks = (typeof $scope.popularLinks === "undefined" ? false : $scope.popularLinks);
+            $scope.userInfo = auth.getUserInfo();
             $scope.list = {
                 data : {
                     auth : auth.getUserInfo(),
@@ -46,6 +47,7 @@ app.directive("listLinks", ['path', function(path){
             $scope.list.fn.edit = function(id){
                 $scope.editTag.id = id;
                 $scope.editTag.edit = true;
+                $location.path(path.pages.addlink.substr(2));
             };
 
             $scope.list.fn.delete = function(id){

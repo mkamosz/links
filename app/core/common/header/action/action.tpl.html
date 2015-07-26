@@ -9,11 +9,11 @@
             <ul class="dropdown-menu">
                 <li class="title">Signed in as <b>{{userInfo.username}}</b></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{{data.path.pages.dashboard}}">Dashboard</a></li>
-                <li><a href="#">Favourites</a></li>
-                <li><a href="#">Watches</a></li>
-                <li role="separator" class="divider"></li>
+                <li><a href="{{data.path.pages.dashboard}}">My profile</a></li>
+                <li><a href="{{data.path.pages.addlink}}">Add link</a></li>
+                <li><a href="{{data.path.pages.notifications}}">Notifications</a></li>
                 <li><a href="{{data.path.pages.settings}}">Settings</a></li>
+                <li role="separator" class="divider"></li>
                 <li><a class="logout" ng-click="action.fn.logout();">Sign out</a></li>
             </ul>
 

@@ -28,18 +28,25 @@ app.service('path', function(){
                 loader :        "core/common/loader/loader.tpl.html",
                 addlink :       "core/common/addlink/addlink.tpl.html",
                 listlink :      "core/common/listlink/listlink.tpl.html",
-                listtag :       "core/common/listtag/listtag.tpl.html"
+                listtag :       "core/common/listtag/listtag.tpl.html",
+                sidebar :       "core/common/sidebar/sidebar.tpl.html",
+                notifi :        "core/common/notifi/notifi.tpl.html"
             },
             pages : {
-                hp :            "#/page",
+                hp :            "#/",
                 about :         "#/page/about",
                 faq :           "#/page/faq",
                 news :          "#/page/news",
                 community :     "#/page/community",
                 signin :        "#/page/signin",
                 signup :        "#/page/signup",
+                settings :      "#/myprofile/personal",
                 dashboard :     "#/myprofile/dashboard",
-                settings :      "#/myprofile/settings"
+                addlink:        "#/myprofile/addlink",
+                notifications:  "#/myprofile/notifications",
+                personal :      "#/myprofile/personal",
+                social :        "#/myprofile/social",
+                password :      "#/myprofile/password"
             }
         };
     }

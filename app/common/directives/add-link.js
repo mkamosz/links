@@ -11,12 +11,13 @@ app.directive("addLink", ['path', function(path){
             editTag : '=editTag',
             loader : '=loader',
             dataListLinks : '=list',
-            dataListTags : '=tags'
+            dataListTags : '=tags',
+            notifi : '=notifi'
         },
         templateUrl: path.template.addlink,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope','conn', 'auth', function($rootScope, $scope, conn, auth){
+        controller : ['$rootScope', '$scope','conn', 'auth','$location','$q', function($rootScope, $scope, conn, auth, $location,$q){
 
             /* Pseudo global variables $scope.data */
 
@@ -36,6 +37,8 @@ app.directive("addLink", ['path', function(path){
                 fn : {}
             };
 
+            console.log($scope.notifi);
+
             /* Functions */
 
             $scope.add.fn.back = function(){
@@ -44,14 +47,14 @@ app.directive("addLink", ['path', function(path){
             };
 
             $scope.add.fn.checkLink = function(){
-                $scope.loader.set = "active";
+                $scope.loader.show();
                 $scope.add.condition.disabledAddButton = true;
                 conn.getData(path.server.link, { params : $scope.add.data })
                     .then(function(result){
                         if(result.status == true){
                             $scope.add.data.title = result.data.title;
                             $scope.add.condition.linkTmpAdded = true;
-                            $scope.loader.set = "";
+                            $scope.loader.hide();
 
                             $scope.add.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
                             $scope.add.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
@@ -62,10 +65,13 @@ app.directive("addLink", ['path', function(path){
             };
 
             $scope.add.fn.saveLink = function(){
-                $scope.loader.set = "active";
+                $scope.loader.show();
                 $scope.add.data.check = false;
                 conn.postData(path.server.link, $scope.add.data )
                     .then(function(result){
+                        var promise1 = conn.getData(path.server.link, { params : $scope.add.data }),
+                            promise2 = conn.getData(path.server.tag, { params : $scope.add.data });
+
                         if(result.status == true){
                             $scope.add.condition.linkTmpAdded = false;
                             $scope.add.data = {
@@ -74,23 +80,17 @@ app.directive("addLink", ['path', function(path){
                             };
                             $scope.add.condition.disabledAddButton = false;
 
-                            conn.getData(path.server.link, { params : $scope.add.data })
-                                .then(function(result){
-                                    $scope.loader.set = "";
+                            $scope.notifi.show(result.message);
 
-                                    $scope.dataListLinks = result.data;
-                                    $scope.add.data.check = true;
-                                }, function(msg){
-                                    console.log(msg);
-                                });
-
-                            conn.getData(path.server.tag, { params : $scope.add.data })
-                                .then(function(result){
-                                    $scope.dataListTags = result.data;
-                                    $scope.add.data.check = true;
-                                }, function(msg){
-                                    console.log(msg);
-                                });
+                            $q.all([promise1, promise2]).then(function(data){
+                                $scope.loader.hide();
+                                $scope.dataListLinks = data[0].data;
+                                $scope.dataListTags = data[1].data;
+                                $scope.add.data.check = true;
+                                $location.path(path.pages.dashboard.substr(2));
+                            });
+                        } else{
+                            $scope.notifi.show(result.message,'danger');
                         }
                     }, function(msg){
                         console.log(msg);
@@ -152,16 +152,16 @@ app.directive("addLink", ['path', function(path){
             };
 
             $scope.edit = function(id){
-
-                $scope.loader.set = "active";
+                $scope.loader.show();
                 $scope.add.condition.disabledAddButton = true;
                 $scope.add.data.id = id;
                 conn.getData(path.server.link, { params : $scope.add.data })
                     .then(function(result){
                         if(result.status == true){
                             $scope.add.data.title = result.data.title;
+                            $scope.add.data.link = result.data.url;
                             $scope.add.condition.linkTmpAdded = true;
-                            $scope.loader.set = "";
+                            $scope.loader.hide();
 
                             if(typeof result.data.comment !== "undefined"){
                                 $scope.add.data.comment = result.data.comment;

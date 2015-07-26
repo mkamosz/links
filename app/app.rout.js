@@ -18,6 +18,7 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: function(param){
                 return 'core/myprofile/' + param.name + '/' + param.name + '.tpl.html'
             },
+            controller : "MyProfileController",
             resolve : {
                 check : ['$q', 'auth', function($q, auth) {
                     var userInfo = auth.getUserInfo();

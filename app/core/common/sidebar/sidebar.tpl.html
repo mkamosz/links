@@ -1,0 +1,13 @@
+<aside class="aside">
+    <nav class="aside-wrap {{data.state}}">
+        <a href="#" class="change" ng-click="sidebar.fn.change($event);"><span class="glyphicon glyphicon-resize-horizontal"></span></a>
+        <ul class="general" ng-if="data.nav">
+            <li ng-repeat="(key, value) in data.nav">
+                <h3>{{key}}</h3>
+                <ul ng-if="value">
+                    <li ng-repeat="item in value"><a href="{{item.url}}" title="{{item.title}}"><span class="glyphicon {{item.icon}}"></span><em>{{item.title}}</em></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</aside>

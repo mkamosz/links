@@ -1,16 +1,20 @@
 <div ng-controller="DashboardController" class="wrapper-gray">
-    <div class="container">
-        <h1>Dashobard</h1>
-        <add-link edit-tag="data.editTag" loader="data.loader" list="data.listLinks" tags="data.listTags"></add-link>
-        <div class="row">
-            <div class="col-sm-12 col-md-8">
-                <list-links list="data.listLinks" tags="data.listTags" edit-tag="data.editTag"></list-links>
-            </div>
-            <div class="col-sm-12 col-md-4">
-                <list-tags list="data.listTags"></list-tags>
+    <sidebar-nav nav-data="data.sidebar"></sidebar-nav>
+    <div class="main-content nav {{data.sidebar.state}}">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Dashobard</h1>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <list-links list="data.listLinks" tags="data.listTags" edit-tag="data.editTag"></list-links>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                            <list-tags list="data.listTags"></list-tags>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
-
 </div>

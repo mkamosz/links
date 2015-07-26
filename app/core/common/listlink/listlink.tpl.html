@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-8">
-                    <h3>{{data.userInfo.username}} links list</h3>
+                    <h3>{{userInfo.username}} links list</h3>
                 </div>
                 <div class="col-md-4">
                     <input type="text" placeholder="filter links by" class="form-control pull-right link-list-search" ng-model="search" />
@@ -23,6 +23,7 @@
                         <div class="col-md-12">
                             <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
                         </div>
+
                         <div class="col-md-2">
                             <span class="link-list-counter all" title="Counter link">{{link.counterAll}}</span>
                         </div>
@@ -35,7 +36,7 @@
                         <div class="col-md-4 text-right link-list-buttons">
                             <button class="btn btn-default btn-xs" title="Edit" ng-click="list.fn.edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                             <button class="btn btn-default btn-xs" title="Delete" ng-click="list.fn.delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        </div>
+                        </div
                     </div>
                 </li>
             </ul>

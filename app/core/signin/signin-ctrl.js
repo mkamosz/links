@@ -21,21 +21,21 @@ app.controller('SigninController', ['$scope','auth','$location', function($scope
 
     /*Signin form*/
     $scope.signin.fn.form = function(){
-        $scope.data.loader.set = "active";
+        $scope.data.loader.show();
         auth.login($scope.data.path.server.login, $scope.signin.data)
             .then(function(result){
                 if(result.authenticated == true){
                     $location.path("/");
                     $scope.data.layout.showProfile = auth.isLogin();
                 }
-                $scope.data.loader.set = "";
+                $scope.data.loader.hide();
             }, function(result) {
                 if(result.authenticated == false){
                     $scope.signin.error.show = true;
                     $scope.signin.error.msg = result.message;
                     $scope.signin.data = {};
                 }
-                $scope.data.loader.set = "";
+                $scope.data.loader.hide();
             });
     };
 
