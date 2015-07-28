@@ -1,4 +1,4 @@
-app.controller('IndexController',['$scope', 'auth', 'path','sidebarNav','$timeout','$window', function($scope, auth, path, sidebarNav, $timeout,$window){
+app.controller('IndexController',['$scope', 'auth', 'path','sidebarNav','$timeout', function($scope, auth, path, sidebarNav, $timeout){
     /* IndexController - main controller
     *  with set pseudo global variables for rest controllers
     * */

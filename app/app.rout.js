@@ -23,7 +23,7 @@ app.config(['$routeProvider', function($routeProvider){
                 check : ['$q', 'auth', function($q, auth) {
                     var userInfo = auth.getUserInfo();
 
-                    if (userInfo) {
+                    if (userInfo.logged) {
                         return $q.resolve(userInfo);
                     } else {
                         return $q.reject({ authenticated: false });

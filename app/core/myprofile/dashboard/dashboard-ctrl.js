@@ -2,7 +2,7 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('DashboardController', ['$scope' , function($scope){
+app.controller('DashboardController', ['$scope', function($scope){
     /* Pseudo global variables $scope.data */
 
     /* Private variables for this controller - $scope*/
@@ -10,6 +10,7 @@ app.controller('DashboardController', ['$scope' , function($scope){
         data : {},
         fn : {}
     };
+
 
     /*Functions*/
 }]);

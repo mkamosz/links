@@ -40,6 +40,18 @@ a{
       font-weight: 700;
       .ArialFont;
     }
+    .search{
+      padding:2px 8px 4px 0;
+      height:20px;
+      .font-px-to-em(12px);
+      box-shadow: none;
+      background-color: transparent;
+      border: 0;
+      border-bottom: 1px solid #ccc;
+      &:focus{
+        box-shadow: none;
+      }
+    }
   }
 }
 
@@ -111,6 +123,73 @@ label{
   }
 }
 
+.strength{
+  margin:0;
+  padding:0;
+  list-style: none;
+  li{
+    display: inline-block;
+    width:60px;
+    height:4px;
+    margin-right:4px;
+    background: @color-gray-ccc;
+  }
+  &.active1 li{
+    &:nth-child(1){
+      background: @color-strength1;
+    }
+  }
+  &.active2 li{
+    &:nth-child(1){
+      background: @color-strength2;
+    }
+    &:nth-child(2){
+      background: @color-strength2;
+    }
+  }
+  &.active3 li{
+    &:nth-child(1){
+      background: @color-strength3;
+    }
+    &:nth-child(2){
+      background: @color-strength3;
+    }
+    &:nth-child(3){
+      background: @color-strength3;
+    }
+  }
+  &.active4 li{
+    &:nth-child(1){
+      background: @color-strength4;
+    }
+    &:nth-child(2){
+      background: @color-strength4;
+    }
+    &:nth-child(3){
+      background: @color-strength4;
+    }
+    &:nth-child(4){
+      background: @color-strength4;
+    }
+  }
+  &.active5 li{
+    &:nth-child(1){
+      background: @color-strength5;
+    }
+    &:nth-child(2){
+      background: @color-strength5;
+    }
+    &:nth-child(3){
+      background: @color-strength5;
+    }
+    &:nth-child(4){
+      background: @color-strength5;
+    }
+    &:nth-child(5){
+      background: @color-strength5;
+    }
+  }
+}
 
 .log-form{
   padding:50px 0 0 0;
@@ -158,14 +237,18 @@ label{
 }
 
 .form{
-  &-personal{
-
-  }
-  &.social{
-
-  }
   &-submit-btn{
     width:100%;
+  }
+
+  &-error{
+    color: @color-red;
+    .font-px-to-em(11px);
+    margin:2px 0 5px;
+  }
+  input.form-error,textarea.form-error{
+      border-color:@color-red;
+    .font-px-to-em(14px);
   }
 }
 
@@ -256,10 +339,6 @@ label{
         .transition();
       }
     }
-    &-search{
-      padding:3px 8px;
-      height:22px;
-    }
   }
   &-tag{
     ul{
@@ -290,10 +369,6 @@ label{
           color: @color-white;
         }
       }
-    }
-    &-search{
-      padding:2px 8px;
-      height:22px;
     }
   }
   &-add{
@@ -329,7 +404,7 @@ label{
         width:100%;
       }
       .back{
-        .font-px-to-em(20);
+        .font-px-to-em(14);
         cursor: pointer;
         display:inline-block;
         margin:15px 0 0 0;
@@ -371,8 +446,11 @@ label{
       .general{
         margin:50px 0 0 0;
         ul li{
-          padding:10px 0 10px 9px;
+          padding:0;
           .font-px-to-em(18);
+          a{
+            padding:10px 0 10px 8px;
+          }
         }
       }
     }
@@ -391,7 +469,6 @@ label{
     ul{
       li{
         .font-px-to-em(12);
-        padding:10px 0 10px 20px;
         &:hover{
           background: #222;
           a{
@@ -399,6 +476,8 @@ label{
           }
         }
         a{
+          padding:10px 0 10px 20px;
+          display:block;
           color:@color-gray-ccc;
           span{
             padding:0 10px 0 0;

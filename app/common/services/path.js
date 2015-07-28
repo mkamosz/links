@@ -30,7 +30,9 @@ app.service('path', function(){
                 listlink :      "core/common/listlink/listlink.tpl.html",
                 listtag :       "core/common/listtag/listtag.tpl.html",
                 sidebar :       "core/common/sidebar/sidebar.tpl.html",
-                notifi :        "core/common/notifi/notifi.tpl.html"
+                notifi :        "core/common/notifi/notifi.tpl.html",
+                messages :      "core/common/messages/messages.tpl.html",
+                strength :      "core/common/strength/strength.tpl.html"
             },
             pages : {
                 hp :            "#/",

@@ -9,6 +9,9 @@ app.controller('SocialController', ['$scope','conn', function($scope,conn){
     /* Private variables for this controller - $scope*/
     $scope.social = {
         data : {},
+        error:{
+            show : false
+        },
         fn : {}
     };
 
@@ -25,22 +28,27 @@ app.controller('SocialController', ['$scope','conn', function($scope,conn){
             })
     };
 
+    $scope.social.fn.saveData = function(check){
 
+        $scope.social.error.show = false;
+        if(check){
+            $scope.data.loader.show();
+            $scope.social.data.username = $scope.data.userInfo.username;
+            $scope.social.data.access_token = $scope.data.userInfo.access_token;
+            $scope.social.data.type = "social";
+            conn.putData($scope.data.path.server.user, $scope.social.data)
+                .then(function(result){
+                    $scope.data.loader.hide();
+                    if(result.status == true){
+                        $scope.data.notifi.show(result.message);
+                    }
+                }, function(msg){
+                    cosole.log(msg);
+                })
+        } else{
+            $scope.social.error.show = true;
+        }
 
-    $scope.social.fn.saveData = function(){
-        $scope.data.loader.show();
-        $scope.social.data.username = $scope.data.userInfo.username;
-        $scope.social.data.access_token = $scope.data.userInfo.access_token;
-        $scope.social.data.type = "social";
-        conn.putData($scope.data.path.server.user, $scope.social.data)
-            .then(function(result){
-                $scope.data.loader.hide();
-                if(result.status == true){
-                    $scope.data.notifi.show(result.message);
-                }
-            }, function(msg){
-                cosole.log(msg);
-            })
     };
 
     $scope.social.fn.getInfo();

@@ -3,7 +3,7 @@
         <div class="panel-body">
             <div class="form-group" ng-if="!add.condition.linkTmpAdded">
                 <div class="link-add-wrapper">
-                    <input type="text" class="form-control link" name="link" ng-model="add.data.link" required tabindex="0" minlength="3" />
+                    <input type="text" class="form-control link" name="link" ng-model="add.data.link" required url />
                     <button ng-click="add.fn.checkLink();"  class="btn btn-primary pull-right" ng-disabled="add.condition.disabledAddButton || addLink.$invalid" ><span class="glyphicon glyphicon-plus"></span></button>
                 </div>
                 <label>Add a new link</label>

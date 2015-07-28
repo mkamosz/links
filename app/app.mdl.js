@@ -3,7 +3,7 @@
  */
 
 
-var app = angular.module('appLinks',['ngRoute','ngSanitize']);
+var app = angular.module('appLinks',['ngRoute','ngSanitize','ngMessages']);
 
 
 app.run(["$rootScope", "$location", function ($rootScope, $location) {

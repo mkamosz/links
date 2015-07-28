@@ -9,6 +9,9 @@ app.controller('PersonalController', ['$scope','conn', function($scope,conn){
     /* Private variables for this controller - $scope*/
     $scope.personal = {
         data : {},
+        error:{
+            show : false
+        },
         fn : {}
     };
 
@@ -28,20 +31,26 @@ app.controller('PersonalController', ['$scope','conn', function($scope,conn){
             })
     };
 
-    $scope.personal.fn.saveData = function(){
-        $scope.data.loader.show();
-        $scope.personal.data.username = $scope.data.userInfo.username;
-        $scope.personal.data.access_token = $scope.data.userInfo.access_token;
-        $scope.personal.data.type = "personal";
-        conn.putData($scope.data.path.server.user, $scope.personal.data)
-            .then(function(result){
-                $scope.data.loader.hide();
-                if(result.status == true){
-                    $scope.data.notifi.show(result.message);
-                }
-            }, function(msg){
-                cosole.log(msg);
-            })
+    $scope.personal.fn.saveData = function(check){
+        $scope.personal.error.show = false;
+        if(check){
+            $scope.data.loader.show();
+            $scope.personal.data.username = $scope.data.userInfo.username;
+            $scope.personal.data.access_token = $scope.data.userInfo.access_token;
+            $scope.personal.data.type = "personal";
+            conn.putData($scope.data.path.server.user, $scope.personal.data)
+                .then(function(result){
+                    $scope.data.loader.hide();
+                    if(result.status == true){
+                        $scope.data.notifi.show(result.message);
+                    }
+                }, function(msg){
+                    cosole.log(msg);
+                })
+        } else{
+            $scope.personal.error.show = true;
+        }
+
     };
 
     $scope.personal.fn.getInfo();
