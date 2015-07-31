@@ -3,25 +3,25 @@
         <input type="text" class="search-field pull-right" placeholder="search links"/>
     </div>
     <div class="col-md-6">
-        <div class="pull-right" ng-if="data.layout.showProfile">
-            <a href="{{data.path.pages.dashboard}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
+        <div class="pull-right" ng-if="global.layout.showProfile">
+            <a href="{{global.path.pages.dashboard}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
             <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li class="title">Signed in as <b>{{userInfo.username}}</b></li>
                 <li role="separator" class="divider"></li>
-                <li><a href="{{data.path.pages.dashboard}}">My profile</a></li>
-                <li><a href="{{data.path.pages.addlink}}">Add link</a></li>
-                <li><a href="{{data.path.pages.notifications}}">Notifications</a></li>
-                <li><a href="{{data.path.pages.settings}}">Settings</a></li>
+                <li><a href="{{global.path.pages.dashboard}}">My profile</a></li>
+                <li><a href="{{global.path.pages.addlink}}">Add link</a></li>
+                <li><a href="{{global.path.pages.notifications}}">Notifications</a></li>
+                <li><a href="{{global.path.pages.settings}}">Settings</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a class="logout" ng-click="action.fn.logout();">Sign out</a></li>
             </ul>
 
 
         </div>
-        <div class="buttons pull-right" ng-if="!data.layout.showProfile">
-            <a href="{{data.path.pages.signin}}" class="btn btn-default btn-sm pull-right">Sign in</a>
-            <a href="{{data.path.pages.signup}}" class="btn btn-primary btn-sm">Sign up</a>
+        <div class="buttons pull-right" ng-if="!global.layout.showProfile">
+            <a href="{{global.path.pages.signin}}" class="btn btn-default btn-sm pull-right">Sign in</a>
+            <a href="{{global.path.pages.signup}}" class="btn btn-primary btn-sm">Sign up</a>
         </div>
     </div>
 </div>

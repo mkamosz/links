@@ -8,40 +8,38 @@
                         <div class="alert alert-danger" ng-show="signup.error.show">
                             <span ng-bind-html="signup.error.msg"></span>
                         </div>
-                        <form name="signIn">
-
-
+                        <form name="form" novalidate ng-submit="signup.fn.form()">
                             <div class="list-group list-group-sm">
                                 <div class="list-group-item">
-                                    <input type="text" minlength="3" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.username" name="username" id="username" placeholder="Username" required />
+                                    <input type="text" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.username" name="username" id="username" placeholder="Username" required ng-minlength="4" />
                                 </div>
                                 <div class="list-group-item">
-                                    <input type="email" minlength="6" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.email" name="email" id="email" placeholder="Email" required />
+                                    <input type="text" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.email" name="email" id="email" placeholder="Email" required email ng-minlength="5" />
                                 </div>
                                 <div class="list-group-item">
-                                    <input type="password" minlength="5" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.password" name="password" id="password" placeholder="Password" required />
+                                    <input type="password" ng-keypress="signup.fn.hideErrors();" class="form-control" ng-model="signup.data.password" name="password" id="password" placeholder="Password" required ng-minlength="6" />
                                 </div>
 
                             </div>
-                            <button ng-click="signup.fn.form();" ng-disabled="signIn.$invalid" class="btn btn-primary btn-lg">Sing up</button>
+                            <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary btn-lg">Sing up</button>
 
                             <div class="text-center log-form-additional">
                                 <p>Already have an account?</p>
-                                <a class="btn btn-default btn-lg" href="#/page/signin">Sign in</a>
+                                <a class="btn btn-default btn-lg" ng-href="{{global.path.pages.signin}}">Sign in</a>
                             </div>
 
                         </form>
 
 
                     </div>
-                    <div class="login-success" ng-hide="signup.showForm">
+                    <div class="login-success" ng-show="!signup.showForm">
                         <div class="thick">
                             <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                         </div>
                         <div class="row">
                             <div class="col-md-12 text-center">
-                                <h3 class="color-success">Congratulate Your account <span class="color-normal">{{data.username}}</span><br>has been created</h3>
-                                <a ng-href="data.path.pages.signin" class="btn btn-primary btn-lg">Sign in</a>
+                                <h3 class="color-success">Congratulate Your account <span class="color-normal">{{signup.data.username}}</span><br>has been created</h3>
+                                <a ng-href="{{global.path.pages.signin}}" class="btn btn-primary btn-lg">Sign in</a>
                             </div>
                         </div>
                     </div>

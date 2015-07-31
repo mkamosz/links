@@ -8,6 +8,7 @@ app.service('path', function(){
             img :               "assets/img/",
             imgContent :        "assets/img/content/",
             imgLayout :         "assets/img/layout/",
+            userProfile :       "/server/user_guide/_images/",
             css :               "assets/css/",
             js :                "assets/js/",
             jsLibs :            "assets/js/libs/",
@@ -21,7 +22,9 @@ app.service('path', function(){
                 logout :        "/server/login",
                 user :          "/server/user",
                 link :          "/server/link",
-                tag :           "/server/tag"
+                tag :           "/server/tag",
+                crop :          "/server/crop",
+                account :       "/server/account"
             },
             template : {
                 action :        "core/common/header/action/action.tpl.html",
@@ -32,7 +35,8 @@ app.service('path', function(){
                 sidebar :       "core/common/sidebar/sidebar.tpl.html",
                 notifi :        "core/common/notifi/notifi.tpl.html",
                 messages :      "core/common/messages/messages.tpl.html",
-                strength :      "core/common/strength/strength.tpl.html"
+                strength :      "core/common/strength/strength.tpl.html",
+                userprofile :   "core/common/userprofile/userprofile.tpl.html"
             },
             pages : {
                 hp :            "#/",

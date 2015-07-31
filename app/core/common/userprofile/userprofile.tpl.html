@@ -1,0 +1,36 @@
+<div class="profile" style="background-image: url('{{userprofile.path.imgContent}}bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <span class="profile-image text-center">
+                            <img ng-src="{{userprofile.data.avatar}}" />
+                        </span>
+                    </div>
+                    <div class="col-sm-9">
+                        <div class="profile-details">
+                            <h3>{{userprofile.data.fullname}}</h3>
+                            <p>{{userprofile.data.city}}{{userprofile.data.country}}</p>
+                        </div>
+                        <ul class="profile-social">
+                            <li ng-show="userprofile.data.fb"><a ng-href="{{userprofile.data.fb}}" target="_blank"><img src="{{userprofile.path.imgContent}}icon_fb.png"/></a></li>
+                            <li ng-show="userprofile.data.twitter"><a ng-href="{{userprofile.data.twitter}}" target="_blank"><img src="{{userprofile.path.imgContent}}icon_twitter.png"/></a></li>
+                            <li ng-show="userprofile.data.g"><a ng-href="{{userprofile.data.g}}" target="_blank"><img src="{{userprofile.path.imgContent}}icon_g+.png"/></a></li>
+                            <li ng-show="userprofile.data.www"><a ng-href="{{userprofile.data.www}}" target="_blank"><img src="{{userprofile.path.imgContent}}icon_www.png"/></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <ul class="profile-stats text-right">
+                    <li title="Followers"><span class="glyphicon glyphicon-heart"></span><em>XXXX</em></li>
+                    <li title="Links"><span class="glyphicon glyphicon-link"></span><em>{{dataListLinks.length}}</em></li>
+                    <li title="Tags"><span class="glyphicon glyphicon-tasks"></span><em>{{userprofile.data.tagsCounter}}</em></li>
+                </ul>
+
+                <button class="btn btn-primary btn-lg pull-right profile-follow">Follow</button>
+            </div>
+        </div>
+    </div>
+</div>

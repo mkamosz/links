@@ -2,12 +2,12 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('ActionController', ['$scope', 'auth', '$location', function($scope, auth, $location){
+app.controller('ActionController', ['$scope', 'auth', '$location','globalData', function($scope, auth, $location, globalData){
 
     /* Pseudo global variables $scope.data */
 
     /* Private variables for this controller - $scope*/
-    $scope.userInfo = auth.getUserInfo();
+    $scope.userInfo = globalData.getData('userInfo');
     $scope.action = {
         fn : {}
     };
@@ -15,11 +15,11 @@ app.controller('ActionController', ['$scope', 'auth', '$location', function($sco
     /*Functions*/
 
     $scope.action.fn.logout = function(){
-        auth.logout($scope.data.path.server.logout,{username : $scope.data.userInfo.username})
+        auth.logout($scope.global.path.server.logout,{username : $scope.global.userInfo.username})
             .then(function(result){
                 $location.path('/');
-                $scope.data.userInfo = result.userInfo;
-                $scope.data.layout.showProfile = auth.isLogin();
+                globalData.setData('userInfo',result.userInfo);
+                globalData.setPropData('layout','showProfile',globalData.getData('userInfo').logged);
             }, function(msg){
                 $location.path('/');
             });

@@ -10,34 +10,36 @@ app.directive("listLinks", ['path', function(path){
         scope : {
             popularLinks : '@popularLinks',
             dataListLinks : '=list',
-            dataListTags : '=tags',
-            editTag : '=editTag'
+            editTag : '=editTag',
+            userView : '@user'
         },
         templateUrl: path.template.listlink,
         replace : true,
         transclude : false,
-        controller : ['$scope','conn', 'auth','$location', function($scope, conn, auth,$location){
+        controller : ['$scope','conn','$location','globalData', function($scope, conn,$location,globalData){
 
             /* Pseudo global variables $scope.data */
 
             /* Private variables for this controller - $scope*/
             $scope.popularLinks = (typeof $scope.popularLinks === "undefined" ? false : $scope.popularLinks);
-            $scope.userInfo = auth.getUserInfo();
+            $scope.userInfo = globalData.getData('userInfo');
             $scope.list = {
                 data : {
-                    auth : auth.getUserInfo(),
+                    auth : globalData.getData('userInfo'),
                     check : false,
                     all : $scope.popularLinks
                 },
                 fn : {}
             };
 
+            $scope.userView = (typeof $scope.userView === 'undefined' ? false : $scope.userView);
+
             /* Functions */
 
             conn.getData(path.server.link, { params : $scope.list.data })
                 .then(function(result){
                     if(result.status == true) {
-                        $scope.dataListLinks = result.data;
+                        $scope.dataListLinks  = result.data;
                     }
                 }, function(msg){
                     console.log(msg);
@@ -45,22 +47,26 @@ app.directive("listLinks", ['path', function(path){
 
 
             $scope.list.fn.edit = function(id){
-                $scope.editTag.id = id;
-                $scope.editTag.edit = true;
-                $location.path(path.pages.addlink.substr(2));
+                if(!$scope.userView){
+                    globalData.setPropData('editTag','id', id);
+                    globalData.setPropData('editTag','edit', true);
+                    $location.path(path.pages.addlink.substr(2));
+                }
             };
 
             $scope.list.fn.delete = function(id){
-                var check = confirm("Are you sure you want to remove?");
-                if (check == true) {
-                    conn.deleteData(path.server.link, {"params" : {auth : auth.getUserInfo(), id : id}})
-                        .then(function(result){
-                            $scope.dataListLinks = result.data.links;
-                            $scope.dataListTags = result.data.tags;
+                if(!$scope.userView){
+                    var check = confirm("Are you sure you want to remove?");
+                    if (check == true) {
+                        conn.deleteData(path.server.link, {"params": {auth: globalData.getData('userInfo'), id: id}})
+                            .then(function (result) {
+                                globalData.setData('listLinks', result.data.links);
+                                globalData.setData('listTags', result.data.tags);
 
-                        }, function(msg){
-                            console.log(msg);
-                        });
+                            }, function (msg) {
+                                console.log(msg);
+                            });
+                    }
                 }
             };
 

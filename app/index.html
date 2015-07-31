@@ -7,22 +7,22 @@
     <link rel="stylesheet" ng-href="assets/css/cropper.css">
     <link rel="stylesheet" ng-href="assets/css/main.min.css">
 </head>
-<body ng-controller="IndexController as main" ng-class="(data.layout.showFooter ? '' : 'full-bg')">
+<body ng-controller="IndexController as main" ng-class="(global.layout.showFooter ? '' : 'full-bg')">
     <header class="header">
         <section class="nav-bar">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
-                        <a href="#/" class="brand navbar-brand"><img ng-src="{{data.path.imgContent}}logo.png" /></a>
+                        <a href="#/" class="brand navbar-brand"><img ng-src="{{global.path.imgContent}}logo.png" /></a>
 
                         <ul class="nav navbar-nav">
-                            <li><a ng-href="{{data.path.pages.about}}">About us</a></li>
-                            <li><a ng-href="{{data.path.pages.faq}}">Faq</a></li>
-                            <li><a ng-href="{{data.path.pages.community}}">Community</a></li>
-                            <li><a ng-href="{{data.path.pages.news}}">News</a></li>
+                            <li><a ng-href="{{global.path.pages.about}}">About us</a></li>
+                            <li><a ng-href="{{global.path.pages.faq}}">Faq</a></li>
+                            <li><a ng-href="{{global.path.pages.community}}">Community</a></li>
+                            <li><a ng-href="{{global.path.pages.news}}">News</a></li>
                         </ul>
                     </div>
-                    <div class="col-md-4 actions" ng-include="data.path.template.action">
+                    <div class="col-md-4 actions" ng-include="global.path.template.action">
 
                     </div>
                 </div>
@@ -32,11 +32,11 @@
     <section class="content">
         <div ng-view=""></div>
 
-        <loader-page state-loader="data.loader.set"></loader-page>
-        <notifi-info notifi-data="data.notifi"></notifi-info>
+        <loader-page state-loader="global.loader.set"></loader-page>
+        <notifi-info notifi-data="global.notifi"></notifi-info>
     </section>
 
-    <footer class="footer" ng-show="data.layout.showFooter">
+    <footer class="footer" ng-show="global.layout.showFooter">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -50,7 +50,7 @@
                 <div class="col-md-6 brand">
                     <ul class="pull-right">
                         <li>&copy2015 <a href="mailtto:mkamosz@gmail.com">Michał Kamosz</a></li>
-                        <li><a href="/#/"><img ng-src="{{data.path.imgContent}}logo-small-mono.png" /></a></li>
+                        <li><a href="/#/"><img ng-src="{{global.path.imgContent}}logo-small-mono.png" /></a></li>
                     </ul>
                 </div>
             </div>
@@ -80,12 +80,16 @@
     <script src="common/directives/notifi.js"></script>
     <script src="common/directives/validation.js"></script>
     <script src="common/directives/strength.js"></script>
+    <script src="common/directives/userprofile.js"></script>
+
 
     <script src="common/services/path.js"></script>
     <script src="common/services/sidebar.js"></script>
     <script src="common/services/connection.js"></script>
     <script src="common/services/authorization.js"></script>
     <script src="common/services/password.js"></script>
+    <script src="common/services/crop.js"></script>
+    <script src="common/services/globalData.js"></script>
 
 
     <script src="common/controllers/staticpage.js"></script>
@@ -104,10 +108,10 @@
     <script src="core/myprofile/dashboard/dashboard-ctrl.js"></script>
     <script src="core/myprofile/addlink/addlink-ctrl.js"></script>
     <script src="core/myprofile/notifications/notifications-ctrl.js"></script>
-    <script src="core/myprofile/settings/settings-ctrl.js"></script>
     <script src="core/myprofile/personal/personal-ctrl.js"></script>
     <script src="core/myprofile/social/social-ctrl.js"></script>
     <script src="core/myprofile/password/password-ctrl.js"></script>
+    <script src="core/user/user-ctrl.js"></script>
 
     <script src="core/common/header/action/action-ctrl.js"></script>
 

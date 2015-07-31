@@ -8,7 +8,7 @@ app.directive("required", function() {
         require: "?ngModel",
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.required = function(modelValue) {
-                return modelValue != ''
+                return (modelValue != '' && modelValue !== null)
             };
         }
     };
@@ -21,7 +21,7 @@ app.directive("url", function() {
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.url = function(modelValue) {
                 var regEx = /(^|\s)((https?:\/\/)?[\w-]+(\.[\w-]+)+\.?(:\d+)?(\/\S*)?)/gi;
-                if (modelValue != '') {
+                if (modelValue != '' && modelValue !== null) {
                     return regEx.test(modelValue);
                 }
                 return true;
@@ -38,7 +38,7 @@ app.directive("email", function() {
             ngModel.$validators.email = function(modelValue) {
                 var regEx = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
 
-                if (modelValue != '') {
+                if (modelValue != '' && modelValue !== null) {
                     return regEx.test(modelValue);
                 }
                 return true;
@@ -54,8 +54,7 @@ app.directive("number", function() {
         link: function(scope, element, attributes, ngModel) {
             ngModel.$validators.number = function(modelValue) {
                 var regEx = /^\d+$/;
-
-                if (modelValue != '') {
+                if (modelValue != '' && modelValue !== null) {
                     return regEx.test(modelValue);
                 }
                 return true;

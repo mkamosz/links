@@ -2,28 +2,32 @@
  * Created by kamoszm on 2015-07-15.
  */
 
-app.service('auth', ['$http', '$q', '$window', 'conn', function($http, $q, $window, conn){
-    var userInfo = {"logged" : false},
-        clearUserInfo = function(){
-            userInfo = {"logged" : false};
+app.service('auth', ['$http', '$q', '$window', 'conn','path','globalData', function($http, $q, $window, conn, path, globalData){
+    var clearUserInfo = function(){
+            globalData.setData('userInfo', {"logged" : false});
             $window.sessionStorage.removeItem("userInfo");
         },
         init = function(){
             if ($window.sessionStorage["userInfo"] != null) {
-                userInfo = JSON.parse($window.sessionStorage["userInfo"]);
+                globalData.setData('userInfo', JSON.parse($window.sessionStorage["userInfo"]));
             }
-        };
+        },
+        path = path.url();
 
     this.login = function(url,data){
         var deferred = $q.defer();
         conn.postData(url, data).then(function(result){
             if(result.status == true){
-                userInfo = {
-                    access_token: result.data.access_token,
-                    username: result.data.username,
+                var userInfo = {
+                    username : result.data.username,
+                    access_token : result.data.access_token,
                     logged : true,
-                    state : ""
+                    state : ''
                 };
+
+                globalData.setData('userInfo', userInfo);
+                globalData.setData('userData', result.data);
+
                 $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
                 deferred.resolve({authenticated: true, userInfo : userInfo});
             } else{
@@ -40,21 +44,12 @@ app.service('auth', ['$http', '$q', '$window', 'conn', function($http, $q, $wind
         var deferred = $q.defer();
         conn.deleteData(url,data).then(function(result){
             clearUserInfo();
-            deferred.resolve({authenticated: false, userInfo : userInfo, message : result.message});
+            deferred.resolve({authenticated: false, userInfo : {}, message : result.message});
         }, function(result){
             clearUserInfo();
-            deferred.reject({authenticated: false, userInfo : userInfo, message : result.message});
+            deferred.reject({authenticated: false, userInfo : {}, message : result.message});
         });
         return deferred.promise;
-    };
-    this.getUserInfo = function(){
-        return userInfo;
-    };
-    this.isLogin = function(){
-        return userInfo.logged;
-    };
-    this.setState = function(type){
-        userInfo.state = type;
     };
 
     init();

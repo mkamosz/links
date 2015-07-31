@@ -20,8 +20,12 @@ app.config(['$routeProvider', function($routeProvider){
             },
             controller : "MyProfileController",
             resolve : {
-                check : ['$q', 'auth', function($q, auth) {
-                    var userInfo = auth.getUserInfo();
+                check : ['$q', 'globalData','$window', function($q, globalData,$window) {
+                    if ($window.sessionStorage["userInfo"] != null) {
+                        globalData.setData('userInfo', JSON.parse($window.sessionStorage["userInfo"]));
+                    }
+
+                    var userInfo = globalData.getData('userInfo');
 
                     if (userInfo.logged) {
                         return $q.resolve(userInfo);
@@ -30,6 +34,10 @@ app.config(['$routeProvider', function($routeProvider){
                     }
                 }]
             }
+        })
+        .when('/user/:name',{ //for user dashboard
+            templateUrl: 'core/user/user.tpl.html',
+            controller : "UserController"
         })
         .otherwise({
             templateUrl : 'core/error/error.tpl.html',

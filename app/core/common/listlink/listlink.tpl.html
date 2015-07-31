@@ -15,7 +15,7 @@
                 <li ng-repeat="link in dataListLinks | filter: search" class="link-list-item" data-id="{{link.id}}">
                     <div class="row">
                         <div class="col-md-9">
-                            <a ng-href="link.url"><h3>{{link.title}} <span>{{link.host}}</span></h3></a>
+                            <a target="_blank" ng-href="{{link.url}}"><h3>{{link.title}} <span>{{link.host}}</span></h3></a>
                         </div>
                         <div class="col-md-3 link-list-time text-right">
                             {{link.date | date : 'd/MM/yyyy' }}
@@ -33,10 +33,10 @@
                                 <li ng-repeat="item in link.tags"><a href="#" ng-click="">#{{item}}</a></li>
                             </ul>
                         </div>
-                        <div class="col-md-4 text-right link-list-buttons">
+                        <div class="col-md-4 text-right link-list-buttons" ng-if="!userView">
                             <button class="btn btn-default btn-xs" title="Edit" ng-click="list.fn.edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                             <button class="btn btn-default btn-xs" title="Delete" ng-click="list.fn.delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
-                        </div
+                        </div>
                     </div>
                 </li>
             </ul>

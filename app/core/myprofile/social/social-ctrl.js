@@ -2,9 +2,9 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('SocialController', ['$scope','conn', function($scope,conn){
+app.controller('SocialController', ['$scope','conn','globalData', function($scope,conn,globalData){
     /* Pseudo global variables $scope.data */
-    $scope.data = $scope.$parent.$parent.data;
+    $scope.global = globalData.getData();
 
     /* Private variables for this controller - $scope*/
     $scope.social = {
@@ -18,11 +18,11 @@ app.controller('SocialController', ['$scope','conn', function($scope,conn){
 
     /*Functions*/
     $scope.social.fn.getInfo = function(){
-        $scope.data.loader.show();
-        conn.getData($scope.data.path.server.user, { params : $scope.data.userInfo })
+        $scope.global.loader.show();
+        conn.getData($scope.global.path.server.user, { params : $scope.global.userInfo })
             .then(function(result){
                 $scope.social.data = result.data;
-                $scope.data.loader.hide();
+                $scope.global.loader.hide();
             }, function(msg){
                 cosole.log(msg);
             })
@@ -32,15 +32,16 @@ app.controller('SocialController', ['$scope','conn', function($scope,conn){
 
         $scope.social.error.show = false;
         if(check){
-            $scope.data.loader.show();
-            $scope.social.data.username = $scope.data.userInfo.username;
-            $scope.social.data.access_token = $scope.data.userInfo.access_token;
+            $scope.global.loader.show();
+            $scope.social.data.username = $scope.global.userInfo.username;
+            $scope.social.data.access_token = $scope.global.userInfo.access_token;
             $scope.social.data.type = "social";
-            conn.putData($scope.data.path.server.user, $scope.social.data)
+            conn.putData($scope.global.path.server.user, $scope.social.data)
                 .then(function(result){
-                    $scope.data.loader.hide();
+                    $scope.global.loader.hide();
                     if(result.status == true){
-                        $scope.data.notifi.show(result.message);
+                        $scope.global.notifi.show(result.message);
+                        globalData.refreshUserData();
                     }
                 }, function(msg){
                     cosole.log(msg);

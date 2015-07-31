@@ -17,14 +17,14 @@ app.directive("addLink", ['path', function(path){
         templateUrl: path.template.addlink,
         replace : true,
         transclude : false,
-        controller : ['$rootScope', '$scope','conn', 'auth','$location','$q', function($rootScope, $scope, conn, auth, $location,$q){
+        controller : ['$rootScope', '$scope','conn', 'auth','$location','$q','globalData', function($rootScope, $scope, conn, auth, $location,$q,globalData){
 
             /* Pseudo global variables $scope.data */
 
             /* Private variables for this controller - $scope*/
             $scope.add = {
                 data : {
-                    auth : auth.getUserInfo(),
+                    auth : globalData.getData('userInfo'),
                     check : true,
                     all : $scope.popularLinks
                 },
@@ -36,8 +36,6 @@ app.directive("addLink", ['path', function(path){
                 addedTags : [],
                 fn : {}
             };
-
-            console.log($scope.notifi);
 
             /* Functions */
 
@@ -75,7 +73,7 @@ app.directive("addLink", ['path', function(path){
                         if(result.status == true){
                             $scope.add.condition.linkTmpAdded = false;
                             $scope.add.data = {
-                                auth : auth.getUserInfo(),
+                                auth : globalData.getData('userInfo'),
                                 check : false
                             };
                             $scope.add.condition.disabledAddButton = false;
@@ -176,9 +174,10 @@ app.directive("addLink", ['path', function(path){
             };
 
             $scope.$watch('editTag.edit', function() {
-                if($scope.editTag.edit == true){
-                    $scope.edit($scope.editTag.id);
-                    $scope.editTag.edit = false;
+
+                if(globalData.getData('editTag').edit == true){
+                    $scope.edit(globalData.getData('editTag').id);
+                    globalData.setPropData('editTag','edit', false);
                 }
             });
 

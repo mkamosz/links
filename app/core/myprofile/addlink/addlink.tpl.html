@@ -1,11 +1,11 @@
 <div ng-controller="AddLinkController" class="wrapper-gray">
-    <sidebar-nav nav-data="data.sidebar"></sidebar-nav>
-    <div class="main-content nav {{data.sidebar.state}}">
+    <sidebar-nav nav-data="global.sidebar"></sidebar-nav>
+    <div class="main-content nav {{global.sidebar.state}}">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">Add link</h1>
-                    <add-link edit-tag="data.editTag" loader="data.loader" list="data.listLinks" notifi="data.notifi" tags="data.listTags"></add-link>
+                    <add-link edit-tag="global.editTag" loader="global.loader" list="global.listLinks" notifi="global.notifi" tags="global.listTags"></add-link>
                 </div>
             </div>
         </div>

@@ -2,8 +2,9 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('DashboardController', ['$scope', function($scope){
+app.controller('DashboardController', ['$scope','globalData', function($scope,globalData){
     /* Pseudo global variables $scope.data */
+    $scope.global = globalData.getData();
 
     /* Private variables for this controller - $scope*/
     $scope.dashboard = {
@@ -13,4 +14,5 @@ app.controller('DashboardController', ['$scope', function($scope){
 
 
     /*Functions*/
+    globalData.refreshUserData();
 }]);

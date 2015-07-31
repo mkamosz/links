@@ -33,7 +33,7 @@ app.service('sidebarNav',['path', function(path){
         {
             title : 'Social',
             url : path.pages.social,
-            icon : 'glyphicon-link'
+            icon : 'glyphicon-globe'
         },
         {
             title : 'Password',

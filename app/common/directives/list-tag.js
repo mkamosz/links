@@ -14,16 +14,16 @@ app.directive("listTags", ['path', function(path){
         templateUrl: path.template.listtag,
         replace : true,
         transclude : false,
-        controller : ['$scope','conn', 'auth', function($scope, conn, auth){
+        controller : ['$scope','conn', 'globalData', function($scope, conn, globalData){
 
             /* Pseudo global variables $scope.data */
 
             /* Private variables for this controller - $scope*/
             $scope.popularTags = (typeof $scope.popularTags === "undefined" ? false : $scope.popularTags);
-            $scope.userInfo = auth.getUserInfo();
+            $scope.userInfo = globalData.getData('userInfo');
             $scope.tag = {
                 data : {
-                    auth : auth.getUserInfo(),
+                    auth : globalData.getData('userInfo'),
                     check : $scope.popularTags
                 },
                 fn : {}

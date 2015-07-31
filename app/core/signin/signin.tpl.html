@@ -8,21 +8,21 @@
                     <div class="alert alert-danger" ng-show="signin.error.show">
                         <span ng-bind-html="signin.error.msg"></span>
                     </div>
-                    <form name="signIn">
+                    <form name="form" novalidate ng-submit="signin.fn.form()">
                         <div class="list-group list-group-sm">
                             <div class="list-group-item">
-                                <input type="text" minlength="3" ng-keypress="signin.fn.hideErrors();" class="form-control" ng-model="signin.data.username" name="username" placeholder="Username or email" required />
+                                <input type="text" ng-keypress="signin.fn.hideErrors();" class="form-control" ng-model="signin.data.username" name="username" placeholder="Username or email" required ng-minlength="4" />
                             </div>
                             <div class="list-group-item">
-                                <input type="password" minlength="5" ng-keypress="signin.fn.hideErrors();" class="form-control" ng-model="signin.data.password" name="password" placeholder="Password" required />
+                                <input type="password" ng-keypress="signin.fn.hideErrors();" class="form-control" ng-model="signin.data.password" name="password" placeholder="Password" required ng-minlength="6"/>
                             </div>
                         </div>
-                        <button ng-click="signin.fn.form();" ng-disabled="signIn.$invalid" class="btn btn-primary btn-lg">Sing in</button>
+                        <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary btn-lg">Sing in</button>
 
                         <div class="text-center log-form-additional">
                             <a class="log-form-additional-forgot hide" href="#">Forgot password?</a>
                             <p>Do not have an account?</p>
-                            <a class="btn btn-default btn-lg" href="data.path.pages.signup">Sign up</a>
+                            <a class="btn btn-default btn-lg" ng-href="{{global.path.pages.signup}}">Sign up</a>
                         </div>
 
                     </form>

@@ -191,6 +191,64 @@ label{
   }
 }
 
+.profile{
+  position: relative;
+  background-size: cover;
+  background-position:50%;
+  min-height:200px;
+  margin: -15px -15px 20px -15px;
+  padding: 0 15px 0 0;
+  &-image{
+    margin:30px 0 0 0;
+    display: inline-block;
+    img{
+      max-width:80%;
+      .border-radius(50%);
+      box-shadow:0px 1px 3px #333
+    }
+  }
+  &-social{
+    padding:0;
+    margin:20px 0 0 0;
+    li{
+      display: inline-block;
+      margin-right:6px;
+      img{
+        width:28px;
+      }
+    }
+  }
+  &-details{
+    color:@color-white;
+    margin:30px 0 0 0;
+    h3{
+      .font-px-to-em(26);
+    }
+  }
+  &-stats{
+    margin:30px 0 80px 0;
+    padding:0;
+    list-style: none;
+    color:@color-white;
+    .font-px-to-em(18px);
+    li{
+      display: inline-block;
+      margin:0 30px 0 0;
+    }
+    em{
+      font-weight: 200;
+      font-style: normal;
+      display: inline-block;
+      margin:0 0 0 6px;
+      position: relative;
+      top:-2px;
+    }
+  }
+  &-follow{
+    width:30%;
+  }
+}
+
 .log-form{
   padding:50px 0 0 0;
   h3{
@@ -220,6 +278,7 @@ label{
     margin:40px 0;
     p{
       margin:0 0 5px 0;
+      .font-px-to-em(12);
     }
     &-forgot{
       display: inline-block;
@@ -249,6 +308,16 @@ label{
   input.form-error,textarea.form-error{
       border-color:@color-red;
     .font-px-to-em(14px);
+  }
+  &-user-avatar{
+    img{
+      width:80px;
+    }
+    &-default{
+    }
+    &-profile {
+      .border-radius(50%);
+    }
   }
 }
 
@@ -527,12 +596,17 @@ label{
   &.nav{
     margin-left:160px;
     padding-bottom:50px;
+    .container{
+      width:100%;
+    }
   }
   &.resize{
     margin-left:36px;
   }
-  .container{
-    width:100%;
+  &.user{
+    > .container{
+      width:100%
+    }
   }
   .title{
     background-color: #f5f5f5;
@@ -540,5 +614,21 @@ label{
     padding: 15px 0 15px 15px;
     border-bottom: 1px solid #ddd;
     font-size: 22px;
+    h1{
+      font-size: 22px;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+.avatar{
+  &-wrapper{
+    height: 300px;
+    width: 100%;
+    margin: 15px 0;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+    background-color: #fcfcfc;
+    overflow: hidden;
   }
 }
