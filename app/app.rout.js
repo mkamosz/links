@@ -20,9 +20,9 @@ app.config(['$routeProvider', function($routeProvider){
             },
             controller : "MyProfileController",
             resolve : {
-                check : ['$q', 'globalData','$window', function($q, globalData,$window) {
-                    if ($window.sessionStorage["userInfo"] != null) {
-                        globalData.setData('userInfo', JSON.parse($window.sessionStorage["userInfo"]));
+                check : ['$q', 'globalData','$cookies', function($q, globalData,$cookies) {
+                    if ($cookies.get("userInfo") != null) {
+                        globalData.setData('userInfo', JSON.parse($cookies.get("userInfo")));
                     }
 
                     var userInfo = globalData.getData('userInfo');

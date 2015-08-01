@@ -13,7 +13,7 @@ app.directive("sidebarNav", ['path', function(path){
         templateUrl: path.template.sidebar,
         replace : true,
         transclude : false,
-        controller : ['$scope','$window','globalData', function($scope, $window,globalData){
+        controller : ['$scope','$cookies','globalData', function($scope, $cookies,globalData){
 
             /* Pseudo global variables $scope.data */
 
@@ -28,7 +28,7 @@ app.directive("sidebarNav", ['path', function(path){
             $scope.sidebar.fn.change = function(e){
                 $scope.data.state = $scope.data.state == 'resize' ? '' : 'resize';
                 globalData.setPropData('userInfo','state', $scope.data.state);
-                $window.sessionStorage["userInfo"] = JSON.stringify(globalData.getData('userInfo'));
+                $cookies.set("userInfo", JSON.stringify(globalData.getData('userInfo')));
 
                 e.preventDefault();
             }

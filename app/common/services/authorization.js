@@ -2,14 +2,14 @@
  * Created by kamoszm on 2015-07-15.
  */
 
-app.service('auth', ['$http', '$q', '$window', 'conn','path','globalData', function($http, $q, $window, conn, path, globalData){
+app.service('auth', ['$http', '$q', '$cookies', 'conn','path','globalData', function($http, $q, $cookies, conn, path, globalData){
     var clearUserInfo = function(){
             globalData.setData('userInfo', {"logged" : false});
-            $window.sessionStorage.removeItem("userInfo");
+            $cookies.remove("userInfo");
         },
         init = function(){
-            if ($window.sessionStorage["userInfo"] != null) {
-                globalData.setData('userInfo', JSON.parse($window.sessionStorage["userInfo"]));
+            if ($cookies.get("userInfo") != null) {
+                globalData.setData('userInfo', JSON.parse($cookies.get("userInfo")));
             }
         },
         path = path.url();
@@ -28,7 +28,7 @@ app.service('auth', ['$http', '$q', '$window', 'conn','path','globalData', funct
                 globalData.setData('userInfo', userInfo);
                 globalData.setData('userData', result.data);
 
-                $window.sessionStorage["userInfo"] = JSON.stringify(userInfo);
+                $cookies.put("userInfo", JSON.stringify(userInfo));
                 deferred.resolve({authenticated: true, userInfo : userInfo});
             } else{
                 clearUserInfo();
