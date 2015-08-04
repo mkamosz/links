@@ -26,7 +26,9 @@ h1,h2,h3,h4,h5{font-weight:200;}
 }
 
 a{
+  color:@color-dark-blue;
   &:hover{
+    color:@color-blue;
     text-decoration: none;
   }
 }
@@ -334,29 +336,30 @@ label{
       border-right:5px solid @color-white;
       .transition();
       &:hover {
-        background: #fcfcfc;
         border-right-color:@color-blue;
         .btn{
           opacity:1;
         }
       }
-      a{
-        h3{
-          margin:0 0 14px 0;
-          color:@color-black;
-          .font-px-to-em(20);
-          font-weight: 600;
+      h3{
+        margin:0 0 14px 0;
+        color:@color-gray-666;
+        .font-px-to-em(20);
+        font-weight: 600;
+        a{
+          color:@color-dark-blue;
           span{
             display: inline-block;
             .font-px-to-em(10);
             font-weight: 300;
-            color:@color-blue;
+            color:@color-gray-999;
           }
-        }
-        &:hover{
-          text-decoration: none;
-          h3{
+          &:hover{
+            text-decoration: none;
             color:@color-blue;
+            span{
+              color:@color-blue;
+            }
           }
         }
       }
@@ -488,6 +491,84 @@ label{
         .btn{
           span{
             padding:0 0 0 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.user{
+  &-list{
+    ul{
+      margin: 0;
+      list-style: none;
+      padding: 0;
+    }
+    &-item {
+      border-bottom: 1px solid @color-gray-eee;
+      padding: 15px 0 15px 0px;
+      border-right: 5px solid @color-white;
+      .transition();
+      &:hover {
+        border-right-color: @color-blue;
+      }
+      h3{
+        margin:0 0 14px 0;
+        color:@color-gray-666;
+        .font-px-to-em(20);
+        font-weight: 600;
+        a{
+          color:@color-dark-blue;
+          span{
+            display: inline-block;
+            .font-px-to-em(10);
+            font-weight: 300;
+            color:@color-gray-999;
+          }
+          &:hover{
+            text-decoration: none;
+            color:@color-blue;
+            span{
+              color:@color-blue;
+            }
+          }
+        }
+      }
+      table{
+        margin:0;
+        tr{
+          th{
+            color:@color-gray-ccc;
+            .font-px-to-em(12px);
+          }
+          th,td{
+            font-weight: normal;
+            width:50%;
+            border:none;
+            padding:5px 0 0 0;
+            &:first-child{
+              width:70%;
+            }
+            a{
+              span{
+                color: @color-gray-999;
+                .font-px-to-em(12);
+              }
+            }
+          }
+        }
+      }
+      &-tag{
+        ul{
+          li{
+            display: inline-block;
+            background-color: @color-gray-light;
+            font-size: 0.857143em;
+            height: 24px;
+            margin: 0 10px 5px 0;
+            padding: 3px 8px 4px 5px;
+            color:@color-dark-blue;
           }
         }
       }

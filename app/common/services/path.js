@@ -25,12 +25,14 @@ app.service('path', function(){
                 tag :           "/server/tag",
                 crop :          "/server/crop",
                 account :       "/server/account",
-                follow :        "/server/follow"
+                follow :        "/server/follow",
+                followed :      "/server/followed"
             },
             template : {
                 action :        "core/common/header/action/action.tpl.html",
                 loader :        "core/common/loader/loader.tpl.html",
                 addlink :       "core/common/addlink/addlink.tpl.html",
+                followed :      "core/common/followed/followed.tpl.html",
                 listlink :      "core/common/listlink/listlink.tpl.html",
                 listtag :       "core/common/listtag/listtag.tpl.html",
                 sidebar :       "core/common/sidebar/sidebar.tpl.html",
@@ -50,6 +52,7 @@ app.service('path', function(){
                 settings :      "#/myprofile/personal",
                 dashboard :     "#/myprofile/dashboard",
                 addlink:        "#/myprofile/addlink",
+                followed:       "#/myprofile/followed",
                 notifications:  "#/myprofile/notifications",
                 personal :      "#/myprofile/personal",
                 social :        "#/myprofile/social",

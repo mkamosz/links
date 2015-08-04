@@ -1,4 +1,4 @@
-<div  ng-controller="HomepageController">
+<div ng-controller="HomepageController">
 <div class="wrapper">
     <div class="container">
         <div class="row">
@@ -9,12 +9,23 @@
                 <p class="lead"><a href="/features">Powerful features</a> to make software development more collaborative.</p>
                 <br><br>
             </div>
+
             <div class="columns marketing-grid">
                 <div class="col-md-6">
-                    <list-links popular-links="true" list="globalData.listLinks"></list-links>
+                    <followed-users popular="true" users-data="hp.data.followed"></followed-users>
                 </div>
                 <div class="col-md-6">
-                    <list-tags popular-tags="true" list="globalData.listTags"></list-tags>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <p>&nbsp;</p>
+            </div>
+            <div class="columns marketing-grid">
+                <div class="col-md-6">
+                    <list-links popular-links="true" list="hp.data.listLinks"></list-links>
+                </div>
+                <div class="col-md-6">
+                    <list-tags popular-tags="true" list="hp.data.listTags"></list-tags>
                 </div>
             </div>
         </div>

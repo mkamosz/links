@@ -24,11 +24,12 @@
             </div>
             <div class="col-sm-6">
                 <ul class="profile-stats text-right">
-                    <li title="Followers"><span class="glyphicon glyphicon-heart"></span><em>XXXX</em></li>
                     <li title="Links"><span class="glyphicon glyphicon-link"></span><em>{{dataListLinks.length}}</em></li>
                     <li title="Tags"><span class="glyphicon glyphicon-tasks"></span><em>{{userprofile.data.tagsCounter}}</em></li>
+                    <li title="Followers"><span class="glyphicon glyphicon-heart"></span><em>{{userprofile.data.followers}}</em></li>
                 </ul>
                 <button ng-if="userprofile.data.follow && userprofile.data.checkFollow" ng-click="userprofile.fn.addFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Follow</button>
+                <button ng-if="!userprofile.data.checkFollow" ng-click="userprofile.fn.unFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Unfollow</button>
             </div>
         </div>
     </div>

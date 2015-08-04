@@ -79,26 +79,13 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
                 data.userData = result.data;
                 deferred.resolve({userData : data.userData});
             } else{
-                //clearUserInfo();
+                clearUserInfo();
                 deferred.reject({authenticated: false, userInfo : data.userInfo, message : result.message});
             }
         }, function(result){
-            //clearUserInfo();
+            clearUserInfo();
             deferred.reject({authenticated: false, message : result.message});
         });
         return deferred.promise;
     };
-
-    //this.getUserInfo = function(){
-    //    return userInfo;
-    //};
-
-    //this.isLogin = function(){
-    //    return userInfo.logged;
-    //};
-
-    //this.setState = function(type){
-    //    userInfo.state = type;
-    //};
-
 }]);

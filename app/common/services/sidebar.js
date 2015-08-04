@@ -18,6 +18,11 @@ app.service('sidebarNav',['path', function(path){
             icon : 'glyphicon-plus'
         },
         {
+            title : 'Followed user',
+            url : path.pages.followed,
+            icon : 'glyphicon-heart'
+        },
+        {
             title : 'Notifications',
             url : path.pages.notifications,
             icon : 'glyphicon-flag'

@@ -15,7 +15,7 @@
                 <li ng-repeat="link in dataListLinks | filter: search" class="link-list-item" data-id="{{link.id}}">
                     <div class="row">
                         <div class="col-md-9">
-                            <a target="_blank" ng-href="{{link.url}}"><h3>{{link.title}} <span>{{link.host}}</span></h3></a>
+                            <h3><a target="_blank" ng-href="{{link.url}}">{{link.title}} <span>({{link.host}})</span></a></h3>
                         </div>
                         <div class="col-md-3 link-list-time text-right">
                             {{link.date | date : 'd/MM/yyyy' }}

@@ -31,15 +31,6 @@ app.directive("listTags", ['path', function(path){
 
             /* Functions */
 
-            conn.getData(path.server.tag, { params : $scope.tag.data })
-                .then(function(result){
-                    if(result.status == true){
-                        $scope.dataListTags = result.data;
-                    }
-                }, function(msg){
-                    console.log(msg);
-                });
-
             $scope.tag.fn.filterTags = function(items, str) {
                 var result = {};
                 if(typeof str !== "undefined"){

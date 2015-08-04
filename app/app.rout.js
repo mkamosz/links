@@ -5,8 +5,7 @@
 app.config(['$routeProvider', function($routeProvider){
     $routeProvider
         .when('/', {
-            templateUrl: 'core/homepage/homepage.tpl.html',
-            controller: "HomepageController"
+            templateUrl: 'core/homepage/homepage.tpl.html'
         })
         .when('/page/:name', { //for static pages about/faq/news/signin/signup etc...
             templateUrl: function(param){

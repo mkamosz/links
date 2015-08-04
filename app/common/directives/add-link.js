@@ -117,12 +117,12 @@ app.directive("addLink", ['path', function(path){
                             $scope.add.data.tags = $scope.add.addedTags.join();
                         }
                         $el.val("");
-                        event.preventDefault();
+                        e.preventDefault();
                     };
 
                 switch(keyCode){
                     case 32 : {
-                        event.preventDefault();
+                        e.preventDefault();
                         break;
                     }
                     case 13 : {

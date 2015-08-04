@@ -36,16 +36,6 @@ app.directive("listLinks", ['path', function(path){
 
             /* Functions */
 
-            conn.getData(path.server.link, { params : $scope.list.data })
-                .then(function(result){
-                    if(result.status == true) {
-                        $scope.dataListLinks  = result.data;
-                    }
-                }, function(msg){
-                    console.log(msg);
-                });
-
-
             $scope.list.fn.edit = function(id){
                 if(!$scope.userView){
                     globalData.setPropData('editTag','id', id);

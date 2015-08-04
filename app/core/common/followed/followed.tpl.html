@@ -1,0 +1,103 @@
+<div class="user-list">
+    <div class="panel panel-default" ng-if="!popularUsers">
+        <div class="panel-heading">
+            <div class="row">
+                <div class="col-md-9">
+                    <h3>{{global.userInfo.username}} followed users</h3>
+                </div>
+                <div class="col-md-3">
+                    <input type="text" placeholder="filter links by" class="form-control pull-right search" ng-model="search" />
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <ul>
+                <li ng-repeat="user in users | filter: search" class="user-list-item">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3><a ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Latest added links</th>
+                                                <th>tags</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="item in user.links">
+                                                <td>
+                                                    <a href="{{item.url}}">{{item.title}} <span>({{item.url}})</span></a>
+                                                </td>
+                                                <td>
+                                                    <div class="user-list-item-tag">
+                                                        <ul>
+                                                            <li ng-repeat="tag in item.tags">#{{tag}}</li>
+                                                        </ul>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 link-list-time text-right">
+                            {{link.date | date : 'd/MM/yyyy' }}
+                        </div>
+                        <div class="col-md-12">
+                            <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div ng-if="popularUsers">
+
+        <h3>The most popular followed users</h3>
+        <ul>
+            <li ng-repeat="user in users" class="user-list-item">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3><a ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>Latest added links</th>
+                                        <th>tags</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="item in user.links">
+                                        <td>
+                                            <a href="{{item.url}}">{{item.title}} <span>({{item.url}})</span></a>
+                                        </td>
+                                        <td>
+                                            <div class="user-list-item-tag">
+                                                <ul>
+                                                    <li ng-repeat="tag in item.tags">#{{tag}}</li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 link-list-time text-right">
+                        {{link.date | date : 'd/MM/yyyy' }}
+                    </div>
+                    <div class="col-md-12">
+                        <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

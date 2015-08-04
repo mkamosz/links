@@ -1,0 +1,20 @@
+<div ng-controller="FollowedController" class="wrapper-gray">
+    <sidebar-nav nav-data="global.sidebar"></sidebar-nav>
+    <div class="main-content nav {{global.sidebar.state}}">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1 class="title">Followed users</h1>
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8">
+                            <followed-users users-data="followed.data.users"></followed-users>
+                        </div>
+                        <div class="col-sm-12 col-md-4">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
