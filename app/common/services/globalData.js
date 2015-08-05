@@ -10,7 +10,9 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
         data = {
             listLinks : [],
             listTags : [],
-            userData : [],
+            userData : {
+                avatar : ''
+            },
             userInfo : {"logged" : false},
             layout : {
                 showFooter : true,

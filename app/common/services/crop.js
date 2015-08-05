@@ -8,7 +8,7 @@
 
 
 
-app.service('crop',['$rootScope', function($rootScope){
+app.service('crop',['$http','globalData', function($http,globalData){
 
     var console = window.console || { log: function () {}},
         avatar = {
@@ -225,31 +225,19 @@ app.service('crop',['$rootScope', function($rootScope){
 
         ajaxUpload: function () {
             var url = this.$avatarForm.attr('action'),
-                data = new FormData(this.$avatarForm[0]),
+                dataForm = new FormData(this.$avatarForm[0]),
                 _this = this;
 
-            $.ajax(url, {
-                type: 'post',
-                data: data,
-                dataType: 'json',
-                processData: false,
-                contentType: false,
-
-                beforeSend: function () {
-                    _this.submitStart();
-                },
-
-                success: function (data) {
-                    _this.submitDone(data);
-                },
-
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    _this.submitFail(textStatus || errorThrown);
-                },
-
-                complete: function () {
-                    _this.submitEnd();
-                }
+            $http.post(url, dataForm, {
+                transformRequest: angular.identity,
+                headers: {'Content-Type': undefined}
+            }).then(function(data){
+                _this.submitStart();
+                _this.submitDone(data);
+                _this.submitEnd();
+            }, function(textStatus,errorThrown){
+                alert(1);
+                _this.submitFail(textStatus || errorThrown);
             });
 
         },
@@ -263,11 +251,13 @@ app.service('crop',['$rootScope', function($rootScope){
         },
 
         submitDone: function (data) {
-            avatar.url = data.result;
+            this.setAvatar(data.data.result);
+            globalData.setPropData('userData','avatar',data.data.result);
 
-            if ($.isPlainObject(data) && data.state === 200) {
-                if (data.result) {
-                    this.url = data.result;
+
+            if ($.isPlainObject(data) && data.data.state === 200) {
+                if (data.data.result) {
+                    this.url = data.data.result;
 
                     if (this.support.datauri || this.uploaded) {
                         this.uploaded = false;
@@ -311,6 +301,9 @@ app.service('crop',['$rootScope', function($rootScope){
             ].join('');
 
             this.$avatarUpload.after($alert);
+        },
+        setAvatar : function(data){
+            avatar.url = data;
         }
     };
 

@@ -26,7 +26,8 @@ app.service('path', function(){
                 crop :          "/server/crop",
                 account :       "/server/account",
                 follow :        "/server/follow",
-                followed :      "/server/followed"
+                followed :      "/server/followed",
+                userrating:     "/server/userrating"
             },
             template : {
                 action :        "core/common/header/action/action.tpl.html",

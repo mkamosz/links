@@ -3,8 +3,6 @@
  */
 
 app.controller('PersonalController', ['$scope','conn','auth','crop','globalData', function($scope,conn,auth,crop,globalData){
-    var avatar = crop.getAvatar();
-
     /* Pseudo global variables $scope.data */
     $scope.global = globalData.getData();
 
@@ -17,8 +15,6 @@ app.controller('PersonalController', ['$scope','conn','auth','crop','globalData'
         fn : {}
     };
 
-    $scope.personal.data.avatar = avatar.url;
-
     /*Functions*/
     $scope.personal.fn.getInfo = function(){
         $scope.global.loader.show();
@@ -27,6 +23,7 @@ app.controller('PersonalController', ['$scope','conn','auth','crop','globalData'
             .then(function(result){
                 if(result.status == true){
                     $scope.personal.data = result.data;
+                    globalData.setPropData('userData','avatar',$scope.personal.data.avatar);
                     $scope.imageAvatar = ($scope.personal.data.avatar == '' ? $scope.global.path.imgContent+'icon_user.png' : $scope.global.path.userProfile + $scope.personal.data.avatar);
                 } else{
                     $scope.global.notifi.show(result.message);
@@ -45,7 +42,7 @@ app.controller('PersonalController', ['$scope','conn','auth','crop','globalData'
             $scope.personal.data.username = $scope.global.userInfo.username;
             $scope.personal.data.access_token = $scope.global.userInfo.access_token;
             $scope.personal.data.type = "personal";
-            $scope.personal.data.avatar = avatar.url;
+            $scope.personal.data.avatar = $scope.global.userData.avatar;
             conn.putData($scope.global.path.server.user, $scope.personal.data)
                 .then(function(result){
                     $scope.global.loader.hide();
@@ -66,8 +63,9 @@ app.controller('PersonalController', ['$scope','conn','auth','crop','globalData'
 
     crop.init();
 
-    $scope.$watch('personal.data.avatar', function() {
-        //console.log($scope.personal.data.avatar);
+    $scope.$watch('global.userData.avatar', function() {
+        $scope.imageAvatar = $scope.global.path.userProfile + $scope.global.userData.avatar;
+        $scope.personal.data.avatar = $scope.global.userData.avatar;
     });
 
 }]);

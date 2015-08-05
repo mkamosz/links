@@ -2,8 +2,8 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.controller('HomepageController', ['$scope','globalData','conn', function($scope,globalData,conn){
-
+app.controller('HomepageController', ['$scope','globalData','conn','$q', function($scope,globalData,conn, $q){
+    var prom1,prom2,prom3;
     /* Pseudo global variables $scope.data */
     $scope.global = globalData.getData();
 
@@ -18,31 +18,19 @@ app.controller('HomepageController', ['$scope','globalData','conn', function($sc
 
     /*Functions*/
 
-    conn.getData($scope.global.path.server.followed, { params : $scope.hp.data })
-        .then(function(result){
-            if(result.status == true){
-                $scope.hp.data.followed = result.data.users;
-            }
-        }, function(msg){
-            console.log(msg);
-        });
+    $scope.global.loader.show();
+    prom1 = conn.getData($scope.global.path.server.followed, { params : $scope.hp.data });
+    prom2 = conn.getData($scope.global.path.server.link, { params : $scope.hp.data });
+    prom3 = conn.getData($scope.global.path.server.tag, { params : $scope.hp.data });
 
-    conn.getData($scope.global.path.server.link, { params : $scope.hp.data })
-        .then(function(result){
-            if(result.status == true) {
-                $scope.hp.data.listLinks  = result.data;
-            }
-        }, function(msg){
-            console.log(msg);
-        });
+    $q.all([prom1, prom2, prom3]).then(function(data){
+        $scope.global.loader.hide();
+        $scope.hp.data.followed = data[0].data.users;
+        $scope.hp.data.listLinks  = data[1].data;
+        $scope.hp.data.listTags = data[2].data;
 
-    conn.getData($scope.global.path.server.tag, { params : $scope.hp.data })
-        .then(function(result){
-            if(result.status == true){
-                $scope.hp.data.listTags = result.data;
-            }
-        }, function(msg){
-            console.log(msg);
-        });
+    }, function(msg){
+        console.log(msg);
+    });
 
 }]);

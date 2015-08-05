@@ -67,6 +67,7 @@ app.directive("addLink", ['path', function(path){
                 $scope.add.data.check = false;
                 conn.postData(path.server.link, $scope.add.data )
                     .then(function(result){
+                        $scope.add.data.id = -1;
                         var promise1 = conn.getData(path.server.link, { params : $scope.add.data }),
                             promise2 = conn.getData(path.server.tag, { params : $scope.add.data });
 
@@ -158,6 +159,7 @@ app.directive("addLink", ['path', function(path){
                         if(result.status == true){
                             $scope.add.data.title = result.data.title;
                             $scope.add.data.link = result.data.url;
+                            $scope.add.data.rating = result.data.rating;
                             $scope.add.condition.linkTmpAdded = true;
                             $scope.loader.hide();
 
@@ -167,6 +169,7 @@ app.directive("addLink", ['path', function(path){
 
                             $scope.add.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
                             $scope.add.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
+
                         }
                     }, function(msg){
                         console.log(msg);

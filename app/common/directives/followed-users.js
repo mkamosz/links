@@ -28,12 +28,6 @@ app.directive("followedUsers", ['path', function(path){
 
             /* Functions */
 
-
-            $scope.$watch('users', function() {
-
-                console.log($scope.users);
-            });
-
         }]
     }
 }]);

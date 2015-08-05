@@ -24,10 +24,11 @@
                             <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
                         </div>
 
-                        <div class="col-md-2">
-                            <span class="link-list-counter all" title="Counter link">{{link.counterAll}}</span>
+                        <div class="col-md-3">
+                            <span class="link-list-counter all" title="Global link counter"><span class="glyphicon glyphicon-link"></span> {{link.counterAll}}</span>
+                            <span class="link-list-counter ratingAll" title="Global link rating"><span class="glyphicon glyphicon-star"></span> {{link.ratingAll}}</span>
                         </div>
-                        <div class="col-md-6 link-list-tags">
+                        <div class="col-md-5 link-list-tags">
                             <span>tags:</span>
                             <ul ng-if="link.tags">
                                 <li ng-repeat="item in link.tags"><a href="#" ng-click="">#{{item}}</a></li>

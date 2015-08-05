@@ -12,19 +12,20 @@ app.directive("userProfile", ['path', function(path){
             dataListLinks : '=list',
             dataListTags : '=tags',
             userSession : '=user',
-            notifi : '=notifi'
+            notifi : '=notifi',
+            followBtn : '@followBtn'
         },
         templateUrl: path.template.userprofile,
         replace : true,
         controller : ['$scope','globalData','conn', function($scope,globalData,conn){
-
+            $scope.global = globalData.getData();
             /* Pseudo global variables $scope.data */
 
             /* Private variables for this controller - $scope*/
             $scope.userprofile = {
                 data : {
                     follow : (typeof $scope.userSession !== 'undefined' ? $scope.userSession.logged : false),
-                    checkFollow : false
+                    checkFollow : (typeof $scope.followBtn !== 'undefined' ? $scope.followBtn : false)
                 },
                 path : path,
                 fn : {}
@@ -36,13 +37,15 @@ app.directive("userProfile", ['path', function(path){
                     userSession : $scope.userSession,
                     user : $scope.userProfileData
                 };
+                $scope.global.loader.show();
                 conn.postData(path.server.follow, data)
                     .then(function(result){
+                        $scope.global.loader.hide();
                         if(result.status == true){
-                            $scope.notifi.show(result.message);
+                            $scope.global.notifi.show(result.message);
                             $scope.userprofile.data.checkFollow = false;
                         } else{
-                            $scope.notifi.show(result.message,'danger');
+                            $scope.global.notifi.show(result.message,'danger');
                         }
                     }, function(msg){
                         console.log(msg);
@@ -54,13 +57,36 @@ app.directive("userProfile", ['path', function(path){
                     userSession : $scope.userSession,
                     user : $scope.userProfileData
                 };
+                $scope.global.loader.show();
                 conn.deleteData(path.server.follow, {params  : data})
                     .then(function(result){
+                        $scope.global.loader.hide();
                         if(result.status == true){
-                            $scope.notifi.show(result.message);
+                            $scope.global.notifi.show(result.message);
                             $scope.userprofile.data.checkFollow = true;
                         } else{
-                            $scope.notifi.show(result.message,'danger');
+                            $scope.global.notifi.show(result.message,'danger');
+                        }
+                    }, function(msg){
+                        console.log(msg);
+                    });
+            };
+
+            $scope.userprofile.fn.rating = function(val){
+                var data = {
+                    userSession : $scope.global.userInfo,
+                    userProfile : $scope.userProfileData.username,
+                    rating : val
+                };
+                $scope.global.loader.show();
+                conn.postData(path.server.userrating, data)
+                    .then(function(result){
+                        $scope.global.loader.hide();
+                        if(result.status == true){
+                            $scope.global.notifi.show(result.message);
+                            $scope.userprofile.data.checkFollow = true;
+                        } else{
+                            $scope.global.notifi.show(result.message, 'danger');
                         }
                     }, function(msg){
                         console.log(msg);
@@ -71,14 +97,16 @@ app.directive("userProfile", ['path', function(path){
 
             //$watch because used $scope.userprofile.data.**** variables
             $scope.$watch('userProfileData', function() {
-                if( $scope.userProfileData != null) {
+                if( typeof $scope.userProfileData !== 'undefined') {
                     //sprawdzenie follow
                     var data = {
                         userSession : $scope.userSession,
                         user : $scope.userProfileData
                     };
+                    $scope.global.loader.show();
                     conn.getData(path.server.follow, {params : data})
                         .then(function(result){
+                            $scope.global.loader.hide();
                             if(result.status == true){
                                 $scope.userprofile.data.checkFollow = true;
                             }
@@ -95,6 +123,7 @@ app.directive("userProfile", ['path', function(path){
                     $scope.userprofile.data.twitter = ($scope.userProfileData.twitter == '' ? "" : $scope.userProfileData.twitter);
                     $scope.userprofile.data.g = ($scope.userProfileData.g == '' ? "" : $scope.userProfileData.g);
                     $scope.userprofile.data.www = ($scope.userProfileData.www == '' ? "" : $scope.userProfileData.www);
+                    $scope.userprofile.data.rating = ($scope.userProfileData.rating == '' ? 0 : $scope.userProfileData.rating);
                 }
             });
             $scope.$watch('dataListTags', function() {

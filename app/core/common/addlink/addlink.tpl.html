@@ -27,10 +27,27 @@
                     </div>
                 </div>
             </div>
+
+
             <div class="form-group" ng-if="add.condition.linkTmpAdded">
                 <label>Comment</label>
                 <textarea class="form-control" ng-model="add.data.comment"></textarea>
                 <label class="text-right">1000</label>
+            </div>
+            <div class="form-group rating-wrap" ng-if="add.condition.linkTmpAdded">
+                <label>Rating</label>
+                <div class="rating">
+                    <input type="radio" id="star10" name="rating" ng-model="add.data.rating" value="10" /><label class = "full" for="star10" title="10 stars"></label>
+                    <input type="radio" id="star9" name="rating" ng-model="add.data.rating" value="9" /><label class = "full" for="star9" title="9 stars"></label>
+                    <input type="radio" id="star8" name="rating" ng-model="add.data.rating" value="8" /><label class = "full" for="star8" title="8 stars"></label>
+                    <input type="radio" id="star7" name="rating" ng-model="add.data.rating" value="7" /><label class = "full" for="star7" title="7 stars"></label>
+                    <input type="radio" id="star6" name="rating" ng-model="add.data.rating" value="6" /><label class = "full" for="star6" title="6 stars"></label>
+                    <input type="radio" id="star5" name="rating" ng-model="add.data.rating" value="5" /><label class = "full" for="star5" title="5 stars"></label>
+                    <input type="radio" id="star4" name="rating" ng-model="add.data.rating" value="4" /><label class = "full" for="star4" title="4 stars"></label>
+                    <input type="radio" id="star3" name="rating" ng-model="add.data.rating" value="3" /><label class = "full" for="star3" title="3 stars"></label>
+                    <input type="radio" id="star2" name="rating" ng-model="add.data.rating" value="2" /><label class = "full" for="star2" title="2 stars"></label>
+                    <input type="radio" id="star1" name="rating" ng-model="add.data.rating" value="1" checked="checked"/><label class = "full set" for="star1" title="1 star"></label>
+                </div>
             </div>
         </div>
     </div>
