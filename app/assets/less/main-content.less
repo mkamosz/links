@@ -19,6 +19,11 @@ html, body{
 }
 
 h1,h2,h3,h4,h5{font-weight:200;}
+ul{
+  list-style:none;
+  margin:0;
+  padding:0;
+}
 
 .form-control:focus{
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
@@ -572,7 +577,7 @@ label{
             border:none;
             padding:5px 0 0 0;
             &:first-child{
-              width:70%;
+              width:65%;
             }
             a{
               span{
@@ -595,6 +600,9 @@ label{
             color:@color-dark-blue;
           }
         }
+      }
+      &.popular{
+        border-right:0;
       }
     }
   }
@@ -723,6 +731,44 @@ label{
       font-size: 22px;
       margin: 0;
       padding: 0;
+    }
+  }
+}
+
+.rated{
+  ul{
+    li{
+      h3{
+        margin:0 0 14px 0;
+        color:@color-gray-666;
+        .font-px-to-em(16px);
+        font-weight: 600;
+        a{
+          color:@color-dark-blue;
+          span{
+            display: inline-block;
+            .font-px-to-em(10);
+            font-weight: 300;
+            color:@color-gray-999;
+          }
+          &:hover{
+            text-decoration: none;
+            color:@color-blue;
+            span{
+              color:@color-blue;
+            }
+          }
+        }
+        .sum{
+          color:@color-white;
+          background: @color-blue;
+          padding:3px 4px;
+          .font-px-to-em(9px);
+          text-align: center;
+          width:26px;
+          font-weight:normal;
+        }
+      }
     }
   }
 }

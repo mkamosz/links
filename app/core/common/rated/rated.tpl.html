@@ -1,0 +1,12 @@
+<div class="rated">
+    <h3>The most rated users profile</h3>
+
+    <ul>
+        <li ng-repeat="rate in dataList | orderBy: '-rating'">
+            <blockquote>
+                <h3><span class="sum">{{rate.rating}}</span> <a href="#/user/{{rate.username}}" target="_blank">{{rate.name}} {{rate.surname}} <span>({{rate.username}})</span></a></h3>
+            </blockquote>
+        </li>
+    </ul>
+
+</div>

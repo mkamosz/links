@@ -59,10 +59,18 @@
 
         <h3>The most popular followed users</h3>
         <ul>
-            <li ng-repeat="user in users" class="user-list-item">
+            <li ng-repeat="user in users" class="user-list-item popular">
                 <div class="row">
                     <div class="col-md-12">
-                        <h3><a ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h3><a ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
+                            </div>
+                            <div class="col-md-3 text-right">
+                                Followers: {{user.total}}
+                            </div>
+                        </div>
+
                         <div class="row">
                             <div class="col-md-12">
                                 <table class="table">

@@ -40,7 +40,8 @@ app.service('path', function(){
                 notifi :        "core/common/notifi/notifi.tpl.html",
                 messages :      "core/common/messages/messages.tpl.html",
                 strength :      "core/common/strength/strength.tpl.html",
-                userprofile :   "core/common/userprofile/userprofile.tpl.html"
+                userprofile :   "core/common/userprofile/userprofile.tpl.html",
+                rated :         "core/common/rated/rated.tpl.html"
             },
             pages : {
                 hp :            "#/",
