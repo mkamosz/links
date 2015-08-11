@@ -8,15 +8,15 @@ app.directive("followedUsers", ['path', function(path){
     return {
         restrict : "AE",
         scope : {
+            userInfo : '=userInfo',
             users : '=usersData',
             popularUsers : '@popular'
         },
         templateUrl: path.template.followed,
         replace : true,
         transclude : false,
-        controller : ['$scope','conn','globalData', function($scope, conn, globalData){
+        controller : ['$scope','conn','globalData', function($scope, conn){
             /* Pseudo global variables $scope.data */
-            $scope.global = globalData.getData();
 
             /* Private variables for this controller - $scope*/
             $scope.popularUsers = (typeof $scope.popularUsers === "undefined" ? false : $scope.popularUsers);

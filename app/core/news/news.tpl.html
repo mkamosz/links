@@ -1,12 +1,64 @@
 <div ng-controller="NewsController">
-    <div class="container">
-        <h1>News Page</h1>
-        <ul>
-            <li>In a previous post about testing I mentioned that route resolves can make authoring unit tests for a controller easier. Resolves can also help the user experience. A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change. </li>
-            <li>In a previous post about testing I mentioned that route resolves can make authoring unit tests for a controller easier. Resolves can also help the user experience. A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change. </li>
-            <li>In a previous post about testing I mentioned that route resolves can make authoring unit tests for a controller easier. Resolves can also help the user experience. A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change. </li>
-            <li>In a previous post about testing I mentioned that route resolves can make authoring unit tests for a controller easier. Resolves can also help the user experience. A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change. </li>
-            <li>In a previous post about testing I mentioned that route resolves can make authoring unit tests for a controller easier. Resolves can also help the user experience. A resolve is a property you can attach to a route in both ngRoute and the more robust UI router. A resolve contains one or more promises that must resolve successfully before the route will change. </li>
-        </ul>
+    <div class="wrapper wrapper-gray static">
+        <div class="container static-news">
+            <div class="row">
+                <div class="col-md-9">
+                    <h1>News</h1>
+                    <ul class="static-news-list">
+                        <li ng-repeat="item in news.data.list">
+                            <div class="layer" ng-if="item.img">
+                                <div class="img-bg" style="background-image: url('{{global.path.newsImages}}{{item.img}}')"></div>
+                            </div>
+                            <div class="box-content">
+                                <h3>{{item.title}}</h3>
+                                <div class="teaser" ng-bind-html="item.teaser"></div>
+                                <div class="text" ng-if="accordion[$index]" ng-bind-html="item.desc"></div>
+                                <a class="more" ng-model="accordion[$index]" ng-init="accordion[$index] = false" ng-click="accordion[$index] = (accordion[$index] ? false : true)" ng-bind="(accordion[$index] ? 'less...' : 'more...')"></a>
+
+                                <div class="bottom">
+                                    <ul>
+                                        <li>
+                                            <span class="glyphicon glyphicon-time"></span>
+                                            <span>{{item.date | dateFormat:'dd MMM, yyyy'}}</span>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3 small-col">
+                    <h3 class="title">Categories</h3>
+                    <ul class="list-group static-news-categories">
+                        <li class="list-group-item">
+                            <a href="">
+                                <span class="badge pull-right">15</span>
+                                Photograph
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                <span class="badge pull-right">30</span>
+                                Life style
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                <span class="badge pull-right">9</span>
+                                Food
+                            </a>
+                        </li>
+                        <li class="list-group-item">
+                            <a href="">
+                                <span class="badge pull-right">4</span>
+                                Travel world
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

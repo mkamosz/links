@@ -28,7 +28,7 @@ app.directive("sidebarNav", ['path', function(path){
             $scope.sidebar.fn.change = function(e){
                 $scope.data.state = $scope.data.state == 'resize' ? '' : 'resize';
                 globalData.setPropData('userInfo','state', $scope.data.state);
-                $cookies.set("userInfo", JSON.stringify(globalData.getData('userInfo')));
+                $cookies.put("userInfo", JSON.stringify(globalData.getData('userInfo')));
 
                 e.preventDefault();
             }

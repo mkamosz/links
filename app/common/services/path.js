@@ -9,6 +9,7 @@ app.service('path', function(){
             imgContent :        "assets/img/content/",
             imgLayout :         "assets/img/layout/",
             userProfile :       "/server/user_guide/_images/",
+            newsImages :        "/server/user_guide/_news/",
             css :               "assets/css/",
             js :                "assets/js/",
             jsLibs :            "assets/js/libs/",
@@ -27,7 +28,11 @@ app.service('path', function(){
                 account :       "/server/account",
                 follow :        "/server/follow",
                 followed :      "/server/followed",
-                userrating:     "/server/userrating"
+                userrating:     "/server/userrating",
+                page : {
+                    contact :   "/server/page/contact",
+                    news :      "/server/page/news"
+                }
             },
             template : {
                 action :        "core/common/header/action/action.tpl.html",
@@ -48,7 +53,7 @@ app.service('path', function(){
                 about :         "#/page/about",
                 faq :           "#/page/faq",
                 news :          "#/page/news",
-                community :     "#/page/community",
+                contact :       "#/page/contact",
                 signin :        "#/page/signin",
                 signup :        "#/page/signup",
                 settings :      "#/myprofile/personal",

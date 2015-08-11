@@ -13,6 +13,7 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
             userData : {
                 avatar : ''
             },
+            listNews : [],
             userInfo : {"logged" : false},
             layout : {
                 showFooter : true,

@@ -1,0 +1,46 @@
+<div ng-controller="ContactController">
+    <div id="contactMap">
+
+    </div>
+    <div class="container static">
+        <div class="row static-contact">
+            <div class="col-md-8">
+                <h1>Contact</h1>
+                <form name="contactForm" class="form" novalidate ng-submit="contact.fn.send(contactForm.$valid)">
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-class="contactForm.name.$invalid && contact.error.show ? 'form-error' : ''" ng-model="contact.data.name" name="name" placeholder="Name (reguired)" required minlength="3"/>
+                                <div ng-show="contact.error.show" ng-messages="contactForm.name.$error" ng-messages-include="{{global.path.template.messages}}" class="form-error"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" ng-class="contactForm.email.$invalid && contact.error.show ? 'form-error' : ''" ng-model="contact.data.email" name="email" placeholder="Email (reguired)" required email minlength="5"/>
+                                <div ng-show="contact.error.show" ng-messages="contactForm.email.$error" ng-messages-include="{{global.path.template.messages}}" class="form-error"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="msg" class="form-control contact-msg" ng-class="contactForm.msg.$invalid && contact.error.show ? 'form-error' : ''" placeholder="Message (reguired)" required minlength="5" ng-model="contact.data.msg" ></textarea>
+                        <div ng-show="contact.error.show" ng-messages="contactForm.msg.$error" ng-messages-include="{{global.path.template.messages}}" class="form-error"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-lg form-submit-btn ">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-4 small-col">
+                <h3 class="title">Leads us</h3>
+                <p>If you have any question please email us using the form or directly by our email</p>
+                <ul class="static-contact-leads text-right">
+                    <li class="glyphicon glyphicon-map-marker">Warsaw, Poland</li>
+                    <li class="glyphicon glyphicon-envelope"><a href="mailto:info@usefullinks.com">info[at]usefullinks.com</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

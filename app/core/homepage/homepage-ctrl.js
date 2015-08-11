@@ -16,6 +16,8 @@ app.controller('HomepageController', ['$scope','globalData','conn','$q', functio
         fn : {}
     };
 
+
+
     /*Functions*/
 
     $scope.global.loader.show();

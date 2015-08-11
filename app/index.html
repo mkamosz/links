@@ -18,8 +18,8 @@
                         <ul class="nav navbar-nav">
                             <li><a ng-href="{{global.path.pages.about}}">About us</a></li>
                             <li><a ng-href="{{global.path.pages.faq}}">Faq</a></li>
-                            <li><a ng-href="{{global.path.pages.community}}">Community</a></li>
                             <li><a ng-href="{{global.path.pages.news}}">News</a></li>
+                            <li><a ng-href="{{global.path.pages.contact}}">Contact</a></li>
                         </ul>
                     </div>
                     <div class="col-md-4 actions" ng-include="global.path.template.action">
@@ -73,6 +73,7 @@
 
 
 
+    <script src="common/filters/filters.js"></script>
     <script src="common/directives/loader.js"></script>
     <script src="common/directives/add-link.js"></script>
     <script src="common/directives/list-link.js"></script>
@@ -93,6 +94,7 @@
     <script src="common/services/password.js"></script>
     <script src="common/services/crop.js"></script>
     <script src="common/services/globalData.js"></script>
+    <script src="common/services/googleMap.js"></script>
 
 
     <script src="common/controllers/staticpage.js"></script>
@@ -104,7 +106,7 @@
     <script src="core/about/about-ctrl.js"></script>
     <script src="core/faq/faq-ctrl.js"></script>
     <script src="core/news/news-ctrl.js"></script>
-    <script src="core/community/community-ctrl.js"></script>
+    <script src="core/contact/contact-ctrl.js"></script>
     <script src="core/error/error-ctrl.js"></script>
     <script src="core/signin/signin-ctrl.js"></script>
     <script src="core/signup/signup-ctrl.js"></script>
@@ -118,6 +120,8 @@
     <script src="core/user/user-ctrl.js"></script>
 
     <script src="core/common/header/action/action-ctrl.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 
 </body>
 </html>

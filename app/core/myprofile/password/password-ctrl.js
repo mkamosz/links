@@ -12,7 +12,6 @@ app.controller('PasswordController', ['$scope','conn','globalData', function($sc
         error : {
             show : false
         },
-        msg : '',
         fn : {}
     };
 
