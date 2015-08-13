@@ -8,3 +8,9 @@ app.filter("dateFormat",['$filter', function($filter){
         return $filter('date')(new Date(timestamp), type);
     }
 }]);
+
+app.filter("firstLetter",[function(){
+    return function(str){
+        return str.charAt(0);
+    }
+}]);

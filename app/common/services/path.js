@@ -31,7 +31,8 @@ app.service('path', function(){
                 userrating:     "/server/userrating",
                 page : {
                     contact :   "/server/page/contact",
-                    news :      "/server/page/news"
+                    news :      "/server/page/news",
+                    faq :      "/server/page/faq"
                 }
             },
             template : {

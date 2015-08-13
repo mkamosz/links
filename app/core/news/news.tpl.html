@@ -5,12 +5,12 @@
                 <div class="col-md-9">
                     <h1>News</h1>
                     <ul class="static-news-list">
-                        <li ng-repeat="item in news.data.list">
+                        <li ng-repeat="item in news.data.list | filter:{type:news.data.category}:true | filter:global.search.text as result" class="animation-list">
                             <div class="layer" ng-if="item.img">
                                 <div class="img-bg" style="background-image: url('{{global.path.newsImages}}{{item.img}}')"></div>
                             </div>
                             <div class="box-content">
-                                <h3>{{item.title}}</h3>
+                                <h3 title="Category: {{item.type}}" data-letter="{{item.type | uppercase | firstLetter}}">{{item.title}}</h3>
                                 <div class="teaser" ng-bind-html="item.teaser"></div>
                                 <div class="text" ng-if="accordion[$index]" ng-bind-html="item.desc"></div>
                                 <a class="more" ng-model="accordion[$index]" ng-init="accordion[$index] = false" ng-click="accordion[$index] = (accordion[$index] ? false : true)" ng-bind="(accordion[$index] ? 'less...' : 'more...')"></a>
@@ -27,33 +27,26 @@
                             </div>
 
                         </li>
+                        <li ng-if="result.length === 0" class="animation-list">
+                            <div class="box-content">
+                                <h3 title="No result" data-letter="NR">No result</h3>
+                            </div>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-md-3 small-col">
                     <h3 class="title">Categories</h3>
                     <ul class="list-group static-news-categories">
                         <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">15</span>
-                                Photograph
+                            <a ng-click="news.data.category=undefined" ng-model="news.data.category">
+                                <span class="badge pull-right">{{news.data.typesCount[t]}}</span>
+                                all
                             </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">30</span>
-                                Life style
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">9</span>
-                                Food
-                            </a>
-                        </li>
-                        <li class="list-group-item">
-                            <a href="">
-                                <span class="badge pull-right">4</span>
-                                Travel world
+                        <li class="list-group-item" ng-repeat="t in news.data.types">
+                            <a ng-click="news.data.category=t" ng-model="news.data.category">
+                                <span class="badge pull-right">{{news.data.typesCount[t]}}</span>
+                                {{t}}
                             </a>
                         </li>
                     </ul>

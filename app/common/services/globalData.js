@@ -14,6 +14,12 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
                 avatar : ''
             },
             listNews : [],
+            listFaq : [],
+            search : {
+                show : false,
+                placeholder : 'search',
+                text : ''
+            },
             userInfo : {"logged" : false},
             layout : {
                 showFooter : true,

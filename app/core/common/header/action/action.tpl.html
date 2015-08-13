@@ -1,10 +1,10 @@
 <div class="row" ng-controller="ActionController">
     <div class="col-md-6">
-        <input type="text" class="search-field pull-right" placeholder="search links"/>
+        <input ng-if="global.search.show" type="text" ng-model="global.search.text" class="search-field pull-right" placeholder="{{global.search.placeholder}}"/>
     </div>
     <div class="col-md-6">
         <div class="pull-right" ng-if="global.layout.showProfile">
-            <a href="{{global.path.pages.dashboard}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="{{global.path.pages.addlink}}" class="btn btn-default btn-sm"><span class="glyphicon glyphicon-plus"></span></a>
             <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span><span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li class="title">Signed in as <b>{{userInfo.username}}</b></li>

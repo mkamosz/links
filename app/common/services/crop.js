@@ -53,7 +53,6 @@ app.service('crop',['$http','globalData', function($http,globalData){
                 this.initIframe();
             }
 
-            this.initTooltip();
             this.initModal();
             this.addListener();
         },
@@ -63,12 +62,6 @@ app.service('crop',['$http','globalData', function($http,globalData){
             this.$avatarInput.on('change', $.proxy(this.change, this));
             this.$avatarForm.on('submit', $.proxy(this.submit, this));
             this.$avatarBtns.on('click', $.proxy(this.rotate, this));
-        },
-
-        initTooltip: function () {
-            this.$avatarView.tooltip({
-                placement: 'bottom'
-            });
         },
 
         initModal: function () {

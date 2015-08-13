@@ -29,8 +29,8 @@
             </div>
         </section>
     </header>
-    <section class="content">
-        <div ng-view=""></div>
+    <section class="content main-container">
+        <div ng-view="" class="main-animation"></div>
 
         <loader-page state-loader="global.loader.set"></loader-page>
         <notifi-info notifi-data="global.notifi"></notifi-info>
@@ -41,8 +41,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <ul>
-
-                        <li><a href="/#/">Help</a></li>
+                        <li><a href="/#/">Faq</a></li>
                         <li><a href="/#/">Term</a></li>
                         <li><a href="/#/">Policy</a></li>
                     </ul>
@@ -61,6 +60,7 @@
     <script src="assets/js/libs/angular-route.js"></script>
     <script src="assets/js/libs/angular-sanitize.js"></script>
     <script src="assets/js/libs/angular-messages.js"></script>
+    <script src="assets/js/libs/angular-animate.js"></script>
     <script src="assets/js/libs/angular-cookies.min.js"></script>
 
 
@@ -70,8 +70,6 @@
 
     <script src="app.mdl.js"></script>
     <script src="app.rout.js"></script>
-
-
 
     <script src="common/filters/filters.js"></script>
     <script src="common/directives/loader.js"></script>
