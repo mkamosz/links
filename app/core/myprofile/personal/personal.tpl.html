@@ -42,13 +42,9 @@
                                                 <div class="col-md-12">
                                                     <div class="form-group">
                                                         <label>Country</label>
-                                                        <select name="country" class="form-control" ng-model="personal.data.country" value="{{personal.data.country}}">
-                                                            <option value="">Choose</option>
-                                                            <option value="1">Afganistan</option>
-                                                            <option value="2">Poland</option>
-                                                            <option value="3">USA</option>
+                                                        <select ng-model="personal.data.country" class="form-control" ng-options="country.code as country.name for country in personal.listCountries">
+                                                            <option value="">-- choose country --</option>
                                                         </select>
-
                                                     </div>
                                                     <div class="form-group"  >
                                                         <label>City</label>

@@ -29,10 +29,11 @@ app.service('path', function(){
                 follow :        "/server/follow",
                 followed :      "/server/followed",
                 userrating:     "/server/userrating",
+                countries:      "/server/countries",
                 page : {
                     contact :   "/server/page/contact",
                     news :      "/server/page/news",
-                    faq :      "/server/page/faq"
+                    faq :       "/server/page/faq"
                 }
             },
             template : {
@@ -47,7 +48,8 @@ app.service('path', function(){
                 messages :      "core/common/messages/messages.tpl.html",
                 strength :      "core/common/strength/strength.tpl.html",
                 userprofile :   "core/common/userprofile/userprofile.tpl.html",
-                rated :         "core/common/rated/rated.tpl.html"
+                rated :         "core/common/rated/rated.tpl.html",
+                counter :       "core/common/counter/counter.tpl.html"
             },
             pages : {
                 hp :            "#/",

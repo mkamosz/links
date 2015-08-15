@@ -9,11 +9,28 @@ app.controller('PersonalController', ['$scope','conn','auth','crop','globalData'
     /* Private variables for this controller - $scope*/
     $scope.personal = {
         data : {},
+        listCountries : [],
         error:{
             show : false
         },
         fn : {}
     };
+
+
+    if($scope.global.listCountries.length == 0){
+        $scope.global.loader.show();
+        conn.getData($scope.global.path.server.countries).then(function(result){
+            $scope.global.loader.hide();
+
+            $scope.personal.listCountries = result;
+            console.log($scope.personal.listCountries)
+            $scope.global.listCountries = result;
+        }, function(msg){
+            $scope.global.notifi.show(msg,'danger');
+        });
+    } else{
+        $scope.personal.listCountries = $scope.global.listCountries;
+    }
 
     /*Functions*/
     $scope.personal.fn.getInfo = function(){

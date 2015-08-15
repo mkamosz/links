@@ -15,6 +15,7 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
             },
             listNews : [],
             listFaq : [],
+            listCountries : [],
             search : {
                 show : false,
                 placeholder : 'search',

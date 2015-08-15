@@ -14,3 +14,12 @@ app.filter("firstLetter",[function(){
         return str.charAt(0);
     }
 }]);
+
+app.filter("stringLength",[function(){
+    return function(str){
+        if(typeof str !== 'undefined'){
+            return str.length;
+        }
+        return 0;
+    }
+}]);
