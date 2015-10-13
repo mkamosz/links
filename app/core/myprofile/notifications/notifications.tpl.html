@@ -1,11 +1,40 @@
-<div ng-controller="NotificationsController" class="wrapper-gray">
+<div ng-controller="NotificationsController" class="">
     <sidebar-nav nav-data="global.sidebar"></sidebar-nav>
     <div class="main-content nav {{global.sidebar.state}}">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
                     <h1 class="title">Notyfications</h1>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <ul class="notifications">
+                                <li ng-repeat="item in global.listNotifications as result">
+                                    <a class="notifications-title" ng-model="notification[$index]" ng-init="notification[$index] = false" ng-click="notification[$index] = !notification[$index]; notifications.fn.read(item.id, item.read); item.read = 1;">
+                                        <div class="row">
+                                            <div class="col-md-9" ng-switch="" data-on="item.read">
 
+                                                <h3 ng-switch-when="0" class="new" title="New notification" data-letter="N">{{item.title}}</h3>
+                                                <h3 ng-switch-when="1" class="old">{{item.title}}</h3>
+
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="notifications-time">
+                                                    <span class="ng-binding">{{item.date | dateFormat:'dd MMM, yyyy'}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="btn notifications-delete btn-default btn-xs" title="Delete" ng-click="notifications.fn.deleteNotifi(item.id,$event);"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                                    <div class="notifications-text" ng-if="notification[$index]" ng-bind-html="item.desc"></div>
+                                </li>
+                                <li ng-if="result.length === 0 && notifications.noResult" class="animation-list">
+                                    <div class="box-content">
+                                        <h3 title="No result" data-letter="NR">No result</h3>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

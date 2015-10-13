@@ -1,4 +1,4 @@
-<div class="profile">
+<div class="profile" style="background-image:url('{{userprofile.data.wallpaper}}')">
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
@@ -39,8 +39,11 @@
                     <li title="Tags"><span class="glyphicon glyphicon-tasks"></span><em>{{userprofile.data.tagsCounter}}</em></li>
                     <li title="Followers"><span class="glyphicon glyphicon-heart"></span><em>{{userprofile.data.followers}}</em></li>
                 </ul>
-                <button ng-if="userprofile.data.follow && userprofile.data.checkFollow" ng-click="userprofile.fn.addFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Follow</button>
-                <button ng-if="!userprofile.data.checkFollow" ng-click="userprofile.fn.unFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Unfollow</button>
+
+                <div ng-if="userInfo.logged">
+                    <button ng-if="userprofile.data.follow && userprofile.data.checkFollow" ng-click="userprofile.fn.addFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Follow</button>
+                    <button ng-if="!userprofile.data.checkFollow" ng-click="userprofile.fn.unFollow();"class="btn btn-primary btn-lg pull-right profile-follow">Unfollow</button>
+                </div>
             </div>
         </div>
     </div>

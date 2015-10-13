@@ -1,5 +1,5 @@
-<div ng-controller="NewsController">
-    <div class="wrapper wrapper-gray static">
+<div ng-controller="NewsController" ng-init="global.search.text = ''">
+    <div class="wrapper  static">
         <div class="container static-news">
             <div class="row">
                 <div class="col-md-9">
@@ -13,7 +13,7 @@
                                 <h3 title="Category: {{item.type}}" data-letter="{{item.type | uppercase | firstLetter}}">{{item.title}}</h3>
                                 <div class="teaser" ng-bind-html="item.teaser"></div>
                                 <div class="text" ng-if="accordion[$index]" ng-bind-html="item.desc"></div>
-                                <a class="more" ng-model="accordion[$index]" ng-init="accordion[$index] = false" ng-click="accordion[$index] = (accordion[$index] ? false : true)" ng-bind="(accordion[$index] ? 'less...' : 'more...')"></a>
+                                <a class="more" ng-model="accordion[$index]" ng-init="accordion[$index] = false" ng-click="accordion[$index] = !accordion[$index]" ng-bind="(accordion[$index] ? 'less...' : 'more...')"></a>
 
                                 <div class="bottom">
                                     <ul>

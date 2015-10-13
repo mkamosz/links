@@ -11,11 +11,16 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
             listLinks : [],
             listTags : [],
             userData : {
-                avatar : ''
+                avatar : '',
+                wallpaper : ''
+            },
+            tagsSearch : {
+                tags : ''
             },
             listNews : [],
             listFaq : [],
             listCountries : [],
+            listNotifications : [],
             search : {
                 show : false,
                 placeholder : 'search',
@@ -45,14 +50,14 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
                 state : ''
             },
             notifi : {
-                show : function(msg,type){
+                show : function(msg,type, time){
                     data.notifi.visible = true;
                     data.notifi.msg = msg;
                     data.notifi.state = (typeof type === "undefined" ? data.notifi.state : type);
                     $timeout(function(){
                         data.notifi.hide();
                         data.notifi.state = 'success';
-                    },3000);
+                    },(typeof time !== 'undefined' ? time : 3000));
                 },
                 hide : function(msg){
                     data.notifi.visible = false;
@@ -96,6 +101,27 @@ app.service('globalData', ['conn', '$q', 'path','sidebarNav','$timeout', functio
             clearUserInfo();
             deferred.reject({authenticated: false, message : result.message});
         });
+        return deferred.promise;
+    };
+
+    this.refreshNotifications = function(){
+        var deferred = $q.defer();
+        if(data.listNotifications.length == 0){
+            data.loader.show();
+            conn.getData(data.path.server.notifications,{params : {auth : data.userInfo} })
+                .then(function(result){
+                    data.loader.hide();
+                    if(result.status == true){
+                        data.listNotifications = result.data.list;
+                        deferred.resolve({data : data.listNotifications});
+                    }
+                }, function(msg){
+                    data.notifi.show(msg,'danger');
+                    deferred.reject({data: []});
+                });
+        } else{
+            deferred.resolve({data : data.listNotifications});
+        }
         return deferred.promise;
     };
 }]);

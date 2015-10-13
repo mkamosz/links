@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <div class="row">
                 <div class="col-md-9">
-                    <h3>{{userInfo.username}} links list</h3>
+                    <h3>Links</h3>
                 </div>
                 <div class="col-md-3">
                     <input type="text" placeholder="filter links by" class="form-control pull-right search" ng-model="search" />
@@ -12,7 +12,7 @@
         </div>
         <div class="panel-body">
             <ul ng-if="dataListLinks">
-                <li ng-repeat="link in dataListLinks | filter: search" class="link-list-item" data-id="{{link.id}}">
+                <li ng-repeat="link in dataListLinks | filter: search | filter:tagsSearch as result" class="link-list-item" data-id="{{link.id}}">
                     <div class="row">
                         <div class="col-md-9">
                             <h3><a target="_blank" ng-href="{{link.url}}">{{link.title}} <span>({{link.host}})</span></a></h3>
@@ -31,13 +31,19 @@
                         <div class="col-md-5 link-list-tags">
                             <span>tags:</span>
                             <ul ng-if="link.tags">
-                                <li ng-repeat="item in link.tags"><a href="#" ng-click="">#{{item}}</a></li>
+                                <li ng-repeat="item in link.tags"><span>#{{item}}</span></li>
                             </ul>
                         </div>
                         <div class="col-md-4 text-right link-list-buttons" ng-if="!userView">
                             <button class="btn btn-default btn-xs" title="Edit" ng-click="list.fn.edit(link.id);">Edit <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
                             <button class="btn btn-default btn-xs" title="Delete" ng-click="list.fn.delete(link.id);">Delete <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                         </div>
+                    </div>
+                </li>
+                <li ng-if="result.length === 0" class="link-list-item clear-border">
+                    <div class="col-md-9" ng-switch="" data-on="dataListLinks.length">
+                        <h3 ng-switch-when="0">No links - please <a ng-href="{{path.pages.addlink}}">add first link</a></h3>
+                        <h3 ng-switch-default>No links - please change a filter</h3>
                     </div>
                 </li>
             </ul>
@@ -50,7 +56,7 @@
             <li ng-repeat="link in dataListLinks">
 
                 <span class="badge" title="{{link.counter}} wystąpień"></span>
-                <blockquote><a href="{{link.url}}" target="_blank">{{link.url}}</a> - {{link.counter}}</blockquote>
+                <blockquote><a href="{{link.url}}" target="_blank">{{link.host}}</a> - {{link.counter}}</blockquote>
             </li>
         </ul>
     </div>

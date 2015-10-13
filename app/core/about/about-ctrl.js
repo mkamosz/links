@@ -9,7 +9,7 @@ app.controller('AboutController', ['$scope' , function($scope){
     /* Private variables for this controller - $scope*/
     $scope.about = {
         data : {
-          test : "Test about"
+          test : "Page under construction"
         },
         fn : {}
     };

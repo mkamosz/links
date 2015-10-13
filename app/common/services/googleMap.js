@@ -2,7 +2,7 @@
  * Created by kamoszm on 2015-07-14.
  */
 
-app.service('googleMap', function(){
+app.service('googleMap', ['$window', function($window){
     var styleArray = [
         {
             featureType: "all",
@@ -26,10 +26,10 @@ app.service('googleMap', function(){
         }
     ];
 
-    var styledMap = new google.maps.StyledMapType(styleArray,
-        {name: "Contact"});
+    $window.mapInit = function () {
 
-    var mapInit = function () {
+        var styledMap = new google.maps.StyledMapType(styleArray,
+            {name: "Contact"});
         var map;
 
         var warsaw = new google.maps.LatLng(52.230185,21.013);
@@ -59,11 +59,16 @@ app.service('googleMap', function(){
             map: map,
             icon:image
         });
+    };
 
-
+    var initialization = function(src,callback) {
+        var script = document.createElement("script");
+        script.type = "text/javascript";
+        document.getElementsByTagName("head")[0].appendChild(script);
+        script.src = src;
     };
 
     this.init = function(){
-        mapInit();
+        initialization('http://maps.googleapis.com/maps/api/js?v=3&sensor=false&callback=mapInit');
     }
-});
+}]);

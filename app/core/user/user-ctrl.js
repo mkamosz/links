@@ -23,7 +23,7 @@ app.controller('UserController', ['$scope','globalData','conn','$routeParams', f
                 $scope.user.data.info = result.data.user;
             }
         }, function(msg){
-            console.log(msg);
+            $scope.global.notifi.show(msg, 'danger');
         });
 
 

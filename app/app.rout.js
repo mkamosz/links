@@ -11,7 +11,14 @@ app.config(['$routeProvider', function($routeProvider){
             templateUrl: function(param){
                 return 'core/' + param.name + '/' + param.name + '.tpl.html';
             },
-            controller : "StaticPageController"
+            controller : "StaticPageController",
+            resolve : {
+                app: ['$q','$route', function ($q, $route) {
+                    /*if($route.current.params.name == 'signin'){
+                        return $q.reject({authenticated : true, redirect : true});
+                    }*/
+                }]
+            }
         })
         .when('/myprofile/:name',{ //for myprofile pages dashboard/settings etc....
             templateUrl: function(param){

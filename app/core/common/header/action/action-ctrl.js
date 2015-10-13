@@ -5,9 +5,10 @@
 app.controller('ActionController', ['$scope', 'auth', '$location','globalData', function($scope, auth, $location, globalData){
 
     /* Pseudo global variables $scope.data */
+    $scope.global = globalData.getData();
 
     /* Private variables for this controller - $scope*/
-    $scope.userInfo = globalData.getData('userInfo');
+    $scope.userInfo = $scope.global.userInfo;
     $scope.action = {
         fn : {}
     };
@@ -19,7 +20,7 @@ app.controller('ActionController', ['$scope', 'auth', '$location','globalData', 
             .then(function(result){
                 $location.path('/');
                 globalData.setData('userInfo',result.userInfo);
-                globalData.setPropData('layout','showProfile',globalData.getData('userInfo').logged);
+                globalData.setPropData('layout','showProfile',$scope.global.userInfo.logged);
             }, function(msg){
                 $location.path('/');
             });

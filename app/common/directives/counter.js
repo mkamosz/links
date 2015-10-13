@@ -22,14 +22,7 @@ app.directive("counter", ['path', function(path){
                 data: {},
                 fn: {}
             };
-
-            $scope.$watch('count', function() {
-                console.log($scope.count);
-            });
-
-
             /* Functions */
-
         }]
     }
 }]);

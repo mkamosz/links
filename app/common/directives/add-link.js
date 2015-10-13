@@ -54,11 +54,11 @@ app.directive("addLink", ['path', function(path){
                             $scope.add.condition.linkTmpAdded = true;
                             $scope.loader.hide();
 
-                            $scope.add.data.tags = (typeof result.data.tags !== "undefined" ? result.data.tags : []);
-                            $scope.add.addedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
+                            $scope.add.data.tags = [];
+                            $scope.add.suggestedTags = (typeof result.data.tags !== "undefined" ? result.data.tags.split(",") : []);
                         }
                     }, function(msg){
-                        console.log(msg);
+                        $scope.notifi.show(msg,'danger');
                     });
             };
 
@@ -92,7 +92,7 @@ app.directive("addLink", ['path', function(path){
                             $scope.notifi.show(result.message,'danger');
                         }
                     }, function(msg){
-                        console.log(msg);
+                        $scope.notifi.show(msg,'danger');
                     });
             };
 
@@ -150,6 +150,14 @@ app.directive("addLink", ['path', function(path){
                 }
             };
 
+            $scope.add.fn.addTag = function(item){
+                if($scope.add.addedTags.indexOf(item) < 0 && $scope.add.addedTags.length < 10) {
+                    $scope.add.addedTags.push(item);
+                    $scope.add.data.tags = $scope.add.addedTags.join();
+                }
+            };
+
+
             $scope.edit = function(id){
                 $scope.loader.show();
                 $scope.add.condition.disabledAddButton = true;
@@ -172,7 +180,7 @@ app.directive("addLink", ['path', function(path){
 
                         }
                     }, function(msg){
-                        console.log(msg);
+                        $scope.notifi.show(msg,'danger');
                     });
             };
 

@@ -23,12 +23,21 @@
                 <label>Tags</label>
                 <input type="text" name="tags"  ng-keydown="add.fn.checkAddedTags($event);" ng-blur="add.fn.checkAddedTags($event);" ng-keyup="add.fn.removeWC($event);" class="form-control">
                 <div class="row">
-                    <div class="col-md-12 text-right">
+                    <div class="col-md-8">
+                        <div ng-if="add.suggestedTags">
+                            <label>Suggested tags</label>
+                            <ul class="link-add-tags suggested">
+                                <li ng-repeat="item in add.suggestedTags | limitTo: 30">
+                                    <button ng-click="add.fn.addTag(item)"class="btn btn-default btn-xs">{{item}}<span class="glyphicon glyphicon-plus"></span></button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-4 text-right">
                         <label>Separated by comma or enter - max 10 tags</label>
                     </div>
                 </div>
             </div>
-
 
             <div class="form-group" ng-if="add.condition.linkTmpAdded">
                 <label>Comment</label>
@@ -56,7 +65,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
-                    <button ng-click="add.fn.saveLink();" ng-disabled="addLink.$invalid" class="btn btn-primary btn-lg">Add link</button>
+                    <button ng-click="add.fn.saveLink();" ng-disabled="addLink.$invalid || !add.addedTags.length" class="btn btn-primary btn-lg">Add link</button>
                 </div>
                 <div class="col-md-1 text-center ">
                     <a class="back" ng-click="add.fn.back();">Cancel</a>

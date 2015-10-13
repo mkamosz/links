@@ -1,17 +1,17 @@
-<div class="wrapper-gray">
+<div class="">
     <div class="main-content user">
         <div class="container">
             <div class="row">
                 <div class="col-sm-12">
 
-                    <user-profile data="user.data.info" notifi="global.notifi" loader="global.loader" user-info="global.uerInfo" list="user.data.links" tags="user.data.tags"></user-profile>
+                    <user-profile data="user.data.info" notifi="global.notifi" loader="global.loader" user-info="global.userInfo" list="user.data.links" tags="user.data.tags"></user-profile>
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12 col-md-8">
-                                <list-links list="user.data.links" user="true"></list-links>
+                                <list-links tags-search="global.tagsSearch" list="user.data.links" user="true"></list-links>
                             </div>
                             <div class="col-sm-12 col-md-4">
-                                <list-tags list="user.data.tags"></list-tags>
+                                <list-tags tags-search="global.tagsSearch" list="user.data.tags"></list-tags>
                             </div>
                         </div>
                     </div>

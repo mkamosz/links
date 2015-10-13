@@ -10,7 +10,7 @@ app.service('sidebarNav',['path', function(path){
         {
             title : 'Dashboard',
             url : path.pages.dashboard,
-            icon : 'glyphicon-pencil'
+            icon : 'glyphicon-user'
         },
         {
             title : 'Add link',
@@ -25,7 +25,7 @@ app.service('sidebarNav',['path', function(path){
         {
             title : 'Notifications',
             url : path.pages.notifications,
-            icon : 'glyphicon-flag'
+            icon : 'glyphicon-bell'
         }
     ];
 

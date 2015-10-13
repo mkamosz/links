@@ -2,11 +2,6 @@
  * Created by kamoszm on 2015-07-29.
  */
 
-/**
- * Created by kamoszm on 2015-07-28.
- */
-
-
 
 app.service('crop',['$http','globalData', function($http,globalData){
 
@@ -16,12 +11,15 @@ app.service('crop',['$http','globalData', function($http,globalData){
         };
 
 
-    function CropAvatar($element) {
+    function CropAvatar($element,ratio) {
         this.$container = $element;
+        this.$containerID = this.$container.attr("id");
+
+        this.ratio = (typeof ratio !== 'undefined' ? ratio : 1);
 
         this.$avatarView = this.$container.find('.avatar-view');
         this.$avatar = this.$avatarView.find('img');
-        this.$avatarModal = this.$container.find('#avatar-modal');
+        this.$avatarModal = this.$container.find('.modal-window');
         this.$loading = this.$container.find('.loading');
 
         this.$avatarForm = this.$avatarModal.find('.avatar-form');
@@ -184,7 +182,7 @@ app.service('crop',['$http','globalData', function($http,globalData){
                 this.$img = $('<img src="' + this.url + '">');
                 this.$avatarWrapper.empty().html(this.$img);
                 this.$img.cropper({
-                    aspectRatio: 1,
+                    aspectRatio: this.ratio,
                     autoCropArea: 0.5,
                     strict: false,
                     crop: function (data) {
@@ -228,8 +226,8 @@ app.service('crop',['$http','globalData', function($http,globalData){
                 _this.submitStart();
                 _this.submitDone(data);
                 _this.submitEnd();
+                $(".form-submit-btn").trigger("click");
             }, function(textStatus,errorThrown){
-                alert(1);
                 _this.submitFail(textStatus || errorThrown);
             });
 
@@ -245,8 +243,11 @@ app.service('crop',['$http','globalData', function($http,globalData){
 
         submitDone: function (data) {
             this.setAvatar(data.data.result);
-            globalData.setPropData('userData','avatar',data.data.result);
-
+            if(this.$containerID == 'crop-avatar'){
+                globalData.setPropData('userData','avatar',data.data.result);
+            } else {
+                globalData.setPropData('userData','wallpaper',data.data.result);
+            }
 
             if ($.isPlainObject(data) && data.data.state === 200) {
                 if (data.data.result) {
@@ -288,7 +289,6 @@ app.service('crop',['$http','globalData', function($http,globalData){
         alert: function (msg) {
             var $alert = [
                 '<div class="alert alert-danger avatar-alert alert-dismissable">',
-                '<button type="button" class="close" data-dismiss="alert">&times;</button>',
                 msg,
                 '</div>'
             ].join('');
@@ -300,8 +300,8 @@ app.service('crop',['$http','globalData', function($http,globalData){
         }
     };
 
-    this.init = function(){
-        return new CropAvatar($('#crop-avatar'));
+    this.init = function(obj,ratio){
+        return new CropAvatar($(obj),ratio);
     }
 
     this.getAvatar = function(){

@@ -10,12 +10,12 @@
                 </div>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-if="users.length > 0">
             <ul>
-                <li ng-repeat="user in users | filter: search" class="user-list-item">
+                <li ng-repeat="user in users | filter: search as result" class="user-list-item">
                     <div class="row">
                         <div class="col-md-12">
-                            <h3><a ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
+                            <h3><a target="_blank" ng-href="#/user/{{user.username}}">{{user.name}} {{user.surname}} <span>({{user.username}})</span></a></h3>
                             <div class="row">
                                 <div class="col-md-12">
                                     <table class="table">
@@ -28,7 +28,7 @@
                                         <tbody>
                                             <tr ng-repeat="item in user.links">
                                                 <td>
-                                                    <a href="{{item.url}}">{{item.title}} <span>({{item.url}})</span></a>
+                                                    <a target="_blank" href="{{item.url}}">{{item.title}} <span>({{item.host}})</span></a>
                                                 </td>
                                                 <td>
                                                     <div class="user-list-item-tag">
@@ -48,6 +48,22 @@
                         </div>
                         <div class="col-md-12">
                             <blockquote ng-show="link.comment">{{link.comment}}</blockquote>
+                        </div>
+                    </div>
+                </li>
+                <li ng-if="result.length === 0" class="user-list-item clear-border">
+                    <td>
+                        <h3>No users</h3>
+                    </td>
+                </li>
+            </ul>
+        </div>
+        <div class="panel-body" ng-if="users.length == 0">
+            <ul>
+                <li class="user-list-item clear-border">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3>No followed users</h3>
                         </div>
                     </div>
                 </li>
@@ -83,7 +99,7 @@
                                     <tbody>
                                     <tr ng-repeat="item in user.links">
                                         <td>
-                                            <a href="{{item.url}}">{{item.title}} <span>({{item.url}})</span></a>
+                                            <a href="{{item.url}}">{{item.title}} <span>({{item.host}})</span></a>
                                         </td>
                                         <td>
                                             <div class="user-list-item-tag">

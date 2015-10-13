@@ -12,8 +12,14 @@ app.run(["$rootScope", "$location", function ($rootScope, $location) {
     });
 
     $rootScope.$on("$routeChangeError", function (event, current, previous, eventObj) {
+
         if (eventObj.authenticated === false) {
             $location.path("/page/signin");
+        } else{
+
+            if (eventObj.redirect === true){
+                $location.path("/myprofile/dashboard");
+            }
         }
     });
 }]);

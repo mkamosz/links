@@ -1,4 +1,4 @@
-<div ng-controller="PersonalController" class="wrapper-gray">
+<div ng-controller="PersonalController" class="">
     <sidebar-nav nav-data="global.sidebar"></sidebar-nav>
     <div class="main-content nav {{global.sidebar.state}}">
         <div class="container">
@@ -104,7 +104,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <div class="panel panel-default">
                                         <div class="panel-heading">
                                             <h3>Your avatar</h3>
@@ -115,11 +115,35 @@
                                                     <div class="row">
                                                         <div class="col-sm-2">
                                                             <div class="form-user-avatar">
-                                                                <img class="form-user-avatar-profile" ng-src="{{imageAvatar}}" />
+                                                                <img class="form-user-avatar-profile" ng-src="{{personal.imageAvatar}}" />
                                                             </div>
                                                         </div>
                                                         <div class="col-sm-10">
                                                             <button class="btn btn-default" data-toggle="modal" data-target="#avatar-modal" type="button">Change avatar</button>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3>Your wallpaper</h3>
+                                        </div>
+                                        <div class="panel-body">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="form-user-wallpaper">
+                                                                <img class="form-user-wallpaper-profile" ng-src="{{personal.imageWallpaper}}" />
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <button class="btn btn-default" data-toggle="modal" data-target="#wallpaper-modal" type="button">Change wallpaper</button>
                                                         </div>
                                                     </div>
 
@@ -137,32 +161,24 @@
                     </form>
 
                     <div class="container avatar" id="crop-avatar">
-                        <!-- Current avatar -->
-                        <div class="avatar-view" title="Change the avatar">
-                            <!--<img src="assets/img/content/picture.jpg" alt="Avatar">-->
-                        </div>
-
-                        <!-- Cropping modal -->
-                        <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                        <div class="modal fade modal-window" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <form class="avatar-form" action="{{global.path.server.crop}}" enctype="multipart/form-data" method="post">
                                         <div class="modal-header">
                                             <button class="close" data-dismiss="modal" type="button">&times;</button>
-                                            <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
+                                            <h4 class="modal-title">Change Avatar</h4>
                                         </div>
                                         <div class="modal-body">
                                             <div class="avatar-body">
 
-                                                <!-- Upload image and data -->
                                                 <div class="avatar-upload">
                                                     <input class="avatar-src" name="avatar_src" type="hidden">
                                                     <input class="avatar-data" name="avatar_data" type="hidden">
-                                                    <label for="avatarInput">Upload avatar</label>
-                                                    <input class="avatar-input" id="avatarInput" name="avatar_file" type="file">
+                                                    <label>Upload avatar</label>
+                                                    <input class="avatar-input"  name="avatar_file" type="file">
                                                 </div>
 
-                                                <!-- Crop and preview -->
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="avatar-wrapper" style=""></div>
@@ -171,20 +187,54 @@
 
                                                 <div class="row avatar-btns">
                                                     <div class="col-md-4 col-md-offset-4">
-                                                        <button class="btn btn-primary btn-block avatar-save" type="submit">Upload</button>
+                                                        <button class="btn btn-primary btn-block avatar-save" type="submit">Upload avatar</button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <!-- <div class="modal-footer">
-                                          <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                                        </div> -->
                                     </form>
                                 </div>
                             </div>
-                        </div><!-- /.modal -->
+                        </div>
+                        <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
+                    </div>
 
-                        <!-- Loading state -->
+                    <div class="container avatar" id="crop-wallpaper">
+                        <div class="modal fade modal-window" id="wallpaper-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
+                            <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                    <form class="avatar-form" action="{{global.path.server.crop}}" enctype="multipart/form-data" method="post">
+                                        <div class="modal-header">
+                                            <button class="close" data-dismiss="modal" type="button">&times;</button>
+                                            <h4 class="modal-title">Change Wallpaper</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="avatar-body">
+
+                                                <div class="avatar-upload">
+                                                    <input class="avatar-src" name="avatar_src" type="hidden">
+                                                    <input class="avatar-data" name="avatar_data" type="hidden">
+                                                    <label>Upload wallpaper</label>
+                                                    <input class="avatar-input" name="avatar_file" type="file">
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="avatar-wrapper" style=""></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row avatar-btns">
+                                                    <div class="col-md-4 col-md-offset-4">
+                                                        <button class="btn btn-primary btn-block avatar-save" type="submit">Upload wallpaper</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                         <div class="loading" aria-label="Loading" role="img" tabindex="-1"></div>
                     </div>
 

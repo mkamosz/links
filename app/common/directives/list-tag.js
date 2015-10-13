@@ -9,7 +9,8 @@ app.directive("listTags", ['path', function(path){
         restrict : "AE",
         scope : {
             popularTags : "@popularTags",
-            dataListTags : "=list"
+            dataListTags : "=list",
+            tagsSearch : '=tagsSearch'
         },
         templateUrl: path.template.listtag,
         replace : true,

@@ -1,4 +1,4 @@
-<div ng-controller="DashboardController" class="wrapper-gray">
+<div ng-controller="DashboardController" class="">
     <sidebar-nav nav-data="global.sidebar"></sidebar-nav>
     <div class="main-content nav {{global.sidebar.state}}">
         <div class="container">
@@ -9,10 +9,10 @@
                     <user-profile follow-btn="false" notifi="global.notifi" loader="global.loader" user-info="global.uerInfo" data="global.userData" list="global.listLinks" tags="global.listTags"></user-profile>
                     <div class="row">
                         <div class="col-sm-12 col-md-8">
-                            <list-links list="global.listLinks" edit-tag="data.editTag"></list-links>
+                            <list-links tags-search="global.tagsSearch" loader="global.loader" list="global.listLinks" edit-tag="data.editTag"></list-links>
                         </div>
                         <div class="col-sm-12 col-md-4">
-                            <list-tags list="global.listTags"></list-tags>
+                            <list-tags tags-search="global.tagsSearch" list="global.listTags"></list-tags>
                         </div>
                     </div>
                 </div>

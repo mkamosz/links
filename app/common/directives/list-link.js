@@ -11,7 +11,9 @@ app.directive("listLinks", ['path', function(path){
             popularLinks : '@popularLinks',
             dataListLinks : '=list',
             editTag : '=editTag',
-            userView : '@user'
+            userView : '@user',
+            loader : '=loader',
+            tagsSearch : '=tagsSearch'
         },
         templateUrl: path.template.listlink,
         replace : true,
@@ -31,6 +33,7 @@ app.directive("listLinks", ['path', function(path){
                 },
                 fn : {}
             };
+            $scope.path = path;
 
             $scope.userView = (typeof $scope.userView === 'undefined' ? false : $scope.userView);
 
@@ -48,8 +51,10 @@ app.directive("listLinks", ['path', function(path){
                 if(!$scope.userView){
                     var check = confirm("Are you sure you want to remove?");
                     if (check == true) {
+                        $scope.loader.show();
                         conn.deleteData(path.server.link, {"params": {auth: globalData.getData('userInfo'), id: id}})
                             .then(function (result) {
+                                $scope.loader.hide();
                                 globalData.setData('listLinks', result.data.links);
                                 globalData.setData('listTags', result.data.tags);
 
